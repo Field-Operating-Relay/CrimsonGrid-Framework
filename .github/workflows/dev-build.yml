@@ -36,3 +36,16 @@ jobs:
         with:
           name: DevBuild-${{ env.GAME_VERSION }}
           path: ${{ env.GAME_VERSION }}/Assemblies/*.dll
+          
+      - name: Comment artifact link on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ✅ **Dev build complete**
+      
+            🔗 [Download DLL artifact](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+      
+            The compiled DLL can be downloaded for testing from this run.
