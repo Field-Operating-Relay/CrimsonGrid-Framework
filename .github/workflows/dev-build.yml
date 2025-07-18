@@ -1,0 +1,38 @@
+name: Dev Build (Single Source, .NET Framework 4.8)
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read RimWorld game version
+        id: game_version
+        run: |
+          $version = Get-Content mod_version.txt
+          echo "GAME_VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Set up MSBuild for .NET Framework
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build mod DLL
+        run: |
+          msbuild Source/MyMod.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v4.8
+
+      - name: Copy DLL to Assemblies
+        run: |
+          mkdir -p ${{ env.GAME_VERSION }}/Assemblies
+          copy Source\bin\Release\*.dll ${{ env.GAME_VERSION }}\Assemblies\
+
+      - name: Upload dev artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DevBuild-${{ env.GAME_VERSION }}
+          path: ${{ env.GAME_VERSION }}/Assemblies/*.dll
