@@ -66,5 +66,8 @@
   <ItemGroup>
     <Publicize Include="Assembly-CSharp:RimWorld.ITab_Pawn_Gear.SelPawnForGear" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comps\WorldComponent_GridBandwidth.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
