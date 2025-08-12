@@ -28,20 +28,21 @@ namespace CrimsonGridFramework
         }
         #endregion
 
-        public HashSet<CompBandwidthProvider> bandwidthProviders;
+        public HashSet<CompBandwidthProvider> bandwidthProviders = [];
         //public Dictionary<>
         public int TotalBandwidth
         {
             get
             {
                 int val = 0;
-                foreach(CompBandwidthProvider provider in bandwidthProviders)
+                foreach (CompBandwidthProvider provider in bandwidthProviders)
                 {
                     val += provider.bandwidthAmount;
                 }
                 return val;
             }
         }
+
 
         public bool TryRegisterProvider(CompBandwidthProvider provider)
         {
@@ -55,8 +56,9 @@ namespace CrimsonGridFramework
                 Logger.Error("BandwidthProviders is null");
                 return false;
             }
-            if (provider.parent.Faction == Find.FactionManager.OfPlayer)
+            if (provider.parent.Faction != Find.FactionManager.OfPlayer)
             {
+                Logger.Error("Provider is not of player faction");
                 return false;
             }
             if (provider.bandwidthAmount == 0)
