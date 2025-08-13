@@ -29,7 +29,7 @@ namespace CrimsonGridFramework
         #endregion
 
         public HashSet<CompBandwidthProvider> bandwidthProviders = [];
-        //public Dictionary<>
+        public HashSet<CompBandwidthRelay> relays = [];
         public int TotalBandwidth
         {
             get
@@ -42,8 +42,28 @@ namespace CrimsonGridFramework
                 return val;
             }
         }
-
-
+        public int TotalBandwidthInUse
+        {
+            get
+            {
+                int val = 0;
+                foreach(var relay in relays)
+                {
+                    if (!relay.IsEnabled)
+                    {
+                        continue;
+                    }
+                    if(relay.consumers.Count == 0)
+                    {
+                        continue;
+                    }
+                    val += relay.RelayBandwidthInUse;
+                }
+                return val;
+            }
+        }
+        public bool IsOverdraw => TotalBandwidthInUse > TotalBandwidth;
+        public float OverDrawAmount => TotalBandwidthInUse / TotalBandwidth;
         public bool TryRegisterProvider(CompBandwidthProvider provider)
         {
             if (provider == null)
@@ -95,6 +115,46 @@ namespace CrimsonGridFramework
             return true;
         }
 
+        public bool TryRegisterRelay(CompBandwidthRelay relay)
+        {
+            if (relay == null)
+            {
+                Logger.Error("relay is null");
+                return false;
+            }
+            if (relays == null)
+            {
+                Logger.Error("relays are null");
+                return false;
+            }
+            if (!relays.Add(relay))
+            {
+                Logger.Error("relay already present");
+                return false;
+            }
+            Logger.Message($"Registered relay");
+            return true;
+        }
+        public bool TryUnregisterRelay(CompBandwidthRelay relay)
+        {
+            if (relay == null)
+            {
+                Logger.Error("relay is null");
+                return false;
+            }
+            if (relays == null)
+            {
+                Logger.Error("relays are null");
+                return false;
+            }
+            if (!relays.Remove(relay))
+            {
+                Logger.Error("relay already removed");
+                return false;
+            }
+            Logger.Message($"Unregistered relay");
+            return true;
+        }
 
 
     }
