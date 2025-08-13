@@ -71,7 +71,6 @@
     <Compile Include="Comps\CompBandwidthProvider.cs" />
     <Compile Include="Comps\CompBandwidthRelay.cs" />
     <Compile Include="Comps\WorldComponent_GridBandwidth.cs" />
-    <Compile Include="Comps\MapComponent_LocalBandwidth.cs" />
     <Compile Include="Helpers\Logger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

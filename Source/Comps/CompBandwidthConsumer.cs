@@ -23,14 +23,22 @@ namespace CrimsonGridFramework
         public int bandwidthAmount => Props.bandwidthAmount;
 
         public CompBandwidthRelay connectedRelay;
-        public bool isConnected => connectedRelay != null;
+        public bool DeadOrDowned => pawn.DeadOrDowned;
+        public bool IsConnected => connectedRelay != null;
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
             base.Notify_Killed(prevMap, dinfo);
-            if(isConnected)
+            if(IsConnected)
             {
                 connectedRelay.TryDisconnectConsumer(this);
             }
         }
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Deep.Look(ref connectedRelay, "relay");
+        }
+        //TODO
+        // Add gizmo for disconnecting and powering down
     }
 }

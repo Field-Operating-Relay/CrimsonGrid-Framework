@@ -26,7 +26,7 @@ namespace CrimsonGridFramework
                 int val = 0;
                 foreach (var consumer in consumers)
                 {
-                    if (!consumer.isDeadOrDowned)
+                    if (!consumer.DeadOrDowned)
                     {
                         val += consumer.bandwidthAmount;
                     }
@@ -168,7 +168,12 @@ namespace CrimsonGridFramework
                 };
                 yield return command_Action;
             }
-        }    
+        }
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Collections.Look(ref consumers, "consumers", LookMode.Deep);
+        }
     }
 
     public class CompBandwidthRelayBuilding : CompBandwidthRelay
