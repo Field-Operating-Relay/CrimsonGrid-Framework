@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="BasePawn" Name="BaseRobot" Abstract="true">
+		<statBases>
+			<MarketValue>1200</MarketValue>
+			<PsychicSensitivity>0.5</PsychicSensitivity>
+			<ToxicResistance>1</ToxicResistance>
+			<Flammability>0</Flammability>
+			<ComfyTemperatureMin>-100</ComfyTemperatureMin>
+			<ComfyTemperatureMax>250</ComfyTemperatureMax>
+			<MeatAmount>0</MeatAmount>
+			<ArmorRating_Heat>2.00</ArmorRating_Heat>
+			<ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+			<MoveSpeed>4.7</MoveSpeed>
+			<ArmorRating_Blunt>0.20</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.40</ArmorRating_Sharp>
+		</statBases>
+		<receivesSignals>true</receivesSignals>
+		<tradeability>None</tradeability>
+		<race>
+			<fleshType>Robotic</fleshType>
+			<needsRest>false</needsRest>
+			<hasGenders>false</hasGenders>
+			<baseBodySize>1.0</baseBodySize>
+			<thinkTreeMain>Robot</thinkTreeMain>
+			<thinkTreeConstant>RobotConstant</thinkTreeConstant>
+			<intelligence>ToolUser</intelligence>
+			<makesFootprints>true</makesFootprints>
+			<nameCategory>NoName</nameCategory>
+			<bloodDef>Filth_MachineBits</bloodDef>
+			<foodType>None</foodType>
+			<lifeExpectancy>2500</lifeExpectancy>
+			<canFlyInVacuum>true</canFlyInVacuum>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+				</li>
+			</lifeStageAges>
+			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+			<specialShadowData>
+				<volume>(0.3, 0.8, 0.4)</volume>
+				<offset>(0,0,-0.3)</offset>
+			</specialShadowData>
+		</race>
+
+	</ThingDef>
+	<ThingDef ParentName="BaseRobot">
+		<defName>Robot_Test</defName>
+		<label>test</label>
+		<description>Le test.</description>
+		<tools>
+			<li>
+				<label>left fist</label>
+				<labelNoLocation>fist</labelNoLocation>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12.0</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>right fist</label>
+				<labelNoLocation>fist</labelNoLocation>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12.0</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8.5</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		</tools>
+		<race>
+			<body>Lancer</body>
+			<baseHealthScale>0.72</baseHealthScale>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>11</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>12</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<comps>
+			<li Class="CrimsonGridFramework.CompProperties_BandwidthConsumer">
+				<bandwidthAmount>5</bandwidthAmount>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

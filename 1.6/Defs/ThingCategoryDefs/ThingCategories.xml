@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+	<ThingCategoryDef>
+		<defName>CorpsesRobot</defName>
+		<label>robot corpses</label>
+		<parent>Corpses</parent>
+	</ThingCategoryDef>
+</Defs>

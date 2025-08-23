@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.AI;
 
 namespace CrimsonGridFramework
 {
@@ -18,6 +19,7 @@ namespace CrimsonGridFramework
         WorldComponent_GridBandwidth gridBandwidth => WorldComponent_GridBandwidth.Instance;
         CompProperties_BandwidthRelay Props => (CompProperties_BandwidthRelay)props;
         public HashSet<CompBandwidthConsumer> consumers = [];
+        public bool AnyGridBandwidth => gridBandwidth.TotalBandwidth > 0;
         public int RelayBandwidthAmount => Props.bandwidthRelayAmount;
         public int RelayBandwidthInUse
         {
@@ -34,11 +36,11 @@ namespace CrimsonGridFramework
                 return val;
             }
         }
-        public int FreeBandwidthLeft => RelayBandwidthInUse - RelayBandwidthAmount;
+        public int FreeBandwidthLeft => RelayBandwidthAmount - RelayBandwidthInUse;
         private bool isRegistered = false;
         public bool IsOverdraw => RelayBandwidthInUse > RelayBandwidthAmount;
         public float OverDrawPercentage => (float)RelayBandwidthInUse / RelayBandwidthAmount;
-        public virtual bool IsEnabled => true;
+        public virtual bool IsEnabled => AnyGridBandwidth;
 
         public bool TryConnectConsumer(CompBandwidthConsumer consumer)
         {
@@ -135,12 +137,6 @@ namespace CrimsonGridFramework
                 isRegistered = !gridBandwidth.TryUnregisterRelay(this);
             }
         }
-        public override string CompInspectStringExtra()
-        {
-            string res = base.CompInspectStringExtra();
-            res += $"\nBandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
-            return res;
-        }
         public override void PostDrawExtraSelectionOverlays()
         {
             foreach (var consumer in consumers)
@@ -190,7 +186,17 @@ namespace CrimsonGridFramework
                 return powerTrader;
             }
         }
-        public override bool IsEnabled => parent.Faction == Find.FactionManager.OfPlayer && Power != null && Power.PowerOn;
+        public override bool IsEnabled => base.IsEnabled && parent.Faction == Find.FactionManager.OfPlayer && Power != null && Power.PowerOn;
+        public override string CompInspectStringExtra()
+        {
+            string res = base.CompInspectStringExtra();
+            if(IsEnabled)
+            {
+                res += $"Bandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
+            }
+
+            return res;
+        }
     }
 
 }

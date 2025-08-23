@@ -62,8 +62,22 @@ namespace CrimsonGridFramework
                 return val;
             }
         }
+        public int UnusuedBandwidth => TotalBandwidth - TotalBandwidthInUse;
         public bool IsOverdraw => TotalBandwidthInUse > TotalBandwidth;
         public float OverDrawAmount => TotalBandwidthInUse / TotalBandwidth;
+
+        public bool HasProviders => bandwidthProviders.Count > 0;
+        public bool HasRelays => relays.Count > 0;
+        public IEnumerable<CompBandwidthRelay> relaysInMap(Map map)
+        {
+            foreach(var relay in relays)
+            {
+                if(relay.parent.Map == map)
+                {
+                    yield return relay;
+                }
+            }
+        }
         public bool TryRegisterProvider(CompBandwidthProvider provider)
         {
             if (provider == null)
