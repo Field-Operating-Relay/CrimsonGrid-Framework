@@ -74,7 +74,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Krafs.Rimworld.Ref">
-      <Version>1.6.4523</Version>
+      <Version>1.6.4543</Version>
     </PackageReference>
     <PackageReference Include="Lib.Harmony" Version="2.3.*">
       <ExcludeAssets>runtime</ExcludeAssets>
@@ -98,6 +98,17 @@
     <Compile Include="JobDrivers\JobDriver_Disconnected.cs" />
     <Compile Include="ThinkNodes\JobGiver_Disconnected.cs" />
     <Compile Include="ThinkNodes\ThinkNode_ConditionalConnected.cs" />
+    <Compile Include="MechUtility\DefOf.cs" />
+    <Compile Include="MechUtility\FloatMenuMakerMap_CanTakeOrder_Patch.cs" />
+    <Compile Include="MechUtility\Hediff_MechControllable.cs" />
+    <Compile Include="MechUtility\HotSwappableAttribute.cs" />
+    <Compile Include="MechUtility\MechanitorUtility_EverControllable_Patch.cs" />
+    <Compile Include="MechUtility\MechanitorUtility_GetMechGizmos_Patch.cs" />
+    <Compile Include="MechUtility\MechanitorUtility_InMechanitorCommandRange_Patch.cs" />
+    <Compile Include="MechUtility\PawnComponentsUtility_AddAndRemoveDynamicComponents.cs" />
+    <Compile Include="MechUtility\Pawn_IsColonyMechPlayerControlled_Patch.cs" />
+    <Compile Include="MechUtility\RemoveComps.cs" />
+    <Compile Include="MechUtility\Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
