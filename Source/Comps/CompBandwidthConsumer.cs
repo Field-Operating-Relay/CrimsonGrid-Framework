@@ -54,7 +54,20 @@ namespace CrimsonGridFramework
             {
                 yield return g;
             }
-
+            if(connectedRelay != null)
+            {
+                Command_Action command_Action = new Command_Action();
+                command_Action.defaultLabel = "Select Parent Relay";
+                command_Action.defaultDesc = "A";
+                command_Action.icon = null;
+                command_Action.Order = -86f;
+                command_Action.action = delegate
+                {
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(connectedRelay.parent);
+                };
+                yield return command_Action;
+            }
             if (IsPlayerControlled)
             {
                 if (connectedRelay == null)
