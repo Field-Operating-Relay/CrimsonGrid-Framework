@@ -15,7 +15,7 @@ namespace CrimsonGridFramework
         {
             if (RCellFinder.TryFindRandomMechSelfShutdownSpot(pawn.Position, pawn, pawn.Map, out var result))
             {
-                Job job = JobMaker.MakeJob(DefOfs.Disconnected, result);
+                Job job = JobMaker.MakeJob(CrimsonGridFramework_DefOfs.Disconnected, result);
                 job.forceSleep = true;
                 return job;
             }

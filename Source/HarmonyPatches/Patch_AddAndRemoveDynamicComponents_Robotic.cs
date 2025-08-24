@@ -12,14 +12,25 @@ namespace CrimsonGridFramework.HarmonyPatches
     [HarmonyPatch(typeof(PawnComponentsUtility), "AddAndRemoveDynamicComponents")]
     public static class Patch_AddAndRemoveDynamicComponents_Robotic
     {
-        public static void Postfix(Pawn pawn)
+        public static void Postfix(Pawn pawn, ref bool __result)
         {
-            if (pawn.GetBandwidthComp() != null && pawn.Faction == Faction.OfPlayer && pawn.drafter == null)
+            if (pawn.IsCrimsonGridRobot() && pawn.Faction == Faction.OfPlayer && pawn.drafter == null)
             {
                 pawn.drafter = new Pawn_DraftController(pawn);
-
             }
 
+        }
+    }
+    public static class FloatMenuMakerMap_CanTakeOrder_Patch
+    {
+        [HarmonyPriority(int.MinValue)]
+        public static void Postfix(Pawn pawn, ref bool __result)
+        {
+            if (__result is false && pawn.IsCrimsonGridRobot())
+            {
+                __result = true;
+
+            }
         }
     }
 }
