@@ -41,13 +41,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Publicizer" Version="2.*">
@@ -74,6 +69,7 @@
     <Compile Include="HarmonyPatches\Patch_AddAndRemoveDynamicComponents_Robotic.cs" />
     <Compile Include="HarmonyPatches\Patch_IsColonyMech_Robots.cs" />
     <Compile Include="HarmonyStarter.cs" />
+    <Compile Include="Hediff\HediffDraftable.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\RobotHelperMethods.cs" />
     <Compile Include="JobDrivers\JobDriver_Disconnected.cs" />
