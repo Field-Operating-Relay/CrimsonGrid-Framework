@@ -14,9 +14,10 @@ namespace CrimsonGridFramework.HarmonyPatches
     {
         public static void Postfix(ref bool __result, Pawn __instance)
         {
-            if (__instance.GetBandwidthComp() != null && __instance.Faction == Faction.OfPlayer && __instance.MentalStateDef == null)
+            if (__instance.IsCrimsonGridRobot() && __instance.Faction == Faction.OfPlayer && __instance.MentalStateDef == null)
             {
                 __result = true;
+                Hediff hediff = __instance.health.AddHediff(CrimsonGridFramework_DefOfs.Hediff_Draftable);
             }
         }
     }
