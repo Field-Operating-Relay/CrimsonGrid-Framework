@@ -30,7 +30,7 @@ namespace CrimsonGridFramework
                 {
                     if (!consumer.DeadOrDowned)
                     {
-                        val += consumer.bandwidthAmount;
+                        val += consumer.BandwidthAmount;
                     }
                 }
                 return val;
@@ -54,17 +54,17 @@ namespace CrimsonGridFramework
                 Logger.Error("Consumers are null");
                 return false;
             }
-            if (consumer.bandwidthAmount > FreeBandwidthLeft)
+            if (consumer.BandwidthAmount > FreeBandwidthLeft)
             {
                 //Needs a warning screen
-                Logger.Warning($"Consumer needs more bandwidth {consumer.bandwidthAmount} than the relay can provide without overdraw {FreeBandwidthLeft}");
+                Logger.Warning($"Consumer needs more bandwidth {consumer.BandwidthAmount} than the relay can provide without overdraw {FreeBandwidthLeft}");
             }
             if (!consumers.Add(consumer))
             {
                 Logger.Error("Consumer already connected");
                 return false;
             }
-            consumer.connectedRelay = this;
+            consumer.relay = parent;
             return true;
 
         }
@@ -85,7 +85,7 @@ namespace CrimsonGridFramework
                 Logger.Error("Consumer already disconnected");
                 return false;
             }
-            consumer.connectedRelay = null;
+            consumer.relay = null;
             return true;
 
         }
@@ -97,53 +97,33 @@ namespace CrimsonGridFramework
                 isRegistered = gridBandwidth.TryRegisterRelay(this);
             }
         }
-        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+        public override void PostPostMake()
         {
-            base.PostDeSpawn(map, mode);
-            if (isRegistered)
+            base.PostPostMake();
+            if (!isRegistered)
             {
-                isRegistered = !gridBandwidth.TryUnregisterRelay(this);
+                isRegistered = gridBandwidth.TryRegisterRelay(this);
             }
         }
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
             base.Notify_Killed(prevMap, dinfo);
+            Logger.Message("Relay killed, unregistering");
+            Unregister();
+        }
+
+        protected void Unregister()
+        {
+            foreach(var consumer in consumers.ToList())
+            {
+                TryDisconnectConsumer(consumer);
+            }
             if (isRegistered)
             {
                 isRegistered = !gridBandwidth.TryUnregisterRelay(this);
             }
         }
-        public override void Notify_AbandonedAtTile(PlanetTile tile)
-        {
-            base.Notify_AbandonedAtTile(tile);
-            if (isRegistered)
-            {
-                isRegistered = !gridBandwidth.TryUnregisterRelay(this);
-            }
-        }
-        public override void Notify_MapRemoved()
-        {
-            base.Notify_MapRemoved();
-            if (isRegistered)
-            {
-                isRegistered = !gridBandwidth.TryUnregisterRelay(this);
-            }
-        }
-        public override void Notify_PassedToWorld()
-        {
-            base.Notify_PassedToWorld();
-            if (isRegistered)
-            {
-                isRegistered = !gridBandwidth.TryUnregisterRelay(this);
-            }
-        }
-        public override void PostDrawExtraSelectionOverlays()
-        {
-            foreach (var consumer in consumers)
-            {
-                GenDraw.DrawLineBetween(parent.TrueCenter(), consumer.parent.TrueCenter());
-            }
-        }
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             foreach (var gizmo in base.CompGetGizmosExtra())
@@ -152,6 +132,10 @@ namespace CrimsonGridFramework
             }
             foreach (var consumer in consumers)
             {
+                if (consumer.IsSelfRelay)
+                {
+                    continue;
+                }
                 Command_Action command_Action = new Command_Action();
                 command_Action.defaultLabel = "Select Connected Consumer";
                 command_Action.defaultDesc = "A";
@@ -164,11 +148,6 @@ namespace CrimsonGridFramework
                 };
                 yield return command_Action;
             }
-        }
-        public override void PostExposeData()
-        {
-            base.PostExposeData();
-            Scribe_Collections.Look(ref consumers, "consumers", LookMode.Deep);
         }
     }
 
@@ -187,15 +166,95 @@ namespace CrimsonGridFramework
             }
         }
         public override bool IsEnabled => base.IsEnabled && parent.Faction == Find.FactionManager.OfPlayer && Power != null && Power.PowerOn;
+        public override void Notify_MapRemoved()
+        {
+            base.Notify_MapRemoved();
+            Unregister();
+        }
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.PostDeSpawn(map, mode);
+            Logger.Message($"Despawning relay, unregistering, {mode.ToString()}");
+            Unregister();
+        }
         public override string CompInspectStringExtra()
         {
             string res = base.CompInspectStringExtra();
-            if(IsEnabled)
+            if (IsEnabled)
             {
                 res += $"Bandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
             }
 
             return res;
+        }
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            foreach (var consumer in consumers)
+            {
+                GenDraw.DrawLineBetween(parent.TrueCenter(), consumer.parent.TrueCenter());
+            }
+        }
+    }
+    public class CompBandwidthRelayEquipment : CompBandwidthRelay
+    {
+        public Pawn Pawn
+        {
+            get
+            {
+                Logger.Message($"{parent.ParentHolder == null}");
+                Logger.Message(parent.ParentHolder.ParentHolder.GetType().ToString());
+                if (parent.ParentHolder == null || parent.ParentHolder.ParentHolder is not Pawn p || p.Faction != Faction.OfPlayer)
+                {
+                    return null;
+                }
+                return (Pawn)parent.ParentHolder.ParentHolder;
+            }
+        }
+        public override bool IsEnabled => true && Pawn != null && !Pawn.DeadOrDowned;
+        public override string CompInspectStringExtra()
+        {
+            string res = base.CompInspectStringExtra();
+            if (IsEnabled)
+            {
+                res += $"Bandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
+            }
+            return res;
+        }
+
+
+        public override void Notify_AbandonedAtTile(PlanetTile tile)
+        {
+            base.Notify_AbandonedAtTile(tile);
+            Logger.Message("Relay abandoned, unregistering");
+            Unregister();
+        }
+    }
+
+    public class CompBandwidthRelayPawn : CompBandwidthRelay
+    {
+        public Pawn Pawn => (Pawn)parent;
+        public override bool IsEnabled => true && Pawn != null && !Pawn.DeadOrDowned && Pawn.Faction == Faction.OfPlayer;
+        public override string CompInspectStringExtra()
+        {
+            string res = base.CompInspectStringExtra();
+            if (IsEnabled)
+            {
+                res += $"Bandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
+            }
+            return res;
+        }
+        public override void Notify_AbandonedAtTile(PlanetTile tile)
+        {
+            base.Notify_AbandonedAtTile(tile);
+            Logger.Message("Relay abandoned, unregistering");
+            Unregister();
+        }
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            foreach (var consumer in consumers)
+            {
+                GenDraw.DrawLineBetween(parent.TrueCenter(), consumer.parent.TrueCenter());
+            }
         }
     }
 

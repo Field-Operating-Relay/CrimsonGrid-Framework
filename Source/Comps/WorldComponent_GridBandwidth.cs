@@ -72,9 +72,20 @@ namespace CrimsonGridFramework
         {
             foreach(var relay in relays)
             {
-                if(relay.parent.Map == map)
+                if(relay is CompBandwidthRelayBuilding buildingRelay && buildingRelay.parent.Map == map)
                 {
                     yield return relay;
+                    continue;
+                }
+                if (relay is CompBandwidthRelayEquipment equipmentRelay && equipmentRelay.Pawn?.Map == map)
+                {
+                    yield return relay;
+                    continue;
+                }
+                if (relay is CompBandwidthRelayPawn pawnRelay && pawnRelay.Pawn?.Map == map)
+                {
+                    yield return relay;
+                    continue;
                 }
             }
         }
