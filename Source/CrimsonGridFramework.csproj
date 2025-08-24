@@ -79,17 +79,6 @@
     <Compile Include="JobDrivers\JobDriver_Disconnected.cs" />
     <Compile Include="ThinkNodes\JobGiver_Disconnected.cs" />
     <Compile Include="ThinkNodes\ThinkNode_ConditionalConnected.cs" />
-    <Compile Include="MechUtility\DefOf.cs" />
-    <Compile Include="MechUtility\FloatMenuMakerMap_CanTakeOrder_Patch.cs" />
-    <Compile Include="MechUtility\Hediff_MechControllable.cs" />
-    <Compile Include="MechUtility\HotSwappableAttribute.cs" />
-    <Compile Include="MechUtility\MechanitorUtility_EverControllable_Patch.cs" />
-    <Compile Include="MechUtility\MechanitorUtility_GetMechGizmos_Patch.cs" />
-    <Compile Include="MechUtility\MechanitorUtility_InMechanitorCommandRange_Patch.cs" />
-    <Compile Include="MechUtility\PawnComponentsUtility_AddAndRemoveDynamicComponents.cs" />
-    <Compile Include="MechUtility\Pawn_IsColonyMechPlayerControlled_Patch.cs" />
-    <Compile Include="MechUtility\RemoveComps.cs" />
-    <Compile Include="MechUtility\Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
