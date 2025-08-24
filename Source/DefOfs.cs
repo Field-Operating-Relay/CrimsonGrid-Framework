@@ -14,6 +14,6 @@ namespace CrimsonGridFramework
     public static class CrimsonGridFramework_DefOfs
     {
         public static JobDef Disconnected;
-        public static HediffDef Hediff_Draftable;
+        public static HediffDef CG_Hediff_Draftable;
     }
 }

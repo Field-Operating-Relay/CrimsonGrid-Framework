@@ -10,8 +10,8 @@
 	</HediffDef>
 
 	<HediffDef>
-		<defName>CG_MechControllable</defName>
-		<hediffClass>CrimsonGridFramework.Hediff_Draftable</hediffClass>
+		<defName>CG_Hediff_Draftable</defName>
+		<hediffClass>CrimsonGridFramework.CG_Hediff_Draftable</hediffClass>
 		<label>Draftable</label>
 		<isBad>false</isBad>
 		<description>Draftable.</description>

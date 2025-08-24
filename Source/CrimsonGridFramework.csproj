@@ -1,19 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{97FA1308-3ED7-41D8-827D-0CC3A3291EE8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrimsonGridFramework</RootNamespace>
-    <AssemblyName>CrimsonGridFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <LangVersion>latest</LangVersion>
-    <TargetFrameworkProfile />
+    <TargetFramework>net48</TargetFramework>
+		<AssemblyName>CrimsonGridFramework</AssemblyName>
+		<AssemblyVersion>1</AssemblyVersion>
+		<FileVersion>1</FileVersion>
+		<Version>1</Version>
+		<Company />
+		<Authors />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <OutputPath>..\Assemblies\</OutputPath>
@@ -29,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    		<LangVersion>12.0</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
@@ -39,6 +35,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>12.0</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
@@ -60,22 +58,5 @@
   <ItemGroup>
     <Publicize Include="Assembly-CSharp:RimWorld.ITab_Pawn_Gear.SelPawnForGear" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Comps\CompBandwidthConsumer.cs" />
-    <Compile Include="Comps\CompBandwidthProvider.cs" />
-    <Compile Include="Comps\CompBandwidthRelay.cs" />
-    <Compile Include="Comps\WorldComponent_GridBandwidth.cs" />
-    <Compile Include="DefOfs.cs" />
-    <Compile Include="HarmonyPatches\Patch_AddAndRemoveDynamicComponents_Robotic.cs" />
-    <Compile Include="HarmonyPatches\Patch_IsColonyMech_Robots.cs" />
-    <Compile Include="HarmonyStarter.cs" />
-    <Compile Include="Hediff\HediffDraftable.cs" />
-    <Compile Include="Helpers\Logger.cs" />
-    <Compile Include="Helpers\RobotHelperMethods.cs" />
-    <Compile Include="JobDrivers\JobDriver_Disconnected.cs" />
-    <Compile Include="ThinkNodes\JobGiver_Disconnected.cs" />
-    <Compile Include="ThinkNodes\ThinkNode_ConditionalConnected.cs" />
-  </ItemGroup>
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿﻿﻿﻿using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace CrimsonGridFramework;
 
-public class Hediff_Draftable : HediffWithComps
+public class CG_Hediff_Draftable : HediffWithComps
 {
-    [System.Obsolete]
     public override IEnumerable<Gizmo> GetGizmos()
     {
         Command_Toggle command_Toggle = new()
@@ -33,7 +32,7 @@ public class Hediff_Draftable : HediffWithComps
 
         if (pawn.Downed)
         {
-            command_Toggle.Disable("IsIncapped".Translate(pawn.LabelShort, this));
+            command_Toggle.Disable(Translator.Translate("IsIncapped", pawn.LabelShort, this));
         }
 
         command_Toggle.tutorTag = !pawn.Drafted ? "Draft" : "Undraft";

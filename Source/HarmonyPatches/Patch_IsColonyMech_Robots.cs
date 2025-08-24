@@ -17,7 +17,7 @@ namespace CrimsonGridFramework.HarmonyPatches
             if (__instance.IsCrimsonGridRobot() && __instance.Faction == Faction.OfPlayer && __instance.MentalStateDef == null)
             {
                 __result = true;
-                Hediff hediff = __instance.health.AddHediff(CG_MechControllable);
+                Hediff hediff = __instance.health.AddHediff(CrimsonGridFramework_DefOfs.CG_Hediff_Draftable);
             }
         }
     }
