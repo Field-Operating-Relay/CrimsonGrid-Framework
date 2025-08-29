@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<JobDef>
+		<defName>Disconnected</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_Disconnected</driverClass>
+		<reportString>disconnected.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<neverShowWeapon>true</neverShowWeapon>
+	</JobDef>
+</Defs>
