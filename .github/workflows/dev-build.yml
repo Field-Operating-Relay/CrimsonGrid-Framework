@@ -18,7 +18,12 @@ jobs:
         run: |
           $version = Get-Content mod_version.txt
           echo "GAME_VERSION=$version" >> $env:GITHUB_ENV
+      - name: Install NuGet
+        uses: NuGet/setup-nuget@v1
 
+      - name: Restore NuGet packages
+        run: nuget restore CrimsonGridFramework.sln
+        
       - name: Set up MSBuild for .NET Framework
         uses: microsoft/setup-msbuild@v2
 
