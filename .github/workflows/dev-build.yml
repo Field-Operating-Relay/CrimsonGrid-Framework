@@ -24,7 +24,7 @@ jobs:
 
       - name: Build mod DLL
         run: |
-          msbuild Source/MyMod.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v4.8
+          msbuild Source/CrimsonGridFramework.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v4.8
 
       - name: Copy DLL to Assemblies
         run: |
