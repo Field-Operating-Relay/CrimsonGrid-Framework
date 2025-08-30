@@ -12,7 +12,7 @@ namespace CrimsonGridFramework.HarmonyPatches
     [HarmonyPatch(typeof(PawnComponentsUtility), "AddAndRemoveDynamicComponents")]
     public static class Patch_AddAndRemoveDynamicComponents_Robotic
     {
-        public static void Postfix(Pawn pawn, ref bool __result)
+        public static void Postfix(Pawn pawn)
         {
             if (pawn.IsCrimsonGridRobot() && pawn.Faction == Faction.OfPlayer && pawn.drafter == null)
             {
