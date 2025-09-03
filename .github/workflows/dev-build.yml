@@ -22,7 +22,7 @@ jobs:
         uses: NuGet/setup-nuget@v1
 
       - name: Restore NuGet packages
-        run: nuget restore Source\CrimsonGridFramework.sln
+        run: nuget restore Source/CrimsonGridFramework.sln
         
       - name: Set up MSBuild for .NET Framework
         uses: microsoft/setup-msbuild@v2
