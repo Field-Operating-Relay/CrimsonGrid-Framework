@@ -44,8 +44,8 @@ jobs:
       - name: Upload dev artifact
         uses: actions/upload-artifact@v4
         with:
-          name: DevBuild-${{ env.GAME_VERSION }}
-          path: ModBuild-${{ env.GAME_VERSION }}.zip
+          name: CrimsonGrid-Framework-${{ env.GAME_VERSION }}
+          path: CrimsonGrid-Framework-${{ env.GAME_VERSION }}.zip
           
       - name: Comment artifact link on PR
         if: github.event_name == 'pull_request'
@@ -54,8 +54,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ✅ **Dev build complete**
-      
             🔗 [Download DLL artifact](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
       
             The compiled DLL can be downloaded for testing from this run.
