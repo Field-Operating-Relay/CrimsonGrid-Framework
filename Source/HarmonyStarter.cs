@@ -9,10 +9,10 @@ using Verse;
 
 namespace CrimsonGridFramework
 {
-    [StaticConstructorOnStartup]
+    
     public static class Utils
     {
-        
+        [StaticConstructorOnStartup]
         public static class HarmonyStarter
         {
             static HarmonyStarter()
