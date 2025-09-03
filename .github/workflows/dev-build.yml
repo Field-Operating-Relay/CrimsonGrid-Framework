@@ -14,9 +14,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Read RimWorld game version
-        id: game_version
+        id: game_version  
         run: |
-          $version = Get-Content mod_version.txt
+          $version = Get-Content game_version.txt
           echo "GAME_VERSION=$version" >> $env:GITHUB_ENV
       - name: Install NuGet
         uses: NuGet/setup-nuget@v1
@@ -30,12 +30,22 @@ jobs:
       - name: Build mod DLL
         run: |
           msbuild Source/CrimsonGridFramework.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v4.8
+      
+      - name: Prepare artifact folder
+        run: |
+          mkdir artifact
+          robocopy . artifact /E /XD Source .git .github obj bin artifact .gitignore
+          exit 0
+
+      - name: Zip artifact
+        run: |
+          Compress-Archive -Path artifact\* -DestinationPath CrimsonGrid-Framework-${{ env.GAME_VERSION }}.zip
 
       - name: Upload dev artifact
         uses: actions/upload-artifact@v4
         with:
           name: DevBuild-${{ env.GAME_VERSION }}
-          path: ${{ env.GAME_VERSION }}/Assemblies/*.dll
+          path: ModBuild-${{ env.GAME_VERSION }}.zip
           
       - name: Comment artifact link on PR
         if: github.event_name == 'pull_request'
