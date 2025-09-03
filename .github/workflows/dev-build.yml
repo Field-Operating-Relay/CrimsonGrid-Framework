@@ -31,11 +31,6 @@ jobs:
         run: |
           msbuild Source/CrimsonGridFramework.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v4.8
 
-      - name: Copy DLL to Assemblies
-        run: |
-          mkdir -p ${{ env.GAME_VERSION }}/Assemblies
-          copy Source\bin\Release\*.dll ${{ env.GAME_VERSION }}\Assemblies\
-
       - name: Upload dev artifact
         uses: actions/upload-artifact@v4
         with:
