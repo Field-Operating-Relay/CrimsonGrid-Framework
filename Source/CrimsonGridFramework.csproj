@@ -8,6 +8,7 @@
 		<Version>1</Version>
 		<Company />
 		<Authors />
+  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <OutputPath>..\Assemblies\</OutputPath>
