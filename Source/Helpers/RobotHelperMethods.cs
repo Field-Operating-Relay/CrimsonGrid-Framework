@@ -17,5 +17,13 @@ namespace CrimsonGridFramework
         {
             return pawn.GetBandwidthComp()?.IsConnected ?? false;
         }
+        public static bool IsCrimsonGridRobot(this Pawn pawn)
+        {
+            return pawn.GetBandwidthComp() != null;
+        }
+        public static void ApplyGlobalBottleneck(CompBandwidthConsumer consumer)
+        {
+
+        }
     }
 }

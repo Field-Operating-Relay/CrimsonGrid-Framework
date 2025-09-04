@@ -8,7 +8,124 @@
 		<initialSeverity>1</initialSeverity>
 		<maxSeverity>1</maxSeverity>
 	</HediffDef>
-
+	<HediffDef>
+		<defName>CG_GlobalBottleneck</defName>
+		<label>bottlenecked (global)</label>
+		<description>There is not enough global bandwidth to control this robot effectively.</description>
+		<isBad>true</isBad>
+		<initialSeverity>0</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<stages>
+			<li>
+				<label>trivial</label>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.05</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.2</minSeverity>
+				<label>minor</label>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.10</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.4</minSeverity>
+				<label>moderate</label>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.20</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.6</minSeverity>
+				<label>severe</label>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.30</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.8</minSeverity>
+				<label>extreme</label>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+	</HediffDef>
+	<HediffDef>
+		<defName>CG_RelayBottleneck</defName>
+		<label>bottlenecked (relay)</label>
+		<description>There is not enough relay throughput to control this robot effectively.</description>
+		<isBad>true</isBad>
+		<initialSeverity>0</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<stages>
+			<li>
+				<label>trivial</label>
+				<capMods>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.05</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.2</minSeverity>
+				<label>minor</label>
+				<capMods>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.10</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.4</minSeverity>
+				<label>moderate</label>
+				<capMods>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.20</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.6</minSeverity>
+				<label>severe</label>
+				<capMods>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.30</offset>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<minSeverity>0.8</minSeverity>
+				<label>extreme</label>
+				<capMods>
+					<li>
+						<capacity>Manipulation</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+	</HediffDef>
 	<HediffDef>
 		<defName>CG_Hediff_Draftable</defName>
 		<hediffClass>CrimsonGridFramework.CG_Hediff_Draftable</hediffClass>

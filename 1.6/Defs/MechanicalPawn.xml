@@ -169,7 +169,7 @@
 		</race>
 		<comps>
 			<li Class="CrimsonGridFramework.CompProperties_BandwidthConsumer">
-				<bandwidthAmount>5</bandwidthAmount>
+				<bandwidthAmount>10</bandwidthAmount>
 			</li>
 		</comps>
 	</ThingDef>
