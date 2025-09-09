@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <ThingDef Abstract="True" ParentName="BaseHumanMakeableGun" Name="Gun_Mech_AssaultRifle">
+        <graphicData>
+            <texPath>Things/Item/Equipment/WeaponRanged/AssaultRifle</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract>
+        <recipeMaker>
+            <researchPrerequisite>PrecisionRifling</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>6</Crafting>
+            </skillRequirements>
+            <displayPriority>420</displayPriority>
+        </recipeMaker>
+        <thingSetMakerTags>
+            <li>RewardStandardQualitySuper</li>
+        </thingSetMakerTags>
+        <statBases>
+            <WorkToMake>40000</WorkToMake>
+            <Mass>3.5</Mass>
+            <AccuracyTouch>0.60</AccuracyTouch>
+            <AccuracyShort>0.70</AccuracyShort>
+            <AccuracyMedium>0.65</AccuracyMedium>
+            <AccuracyLong>0.55</AccuracyLong>
+            <RangedWeapon_Cooldown>1.70</RangedWeapon_Cooldown>
+        </statBases>
+        <costList>
+            <Steel>60</Steel>
+            <ComponentIndustrial>7</ComponentIndustrial>
+        </costList>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_AssaultRifle</defaultProjectile>
+                <warmupTime>1.0</warmupTime>
+                <range>30.9</range>
+                <burstShotCount>3</burstShotCount>
+                <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+                <soundCast>Shot_AssaultRifle</soundCast>
+                <soundCastTail>GunTail_Medium</soundCastTail>
+                <muzzleFlashScale>9</muzzleFlashScale>
+            </li>
+        </verbs>
+        <weaponTags>
+            <li>IndustrialGunAdvanced</li>
+            <li>AssaultRifle</li>
+        </weaponTags>
+        <tools>
+            <li>
+                <label>stock</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>barrel</label>
+                <capacities>
+                    <li>Blunt</li>
+                    <li>Poke</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_AssaultRifle</defName>
+        <label>assault rifle bullet</label>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_Small</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>11</damageAmountBase>
+            <speed>70</speed>
+        </projectile>
+    </ThingDef>
+    <ThingDef ParentName="Gun_Mech_AssaultRifle">
+        <defName>Gun_Mech_AssaultRifle_Light</defName>
+        <label>assault rifle (light)</label>
+        <description>A general-purpose gas-operated assault rifle for field or urban combat. It has good range, decent power, and good accuracy.</description>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
+                <targetMechWeightClass>Light</targetMechWeightClass>
+                <debuffStats>
+                    <MoveSpeed>-0.5</MoveSpeed>
+                    <ShootingAccuracyPawn>-0.1</ShootingAccuracyPawn>
+                </debuffStats>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
+    </ThingDef>
+    <ThingDef ParentName="Gun_Mech_AssaultRifle">
+        <defName>Gun_Mech_AssaultRifle_Medium</defName>
+        <label>assault rifle (medium)</label>
+        <description>A general-purpose gas-operated assault rifle for field or urban combat. It has good range, decent power, and good accuracy.</description>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
+                <targetMechWeightClass>Medium</targetMechWeightClass>
+                <debuffStats>
+                    <MoveSpeed>-0.7</MoveSpeed>
+                    <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
+                    <RangedWeapon_DamageMultiplier>-0.1</RangedWeapon_DamageMultiplier>
+                </debuffStats>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
+    </ThingDef>
+    <ThingDef ParentName="Gun_Mech_AssaultRifle">
+        <defName>Gun_Mech_AssaultRifle_Heavy</defName>
+        <label>assault rifle (heavy)</label>
+        <description>A general-purpose gas-operated assault rifle for field or urban combat. It has good range, decent power, and good accuracy.</description>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
+                <targetMechWeightClass>Heavy</targetMechWeightClass>
+                <debuffStats>
+                    <MoveSpeed>-0.9</MoveSpeed>
+                    <ShootingAccuracyPawn>-0.3</ShootingAccuracyPawn>
+                </debuffStats>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
+    </ThingDef>
+    <ThingDef ParentName="Gun_Mech_AssaultRifle">
+        <defName>Gun_Mech_AssaultRifle_Medium_EMP</defName>
+        <label>assault rifle (medium) with emp debuff</label>
+        <description>A general-purpose gas-operated assault rifle for field or urban combat. It has good range, decent power, and good accuracy.</description>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
+                <targetMechWeightClass>Medium</targetMechWeightClass>
+                <debuffStats>
+                    <MoveSpeed>-0.7</MoveSpeed>
+                    <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
+                </debuffStats>
+                <applyEmpStunOnFire>true</applyEmpStunOnFire>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
+    </ThingDef>
+    <ThingDef ParentName="Gun_Mech_AssaultRifle">
+        <defName>Gun_Mech_AssaultRifle_Medium_Fire</defName>
+        <label>assault rifle (medium) with fire debuff</label>
+        <description>A general-purpose gas-operated assault rifle for field or urban combat. It has good range, decent power, and good accuracy.</description>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
+                <targetMechWeightClass>Medium</targetMechWeightClass>
+                <debuffStats>
+                    <MoveSpeed>-0.7</MoveSpeed>
+                    <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
+                </debuffStats>
+                <applyFireDamageOnFire>true</applyFireDamageOnFire>
+                <fireDamageAmount>5</fireDamageAmount>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
+    </ThingDef>
+</Defs>

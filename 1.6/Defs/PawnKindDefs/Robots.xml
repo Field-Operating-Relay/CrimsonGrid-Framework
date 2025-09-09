@@ -9,7 +9,9 @@
 		<minGenerationAge MayRequire="Ludeon.RimWorld.Biotech">200</minGenerationAge>
 		<forceNormalGearQuality>true</forceNormalGearQuality>
 	</PawnKindDef>
-	<PawnKindDef ParentName="BaseRobotKind">
+
+	<PawnKindDef ParentName="BaseRobotKind" Name="RobotTestKind">
+
 		<defName>Robot_Test</defName>
 		<label>test</label>
 		<race>Robot_Test</race>
@@ -60,6 +62,18 @@
 		</weaponTags>
 		<techHediffsChance>1</techHediffsChance>
 		<techHediffsMoney>9999~9999</techHediffsMoney>
+	</PawnKindDef>
+	<PawnKindDef ParentName="RobotTestKind">
+		<defName>Robot_Test_With_Turret_Light</defName>
+		<label>Turret Robot (Light)</label>
+		<race>Robot_Test_With_Turret_Light</race>
+		<destroyGearOnDrop>false</destroyGearOnDrop>
+	</PawnKindDef>
+	<PawnKindDef ParentName="RobotTestKind">
+		<defName>Robot_Test_With_Turret_Medium</defName>
+		<label>Turret Robot (Medium)</label>
+		<race>Robot_Test_With_Turret_Medium</race>
+		<destroyGearOnDrop>false</destroyGearOnDrop>
 	</PawnKindDef>
 
 </Defs>

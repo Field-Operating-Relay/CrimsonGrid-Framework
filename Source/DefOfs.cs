@@ -15,6 +15,7 @@ namespace CrimsonGridFramework
     {
         public static JobDef Disconnected;
         public static HediffDef CG_Hediff_Draftable;
+        public static DamageDef CG_Burn;
         public static HediffDef CG_GlobalBottleneck;
         public static HediffDef CG_RelayBottleneck;
     }

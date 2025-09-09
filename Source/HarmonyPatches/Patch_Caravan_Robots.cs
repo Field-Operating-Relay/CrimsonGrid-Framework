@@ -22,16 +22,24 @@ namespace CrimsonGridFramework.HarmonyPatches
     [HarmonyPatch(typeof(CaravanUIUtility), "AddPawnsSections")]
     public class Patch_AddPawnsSections_Postfix_Robots
     {
+        public static bool Prepare(MethodBase original)
+        {
+            return !ModsConfig.BiotechActive;
+        }
         public static void Postfix(TransferableOneWayWidget widget, List<TransferableOneWay> transferables)
         {
             IEnumerable<TransferableOneWay> source = transferables.Where((TransferableOneWay x) => x.ThingDef.category == ThingCategory.Pawn);
-            widget.AddSection("CGF_Caravan_MechSection_Title".Translate(), source.Where((TransferableOneWay x) => ((Pawn)x.AnyThing).IsCrimsonGridRobot()&& ((Pawn)x.AnyThing).IsConnected() && ((Pawn)x.AnyThing).Faction == Faction.OfPlayer));
+            widget.AddSection("CGF_Caravan_MechSection_Title".Translate(), source.Where((TransferableOneWay x) => ((Pawn)x.AnyThing).IsCrimsonGridRobot() && ((Pawn)x.AnyThing).Faction == Faction.OfPlayer));
         }
     }
 
     [HarmonyPatch(typeof(TransferableOneWayWidget), "AddSection")]
     public class Patch_AddSection_Robots
     {
+        public static bool Prepare(MethodBase original)
+        {
+            return ModsConfig.BiotechActive;
+        }
         public static void Prefix(string title, ref IEnumerable<TransferableOneWay> transferables)
         {
             if (title != "MechsSection".Translate())

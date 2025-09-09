@@ -41,7 +41,6 @@ namespace CrimsonGridFramework
         public bool IsOverdraw => DrawPercentage > 1f;
         public virtual bool IsEnabled => AnyGridBandwidth;
 
-
         public bool TryConnectConsumer(CompBandwidthConsumer consumer)
         {
             if (consumer == null)
@@ -256,6 +255,7 @@ namespace CrimsonGridFramework
                 {
                     res += $"\n<color=red>Overdrawn!</color>";
                 }
+
             }
             return res;
         }
