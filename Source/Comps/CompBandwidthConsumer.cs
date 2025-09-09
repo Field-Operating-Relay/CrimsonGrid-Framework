@@ -30,8 +30,11 @@ namespace CrimsonGridFramework
         public CompBandwidthRelay ConnectedRelayComp => relay.TryGetComp<CompBandwidthRelay>();
         public bool DeadOrDowned => pawn.DeadOrDowned;
         public bool InCaravan => pawn.IsCaravanMember();
-        public bool IsConnected => ConnectedRelayComp != null && ConnectedRelayComp.IsEnabled;
+        public bool IsConnected => ConnectedRelayComp != null && ConnectedRelayComp.IsEnabled && ConnectedRelayComp.AnyGridBandwidth;
         public bool IsPlayerControlled => pawn.Faction == Find.FactionManager.OfPlayer;
+        private Hediff GlobalBottleneck => pawn.health.GetOrAddHediff(CrimsonGridFramework_DefOfs.CG_GlobalBottleneck);
+        private Hediff RelayBottleneck => pawn.health.GetOrAddHediff(CrimsonGridFramework_DefOfs.CG_RelayBottleneck);
+
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
@@ -53,10 +56,39 @@ namespace CrimsonGridFramework
                 ConnectedRelayComp.TryDisconnectConsumer(this);
             }
         }
+        public override void CompTickInterval(int delta)
+        {
+            base.CompTickInterval(delta);
+            if (IsConnected || IsSelfRelay)
+            {
+                Log.Message(gridBandwidth.IsOverdraw);
+                Log.Message(gridBandwidth.OverDrawPercentage);
+                if (ConnectedRelayComp.IsOverdraw)
+                {
+                    RelayBottleneck.Severity = ConnectedRelayComp.OverDrawPercentage;
+                }
+                else
+                {
+                    RelayBottleneck.Severity = 0;
+                }
+                if (gridBandwidth.IsOverdraw && gridBandwidth.AnyBandwidth)
+                {
+                    GlobalBottleneck.Severity = gridBandwidth.OverDrawPercentage;
+                }
+                else
+                {
+                    GlobalBottleneck.Severity = 0;
+                }
+
+            }
+        }
         public override void CompTick()
         {
             base.CompTick();
-
+            if (!IsConnected && pawn.Drafted)
+            {
+                pawn.drafter.Drafted = false;
+            }
         }
         public override void PostExposeData()
         {
@@ -69,7 +101,7 @@ namespace CrimsonGridFramework
             {
                 yield return g;
             }
-            if(!IsSelfRelay)
+            if (!IsSelfRelay)
             {
                 if (ConnectedRelayComp != null)
                 {
@@ -91,7 +123,7 @@ namespace CrimsonGridFramework
                             Find.Selector.Select(e.Pawn);
                             return;
                         }
-                        if(ConnectedRelayComp is CompBandwidthRelayPawn p)
+                        if (ConnectedRelayComp is CompBandwidthRelayPawn p)
                         {
                             Find.Selector.Select(p.Pawn);
                             return;
@@ -140,20 +172,23 @@ namespace CrimsonGridFramework
                         yield return command_DisconnectFromRelay;
                     }
                 }
-            
-                Command_Action test = new Command_Action();
-                test.defaultLabel = "CFG_DisconnectFromRelay".Translate();
-                test.defaultDesc = "CFG_DisconnectFromRelayDesc".Translate();
-                test.icon = null;
-                test.action = delegate
-                {
-                    Logger.Message($"{pawn.IsColonyMech}");
-
-                    Logger.Message($"{pawn.drafter.ShowDraftGizmo}");
-
-                };
-                yield return test;
             }
+
+            Command_Action test = new Command_Action();
+            test.defaultLabel = "Log Some Things";
+            test.defaultDesc = null;
+            test.icon = null;
+            test.action = delegate
+            {
+                Logger.Message($"{pawn.IsColonyMech}");
+
+                Logger.Message($"{pawn.drafter.ShowDraftGizmo}");
+
+                Logger.Message($"{pawn.lord == null}");
+                Logger.Message($"Rah {pawn.RaceProps.IsMechanoid}");
+
+            };
+            yield return test;
         }
     }
 }

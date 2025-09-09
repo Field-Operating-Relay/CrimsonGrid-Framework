@@ -9,7 +9,9 @@
 		<minGenerationAge MayRequire="Ludeon.RimWorld.Biotech">200</minGenerationAge>
 		<forceNormalGearQuality>true</forceNormalGearQuality>
 	</PawnKindDef>
+
 	<PawnKindDef ParentName="BaseRobotKind" Name="RobotTestKind">
+
 		<defName>Robot_Test</defName>
 		<label>test</label>
 		<race>Robot_Test</race>
@@ -73,4 +75,5 @@
 		<race>Robot_Test_With_Turret_Medium</race>
 		<destroyGearOnDrop>false</destroyGearOnDrop>
 	</PawnKindDef>
+
 </Defs>

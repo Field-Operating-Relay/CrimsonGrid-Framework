@@ -21,12 +21,6 @@ namespace CrimsonGridFramework
                 harmony.PatchAll();
                 Logger.Message("Harmony Patches Applied");
             }
-        }
-
-        public static bool IsCrimsonGridRobot(this Pawn pawn)
-        {
-            return pawn.GetBandwidthComp() != null;
-        }
-    
+        }    
     }
 }
