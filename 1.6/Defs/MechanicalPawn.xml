@@ -258,7 +258,7 @@
 					</li>
 				</renderNodeProperties>
 			</li>
-			<li Class="CrimsonGridFramework.CompProperties_MechWeaponRestriction"/>
+			<li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionPawn"/>
 		</comps>
 	</ThingDef>
 
@@ -380,7 +380,7 @@
 					</li>
 				</renderNodeProperties>
 			</li>
-			<li Class="CrimsonGridFramework.CompProperties_MechWeaponRestriction"/>
+			<li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionPawn"/>
 		</comps>
 	</ThingDef>
 </Defs>

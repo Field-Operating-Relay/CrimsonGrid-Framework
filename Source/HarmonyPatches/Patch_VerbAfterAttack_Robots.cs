@@ -26,7 +26,7 @@ namespace CrimsonGridFramework.HarmonyPatches
                 return;
             }
 
-            var weaponRestrictionComp = casterPawn.TryGetComp<Comp_MechWeaponRestriction>();
+            var weaponRestrictionComp = casterPawn.TryGetComp<Comp_MechWeaponRestrictionPawn>();
             if (weaponRestrictionComp == null)
             {
                 return;

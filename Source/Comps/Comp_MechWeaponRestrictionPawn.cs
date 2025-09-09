@@ -4,7 +4,7 @@ using RimWorld;
 
 namespace CrimsonGridFramework
 {
-    public class Comp_MechWeaponRestriction : ThingComp
+    public class Comp_MechWeaponRestrictionPawn : ThingComp
     {
         private Pawn Mech => parent as Pawn;
 

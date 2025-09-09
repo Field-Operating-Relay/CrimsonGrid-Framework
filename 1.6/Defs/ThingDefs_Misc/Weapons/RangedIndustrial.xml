@@ -93,6 +93,9 @@
                 </debuffStats>
             </li>
         </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
     </ThingDef>
     <ThingDef ParentName="Gun_Mech_AssaultRifle">
         <defName>Gun_Mech_AssaultRifle_Medium</defName>
@@ -104,9 +107,13 @@
                 <debuffStats>
                     <MoveSpeed>-0.7</MoveSpeed>
                     <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
+                    <RangedWeapon_DamageMultiplier>-0.1</RangedWeapon_DamageMultiplier>
                 </debuffStats>
             </li>
         </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
     </ThingDef>
     <ThingDef ParentName="Gun_Mech_AssaultRifle">
         <defName>Gun_Mech_AssaultRifle_Heavy</defName>
@@ -121,6 +128,9 @@
                 </debuffStats>
             </li>
         </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
     </ThingDef>
     <ThingDef ParentName="Gun_Mech_AssaultRifle">
         <defName>Gun_Mech_AssaultRifle_Medium_EMP</defName>
@@ -136,6 +146,9 @@
                 <applyEmpStunOnFire>true</applyEmpStunOnFire>
             </li>
         </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
     </ThingDef>
     <ThingDef ParentName="Gun_Mech_AssaultRifle">
         <defName>Gun_Mech_AssaultRifle_Medium_Fire</defName>
@@ -152,5 +165,8 @@
                 <fireDamageAmount>5</fireDamageAmount>
             </li>
         </modExtensions>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_MechWeaponRestrictionGun"/>
+        </comps>
     </ThingDef>
 </Defs>
