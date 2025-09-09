@@ -16,40 +16,34 @@ namespace CrimsonGridFramework.HarmonyPatches
             }
 
 
-            // Must have a pawn caster
             if (!(__instance.caster is Pawn casterPawn))
             {
                 return;
             }
 
-            // Must be a Crimson Grid robot
             if (!casterPawn.IsCrimsonGridRobot())
             {
                 return;
             }
 
-            // Must have the weapon restriction component
             var weaponRestrictionComp = casterPawn.TryGetComp<Comp_MechWeaponRestriction>();
             if (weaponRestrictionComp == null)
             {
                 return;
             }
 
-            // Must have an equipped weapon
             var equippedWeapon = casterPawn.equipment?.Primary;
             if (equippedWeapon == null)
             {
                 return;
             }
 
-            // Must have the weapon weight class extension
             var weaponExtension = equippedWeapon.def.GetModExtension<WeaponWeightClassExtension>();
             if (weaponExtension == null)
             {
                 return;
             }
 
-            // Check if debuffs should be applied based on weight class mismatch
             var mechWeightClass = casterPawn.def?.race?.mechWeightClass;
             if (mechWeightClass == null || weaponExtension.targetMechWeightClass == null)
             {
@@ -61,13 +55,11 @@ namespace CrimsonGridFramework.HarmonyPatches
                 return;
             }
 
-            // Apply EMP stun if enabled
             if (weaponExtension.applyEmpStunOnFire)
             {
                 ApplyEmpStun(casterPawn);
             }
 
-            // Apply fire damage if enabled
             if (weaponExtension.applyFireDamageOnFire)
             {
                 ApplyFireDamage(casterPawn, weaponExtension.fireDamageAmount);
@@ -76,7 +68,6 @@ namespace CrimsonGridFramework.HarmonyPatches
 
         private static void ApplyEmpStun(Pawn pawn)
         {
-            // Apply EMP damage which will stun mechs
             var empDamage = new DamageInfo(
                 DamageDefOf.EMP,
                 5f, // Small amount of EMP damage
@@ -91,7 +82,6 @@ namespace CrimsonGridFramework.HarmonyPatches
 
         private static void ApplyFireDamage(Pawn pawn, float damageAmount)
         {
-            // Apply burn damage
             var fireDamage = new DamageInfo(
                 CrimsonGridFramework_DefOfs.CG_Burn,
                 Rand.Range(damageAmount * 0.8f, damageAmount * 1.2f), // Add some randomness

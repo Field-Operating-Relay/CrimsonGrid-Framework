@@ -11,18 +11,14 @@ namespace CrimsonGridFramework
     {
         private static readonly CachedTexture ToggleTurretIcon = new CachedTexture("UI/Gizmos/ToggleTurret");
 
-        // Forced target functionality
         private LocalTargetInfo forcedTarget = LocalTargetInfo.Invalid;
         private bool hasForcedTarget = false;
 
-        // Duplicate private members from base class that we need
         private LocalTargetInfo myLastAttackedTarget = LocalTargetInfo.Invalid;
         private int myLastAttackTargetTick;
 
-        // Our own fireAtWill tracking
         private bool myFireAtWill = true;
 
-        // Properties for forced targeting
         public LocalTargetInfo ForcedTarget
         {
             get => forcedTarget;
@@ -35,11 +31,9 @@ namespace CrimsonGridFramework
 
         public bool HasForcedTarget => hasForcedTarget && forcedTarget.IsValid;
 
-        // Expose our tracked values similar to base class
         public new LocalTargetInfo LastAttackedTarget => myLastAttackedTarget;
         public new int LastAttackTargetTick => myLastAttackTargetTick;
 
-        // Duplicate private properties from base class
         private bool MyCanShoot
         {
             get
@@ -85,14 +79,12 @@ namespace CrimsonGridFramework
         {
             get
             {
-                // We track our own fireAtWill since the base class field is private
                 return myFireAtWill;
             }
         }
 
         private bool MyWarmingUp => burstWarmupTicksLeft > 0;
 
-        // Forced target methods
         public void ClearForcedTarget()
         {
             forcedTarget = LocalTargetInfo.Invalid;
@@ -104,7 +96,6 @@ namespace CrimsonGridFramework
             if (target.IsValid)
             {
                 ForcedTarget = target;
-                // Immediately start targeting if we can shoot
                 if (MyCanShoot && burstCooldownTicksLeft <= 0)
                 {
                     currentTarget = forcedTarget;
@@ -151,7 +142,6 @@ namespace CrimsonGridFramework
 
             if (burstCooldownTicksLeft <= 0 && parent.IsHashIntervalTick(10))
             {
-                // Check if we have a forced target and it's still valid
                 if (HasForcedTarget)
                 {
                     if (IsForcedTargetStillValid())
@@ -162,12 +152,10 @@ namespace CrimsonGridFramework
                     }
                     else
                     {
-                        // Forced target is no longer valid, clear it
                         ClearForcedTarget();
                     }
                 }
 
-                // Fall back to automatic target finding
                 currentTarget = (Thing)AttackTargetFinder.BestShootTargetFromCurrentPosition(this, TargetScanFlags.NeedThreat | TargetScanFlags.NeedAutoTargetable);
                 if (currentTarget.IsValid)
                 {
@@ -185,7 +173,6 @@ namespace CrimsonGridFramework
             if (!forcedTarget.IsValid)
                 return false;
 
-            // Check if target still exists and is alive
             if (forcedTarget.Thing != null)
             {
                 if (forcedTarget.Thing.Destroyed)
@@ -195,7 +182,6 @@ namespace CrimsonGridFramework
                     return false;
             }
 
-            // Check if we can still shoot at the target (line of sight, range, etc.)
             if (!AttackVerb.CanHitTarget(forcedTarget))
                 return false;
 
@@ -210,10 +196,8 @@ namespace CrimsonGridFramework
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            // Get base gizmos but replace the fire at will toggle with our own
             foreach (Gizmo gizmo in base.CompGetGizmosExtra())
             {
-                // Skip the base fire at will toggle, we'll add our own
                 if (gizmo is Command_Toggle toggle && toggle.defaultLabel == "CommandToggleTurret".Translate())
                     continue;
 
@@ -222,7 +206,6 @@ namespace CrimsonGridFramework
 
             if (parent is Pawn pawn && pawn.IsColonyMechPlayerControlled)
             {
-                // Our own fire at will toggle
                 Command_Toggle command_Toggle = new Command_Toggle();
                 command_Toggle.defaultLabel = "CommandToggleTurret".Translate();
                 command_Toggle.defaultDesc = "CommandToggleTurretDesc".Translate();
@@ -234,7 +217,6 @@ namespace CrimsonGridFramework
                 };
                 yield return command_Toggle;
 
-                // Forced target gizmo for Crimson Grid robots
                 if (pawn.IsCrimsonGridRobot() && pawn.Faction == Faction.OfPlayer && pawn.MentalStateDef == null)
                 {
                     yield return CreateForcedTargetCommand();
@@ -253,10 +235,8 @@ namespace CrimsonGridFramework
             command.ownerThing = gun;
             command.tutorTag = "VerbTarget";
             command.verb = AttackVerb;
-            //command.defaultLabel = "Force Target";
             command.icon = AttackVerb.UIIcon;
 
-            // Handle disable conditions
             if (AttackVerb.caster.Faction != Faction.OfPlayer && !DebugSettings.ShowDevGizmos)
             {
                 command.Disable("CannotOrderNonControlled".Translate());
@@ -266,7 +246,6 @@ namespace CrimsonGridFramework
                 command.Disable("IsNotDrafted".Translate(AttackVerb.CasterPawn.LabelShort, AttackVerb.CasterPawn));
             }
 
-            // Add weather range cap warning if applicable
             if (AttackVerb.EquipmentSource != null &&
                 AttackVerb.caster.Spawned &&
                 AttackVerb.caster.Map.weatherManager.CurWeatherMaxRangeCap >= 0f)
