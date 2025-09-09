@@ -51,7 +51,7 @@ namespace CrimsonGridFramework.HarmonyPatches
                 if (transferable.ThingDef.category == ThingCategory.Pawn)
                 {
                     var pawn = transferable.AnyThing as Pawn;
-                    return pawn.IsCrimsonGridRobot() && pawn.Faction == Faction.OfPlayer;
+                    return pawn.IsCrimsonGridRobot() && pawn.IsConnected() && pawn.Faction == Faction.OfPlayer;
                 }
                 return false;
             }).ToList();

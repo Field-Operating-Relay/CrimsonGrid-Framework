@@ -21,16 +21,4 @@ namespace CrimsonGridFramework.HarmonyPatches
 
         }
     }
-    public static class FloatMenuMakerMap_CanTakeOrder_Patch
-    {
-        [HarmonyPriority(int.MinValue)]
-        public static void Postfix(Pawn pawn, ref bool __result)
-        {
-            if (__result is false && pawn.IsCrimsonGridRobot())
-            {
-                __result = true;
-
-            }
-        }
-    }
 }

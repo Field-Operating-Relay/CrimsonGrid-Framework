@@ -2,6 +2,7 @@
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,18 +29,16 @@ namespace CrimsonGridFramework
                 int val = 0;
                 foreach (var consumer in consumers)
                 {
-                    if (!consumer.DeadOrDowned)
-                    {
-                        val += consumer.BandwidthAmount;
-                    }
+                    val += consumer.BandwidthAmount;
                 }
                 return val;
             }
         }
         public int FreeBandwidthLeft => RelayBandwidthAmount - RelayBandwidthInUse;
         private bool isRegistered = false;
-        public bool IsOverdraw => RelayBandwidthInUse > RelayBandwidthAmount;
-        public float OverDrawPercentage => (float)RelayBandwidthInUse / RelayBandwidthAmount;
+        public float DrawPercentage => (float)RelayBandwidthInUse / (float)RelayBandwidthAmount;
+        public float OverDrawPercentage => DrawPercentage - 1f;
+        public bool IsOverdraw => DrawPercentage > 1f;
         public virtual bool IsEnabled => AnyGridBandwidth;
 
         public bool TryConnectConsumer(CompBandwidthConsumer consumer)
@@ -65,6 +64,10 @@ namespace CrimsonGridFramework
                 return false;
             }
             consumer.relay = parent;
+            if(consumer.pawn.jobs.curJob != null)
+            {
+                consumer.pawn.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
+            }
             return true;
 
         }
@@ -86,6 +89,14 @@ namespace CrimsonGridFramework
                 return false;
             }
             consumer.relay = null;
+            if (consumer.pawn.jobs.curJob != null)
+            {
+                consumer.pawn.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
+            }
+            if(consumer.pawn.health.hediffSet.HasHediff(CrimsonGridFramework_DefOfs.CG_GlobalBottleneck))
+            {
+                consumer.pawn.health.RemoveHediff(consumer.pawn.health.hediffSet.GetFirstHediffOfDef(CrimsonGridFramework_DefOfs.CG_GlobalBottleneck));
+            }
             return true;
 
         }
@@ -114,7 +125,7 @@ namespace CrimsonGridFramework
 
         protected void Unregister()
         {
-            foreach(var consumer in consumers.ToList())
+            foreach (var consumer in consumers.ToList())
             {
                 TryDisconnectConsumer(consumer);
             }
@@ -233,13 +244,18 @@ namespace CrimsonGridFramework
     public class CompBandwidthRelayPawn : CompBandwidthRelay
     {
         public Pawn Pawn => (Pawn)parent;
-        public override bool IsEnabled => true && Pawn != null && !Pawn.DeadOrDowned && Pawn.Faction == Faction.OfPlayer;
+        public override bool IsEnabled => true && Pawn != null && !Pawn.Dead && Pawn.Faction == Faction.OfPlayer;
         public override string CompInspectStringExtra()
         {
             string res = base.CompInspectStringExtra();
             if (IsEnabled)
             {
                 res += $"Bandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
+                if (IsOverdraw)
+                {
+                    res += $"\n<color=red>Overdrawn!</color>";
+                }
+
             }
             return res;
         }

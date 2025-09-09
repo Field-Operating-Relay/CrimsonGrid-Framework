@@ -1,15 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-
   <!-- Weapon Weight Class Restrictions -->
   <CGF_WeaponTooLight>This {0} weapon is too light for a {1} mech to effectively use</CGF_WeaponTooLight>
   <CGF_WeaponTooHeavy>This {0} weapon is too heavy for a {1} mech to handle</CGF_WeaponTooHeavy>
   <CGF_WeaponIncompatible>Weapon is incompatible with this mech's weight class</CGF_WeaponIncompatible>
-
   <!-- Heavy Weapon Penalty -->
   <CGF_HeavyWeaponPenalty>Heavy weapon penalty ({0})</CGF_HeavyWeaponPenalty>
-
   <!-- Caravan Section -->
   <CGF_Caravan_MechSection_Title>Mechanoids</CGF_Caravan_MechSection_Title>
-
+  <CGF_Title>CrimsonGrid Framework</CGF_Title>
+  <CGF_Caravan_MechSection_Title>Ironskins</CGF_Caravan_MechSection_Title>
 </LanguageData>

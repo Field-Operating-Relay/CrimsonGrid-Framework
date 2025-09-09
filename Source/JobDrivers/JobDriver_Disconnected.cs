@@ -31,6 +31,10 @@ namespace CrimsonGridFramework
                 actor.jobs.posture = PawnPosture.LayingOnGroundNormal;
                 actor.mindState.lastBedDefSleptIn = null;
                 curDriver.asleep = true;
+                if (actor.Drafted)
+                {
+                    actor.drafter.Drafted = false;
+                }
             };
             layDown.defaultCompleteMode = ToilCompleteMode.Never;
             layDown.tickIntervalAction = delegate
