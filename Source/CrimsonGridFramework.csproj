@@ -58,5 +58,4 @@
   <ItemGroup>
     <Publicize Include="Assembly-CSharp:RimWorld.ITab_Pawn_Gear.SelPawnForGear" />
   </ItemGroup>
-  <ItemGroup />
 </Project>
