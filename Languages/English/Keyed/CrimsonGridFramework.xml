@@ -7,7 +7,6 @@
   <!-- Heavy Weapon Penalty -->
   <CGF_HeavyWeaponPenalty>Heavy weapon penalty ({0})</CGF_HeavyWeaponPenalty>
   <!-- Caravan Section -->
-  <CGF_Caravan_MechSection_Title>Mechanoids</CGF_Caravan_MechSection_Title>
   <CGF_Title>CrimsonGrid Framework</CGF_Title>
   <CGF_Caravan_MechSection_Title>Ironskins</CGF_Caravan_MechSection_Title>
 </LanguageData>

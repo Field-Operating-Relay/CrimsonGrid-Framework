@@ -22,10 +22,6 @@ namespace CrimsonGridFramework.HarmonyPatches
     [HarmonyPatch(typeof(CaravanUIUtility), "AddPawnsSections")]
     public class Patch_AddPawnsSections_Postfix_Robots
     {
-        public static bool Prepare(MethodBase original)
-        {
-            return !ModsConfig.BiotechActive;
-        }
         public static void Postfix(TransferableOneWayWidget widget, List<TransferableOneWay> transferables)
         {
             IEnumerable<TransferableOneWay> source = transferables.Where((TransferableOneWay x) => x.ThingDef.category == ThingCategory.Pawn);
@@ -33,7 +29,7 @@ namespace CrimsonGridFramework.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(TransferableOneWayWidget), "AddSection")]
+/*    [HarmonyPatch(typeof(TransferableOneWayWidget), "AddSection")]
     public class Patch_AddSection_Robots
     {
         public static bool Prepare(MethodBase original)
@@ -58,5 +54,5 @@ namespace CrimsonGridFramework.HarmonyPatches
             modRobots.AddRange(transferables);
             transferables = modRobots;
         }
-    }
+    }*/
 }
