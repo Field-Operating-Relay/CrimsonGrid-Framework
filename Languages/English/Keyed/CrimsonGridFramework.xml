@@ -9,4 +9,7 @@
   <!-- Caravan Section -->
   <CGF_Title>CrimsonGrid Framework</CGF_Title>
   <CGF_Caravan_MechSection_Title>Ironskins</CGF_Caravan_MechSection_Title>
+
+<!--Overclocking-->
+	<CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
 </LanguageData>

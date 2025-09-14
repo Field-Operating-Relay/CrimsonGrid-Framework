@@ -44,9 +44,37 @@
 				<basePowerConsumption>250</basePowerConsumption>
 				<shortCircuitInRain>true</shortCircuitInRain>
 			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>6</heatPerSecond>
+			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CrimsonGridFramework.CompProperties_BandwidthProvider">
 				<bandwidthAmount>10</bandwidthAmount>
+			</li>
+			<li Class="CrimsonGridFramework.CompProperties_BandwidthOverclock">
+				<stages>
+					<li>
+						<BonusBandwidth>0</BonusBandwidth>
+						<AdditionalHeatPerSecond>0</AdditionalHeatPerSecond>
+						<PowerConsumption>0</PowerConsumption>
+					</li>
+					<li>
+						<BonusBandwidth>1</BonusBandwidth>
+						<AdditionalHeatPerSecond>2</AdditionalHeatPerSecond>
+						<PowerConsumption>50</PowerConsumption>
+					</li>
+					<li>
+						<BonusBandwidth>2</BonusBandwidth>
+						<AdditionalHeatPerSecond>4</AdditionalHeatPerSecond>
+						<PowerConsumption>150</PowerConsumption>
+					</li>
+					<li>
+						<BonusBandwidth>3</BonusBandwidth>
+						<AdditionalHeatPerSecond>8</AdditionalHeatPerSecond>
+						<PowerConsumption>250</PowerConsumption>
+					</li>
+				</stages>
 			</li>
 		</comps>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>

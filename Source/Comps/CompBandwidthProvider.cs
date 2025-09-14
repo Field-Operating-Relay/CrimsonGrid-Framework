@@ -17,12 +17,12 @@ namespace CrimsonGridFramework
             compClass = typeof(CompBandwidthProvider);
         }
     }
-    public class CompBandwidthProvider : ThingComp
+    public class CompBandwidthProvider : ThingComp, IBuildingWithBandwidth
     {
         public CompProperties_BandwidthProvider Props => (CompProperties_BandwidthProvider)props;
         WorldComponent_GridBandwidth gridBandwidth => WorldComponent_GridBandwidth.Instance;
-        public int bandwidthAmount => Props.bandwidthAmount;
-
+        public List<IBandwidthBooster> additionalBandwidthBoosts = [];
+        public int BandwidthAmount => Props.bandwidthAmount + GetBoostedBandwidth();
         private CompPowerTrader powerTrader;
         public CompPowerTrader Power
         {
@@ -35,8 +35,22 @@ namespace CrimsonGridFramework
                 return powerTrader;
             }
         }
+
+        public bool Enabled => CanProvideBandwidth();
         private bool isRegistered = false;
 
+        private int GetBoostedBandwidth()
+        {
+            int totalBoost = 0;
+            foreach (IBandwidthBooster booster in additionalBandwidthBoosts)
+            {
+                if (booster != null && booster.Enabled)
+                {
+                    totalBoost += booster.BandwidthBoostAmount;
+                }
+            }
+            return totalBoost;
+        }
         public override void CompTick()
         {
             base.CompTick();
@@ -83,7 +97,7 @@ namespace CrimsonGridFramework
             string result = base.CompInspectStringExtra();
             if (isRegistered)
             {
-                result += $"Providing {bandwidthAmount} bandwidth";
+                result += $"Providing {BandwidthAmount} bandwidth";
             }
             return result;
         }
@@ -100,8 +114,34 @@ namespace CrimsonGridFramework
                 action = () =>
                 {
                     Logger.Message($"Total Bandwidth: {gridBandwidth.TotalBandwidth}");
+                    Logger.Message($"Boosters: {additionalBandwidthBoosts.Count()}, {additionalBandwidthBoosts.First().BandwidthBoostAmount}");
                 }
             };
+        }
+
+        public bool TryBoostBandwidth(IBandwidthBooster booster)
+        {
+            if (booster == null || additionalBandwidthBoosts.Contains(booster))
+            {
+                return false;
+            }
+            additionalBandwidthBoosts.Add(booster);
+            return true;
+        }
+
+        public bool TryUnboostBandwidth(IBandwidthBooster booster)
+        {
+            if (booster == null || !additionalBandwidthBoosts.Contains(booster))
+            {
+                return false;
+            }
+            additionalBandwidthBoosts.Remove(booster);
+            return true;
+        }
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Collections.Look(ref additionalBandwidthBoosts, "additionalBandwidthBoosts", LookMode.Deep);
         }
     }
 }

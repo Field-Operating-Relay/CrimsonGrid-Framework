@@ -37,7 +37,7 @@ namespace CrimsonGridFramework
                 int val = 0;
                 foreach (CompBandwidthProvider provider in bandwidthProviders)
                 {
-                    val += provider.bandwidthAmount;
+                    val += provider.BandwidthAmount;
                 }
                 return val;
             }
@@ -102,7 +102,7 @@ namespace CrimsonGridFramework
                 Logger.Error("Provider is not of player faction");
                 return false;
             }
-            if (provider.bandwidthAmount == 0)
+            if (provider.BandwidthAmount == 0)
             {
                 Logger.Error("Bandwidth Amount must not be 0");
                 return false;
