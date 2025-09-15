@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
+using static HarmonyLib.Code;
 
 namespace CrimsonGridFramework
 {
@@ -21,7 +22,7 @@ namespace CrimsonGridFramework
         CompProperties_BandwidthRelay Props => (CompProperties_BandwidthRelay)props;
         public HashSet<CompBandwidthConsumer> consumers = [];
         public bool AnyGridBandwidth => gridBandwidth.TotalBandwidth > 0;
-        public int RelayBandwidthAmount => Props.bandwidthRelayAmount;
+        virtual public int RelayBandwidthAmount => Props.bandwidthRelayAmount;
         public int RelayBandwidthInUse
         {
             get
@@ -162,8 +163,10 @@ namespace CrimsonGridFramework
         }
     }
 
-    public class CompBandwidthRelayBuilding : CompBandwidthRelay
+    public class CompBandwidthRelayBuilding : CompBandwidthRelay, IBuildingWithBandwidth
     {
+        public List<IBandwidthBooster> additionalBandwidthBoosts = [];
+        public override int RelayBandwidthAmount => base.RelayBandwidthAmount + GetBoostedBandwidth();
         private CompPowerTrader powerTrader;
         public CompPowerTrader Power
         {
@@ -177,6 +180,9 @@ namespace CrimsonGridFramework
             }
         }
         public override bool IsEnabled => base.IsEnabled && parent.Faction == Find.FactionManager.OfPlayer && Power != null && Power.PowerOn;
+
+        public bool Enabled => IsEnabled;
+
         public override void Notify_MapRemoved()
         {
             base.Notify_MapRemoved();
@@ -195,6 +201,10 @@ namespace CrimsonGridFramework
             {
                 res += $"Bandwidth: {FreeBandwidthLeft}/{RelayBandwidthAmount}";
             }
+            else
+            {
+                res += "Not relaying bandwidth";
+            }
 
             return res;
         }
@@ -204,6 +214,38 @@ namespace CrimsonGridFramework
             {
                 GenDraw.DrawLineBetween(parent.TrueCenter(), consumer.parent.TrueCenter());
             }
+        }
+        private int GetBoostedBandwidth()
+        {
+            int totalBoost = 0;
+            foreach (IBandwidthBooster booster in additionalBandwidthBoosts)
+            {
+                if (booster != null && booster.Enabled)
+                {
+                    totalBoost += booster.BandwidthBoostAmount;
+                }
+            }
+            return totalBoost;
+        }
+
+        public bool TryBoostBandwidth(IBandwidthBooster booster)
+        {
+            if (booster == null || additionalBandwidthBoosts.Contains(booster))
+            {
+                return false;
+            }
+            additionalBandwidthBoosts.Add(booster);
+            return true;
+        }
+
+        public bool TryUnboostBandwidth(IBandwidthBooster booster)
+        {
+            if (booster == null || !additionalBandwidthBoosts.Contains(booster))
+            {
+                return false;
+            }
+            additionalBandwidthBoosts.Remove(booster);
+            return true;
         }
     }
     public class CompBandwidthRelayEquipment : CompBandwidthRelay
