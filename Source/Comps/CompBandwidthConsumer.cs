@@ -61,8 +61,6 @@ namespace CrimsonGridFramework
             base.CompTickInterval(delta);
             if (IsConnected || IsSelfRelay)
             {
-                Log.Message(gridBandwidth.IsOverdraw);
-                Log.Message(gridBandwidth.OverDrawPercentage);
                 if (ConnectedRelayComp.IsOverdraw)
                 {
                     RelayBottleneck.Severity = ConnectedRelayComp.OverDrawPercentage;

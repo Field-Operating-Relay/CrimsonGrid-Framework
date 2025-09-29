@@ -15,7 +15,15 @@ namespace CrimsonGridFramework
         }
         public static bool IsConnected(this Pawn pawn)
         {
-            return pawn.GetBandwidthComp()?.IsConnected ?? false;
+            var bandwidthConnected = pawn.GetBandwidthComp()?.IsConnected ?? false;
+
+            if (!bandwidthConnected)
+                return false;
+
+            if (HasPendingSurgery(pawn))
+                return false;
+
+            return true;
         }
         public static bool IsCrimsonGridRobot(this Pawn pawn)
         {
@@ -24,6 +32,22 @@ namespace CrimsonGridFramework
         public static void ApplyGlobalBottleneck(CompBandwidthConsumer consumer)
         {
 
+        }
+        private static bool HasPendingSurgery(Pawn pawn)
+        {
+            // Check if the robot has any surgery bills that should be done now
+            if (pawn.health?.surgeryBills?.AnyShouldDoNow == true)
+            {
+                return true;
+            }
+
+            // Check if robot is currently undergoing surgery
+            if (pawn.CurJob?.def?.defName == "DoBill" && pawn.CurJob.bill?.recipe?.IsSurgery == true)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

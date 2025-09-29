@@ -17,6 +17,8 @@ namespace CrimsonGridFramework.HarmonyPatches
             if (pawn.IsCrimsonGridRobot() && pawn.Faction == Faction.OfPlayer && pawn.drafter == null)
             {
                 pawn.drafter = new Pawn_DraftController(pawn);
+
+                pawn.abilities = new Pawn_AbilityTracker(pawn);
             }
 
         }

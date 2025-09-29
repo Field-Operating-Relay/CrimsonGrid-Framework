@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <WorkGiverDef>
+        <defName>CGF_DoBillsRobotOperation</defName>
+        <label>operate on mechs</label>
+        <giverClass>WorkGiver_DoBill</giverClass>
+        <workType>Crafting</workType>
+        <priorityInType>70</priorityInType>
+        <verb>work on</verb>
+        <gerund>operating on</gerund>
+        <requiredCapacities>
+            <li>Manipulation</li>
+        </requiredCapacities>
+        <prioritizeSustains>true</prioritizeSustains>
+        <fixedBillGiverDefs>
+            <li>Robot_Test_With_Turret_Light</li>
+        </fixedBillGiverDefs>
+    </WorkGiverDef>
+</Defs>
