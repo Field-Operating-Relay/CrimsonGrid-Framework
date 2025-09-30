@@ -40,11 +40,9 @@ namespace CrimsonGridFramework
         public CompPowerTrader compPower;
         public CompHeatPusher heatPusher;
         public float TargetStage;
-        private float defaultPowerOutput;
         public int overclockStages => Props.stages.Count;
-
         public CompProperties_BandwidthOverclock Props => (CompProperties_BandwidthOverclock)props;
-
+        private float previousPowerDraw;
         public int BandwidthBoostAmount => Props.stages[Overclock].BonusBandwidth;
 
         public CompBandwidthOverclock() { }
@@ -56,7 +54,7 @@ namespace CrimsonGridFramework
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             compPower = parent.GetComp<CompPowerTrader>();
-            defaultPowerOutput = compPower.PowerOutput;
+            previousPowerDraw = compPower.Props.PowerConsumption;
             heatPusher = parent.GetComp<CompHeatPusher>();
             buildingWithBandwidth = (IBuildingWithBandwidth)parent.AllComps.Where(c => c is IBuildingWithBandwidth).First();
             buildingWithBandwidth.TryBoostBandwidth(this);
@@ -94,6 +92,7 @@ namespace CrimsonGridFramework
         public override void CompTick()
         {
             base.CompTick();
+            
             if (buildingWithBandwidth.Enabled && enabled)
             {
                 if (heatPusher != null && heatPusher.enabled && parent.IsHashIntervalTick(60))
@@ -104,11 +103,13 @@ namespace CrimsonGridFramework
                 targetStage = Math.Max(0, Math.Min(overclockStages - 1, targetStage));
                 if (targetStage != Overclock && targetStage < overclockStages)
                 {
+                    compPower.PowerOutput += Props.stages[Overclock].PowerConsumption;
                     Log.Message("Rah " + targetStage);
                     Overclock = targetStage;
+                    compPower.PowerOutput -= Props.stages[Overclock].PowerConsumption;
                 }
             }
-            compPower.PowerOutput = defaultPowerOutput - Props.stages[Overclock].PowerConsumption;
+            
         }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
