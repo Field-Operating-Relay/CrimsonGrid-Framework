@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<JobDef>
+		<defName>CG_DeliverUpgradeMaterials</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_DeliverUpgradeMaterials</driverClass>
+		<reportString>Delivering upgrade materials into TargetB.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+	<JobDef>
+		<defName>CG_UpgradeBuilding</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_UpgradeBuilding</driverClass>
+		<reportString>Upgrading TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+</Defs>

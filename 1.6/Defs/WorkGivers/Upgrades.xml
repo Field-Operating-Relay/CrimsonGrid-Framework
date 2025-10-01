@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<WorkGiverDef>
+		<defName>DeliverUpgradeMaterials</defName>
+		<label>deliver upgrade materials</label>
+		<giverClass>CrimsonGridFramework.WorkGiver_DeliverUpgradeMaterials</giverClass>
+		<workType>Hauling</workType>
+		<verb>load</verb>
+		<gerund>loading</gerund>
+		<priorityInType>60</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>WorkUpgradeBuilding</defName>
+		<label>upgrade building</label>
+		<giverClass>CrimsonGridFramework.WorkGiver_WorkUpgradeBuilding</giverClass>
+		<workType>Construction</workType>
+		<verb>upgrade</verb>
+		<gerund>upgrading</gerund>
+		<priorityInType>70</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+</Defs>
