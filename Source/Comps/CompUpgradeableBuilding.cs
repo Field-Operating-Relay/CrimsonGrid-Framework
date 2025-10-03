@@ -249,17 +249,28 @@ namespace CrimsonGridFramework
                     }
                 };
             }
-            yield return new Command_Action()
+            if (DebugSettings.ShowDevGizmos)
             {
-                defaultLabel = "Test Upgrade",
-                icon = null,
-                action = () =>
+                yield return new Command_Action()
                 {
-                    isUpgrading = true;
-                    TargetUpgradeLevel = 1;
-                    buildingsWithUpgradeInProgress.Add(parent);
-                }
-            };
+                    defaultLabel = "DEV: Max Upgrade",
+                    icon = null,
+                    action = () =>
+                    {
+                        CurrentUpgradeLevel = MaxUpgradeLevel;
+                    }
+                };
+                yield return new Command_Action()
+                {
+                    defaultLabel = "DEV: Min Upgrade",
+                    icon = null,
+                    action = () =>
+                    {
+                        CurrentUpgradeLevel = 0;
+                    }
+                };
+            }
+              
         }
         public void FinishUpgrade()
         {
