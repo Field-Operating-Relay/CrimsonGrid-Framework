@@ -258,6 +258,8 @@ namespace CrimsonGridFramework
                     action = () =>
                     {
                         CurrentUpgradeLevel = MaxUpgradeLevel;
+                        cachedGraphic = null;
+
                     }
                 };
                 yield return new Command_Action()
@@ -267,6 +269,8 @@ namespace CrimsonGridFramework
                     action = () =>
                     {
                         CurrentUpgradeLevel = 0;
+                        cachedGraphic = null;
+
                     }
                 };
             }
@@ -279,6 +283,8 @@ namespace CrimsonGridFramework
             CurrentUpgradeLevel = CurrentUpgradeLevel + 1;
             buildingsWithUpgradeInProgress.Remove(parent);
             TargetUpgradeLevel = 0;
+            cachedGraphic = null;
+            Log.Message(CurrentUpgradeLevel);
         }
         public override void PostExposeData()
         {

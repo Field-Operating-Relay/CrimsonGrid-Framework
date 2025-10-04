@@ -74,7 +74,7 @@
 						<additionalPowerDraw>250</additionalPowerDraw>
 						<AdditionalHeatPerSecond>10</AdditionalHeatPerSecond>
 						<graphicData>
-							<texPath>Things/Building/Power/WoodFiredGenerator</texPath>
+							<texPath>Things/Building/Recreation/Harpsichord</texPath>
 							<graphicClass>Graphic_Single</graphicClass>
 							<drawSize>(2,2)</drawSize>
 							<shadowData>
