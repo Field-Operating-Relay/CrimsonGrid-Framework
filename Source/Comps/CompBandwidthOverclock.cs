@@ -120,7 +120,7 @@ namespace CrimsonGridFramework
                 {
                     defaultLabel = "CGF_EnableOverclocking".Translate(),
                     defaultDesc = "CGF_EnableOverclockingDesc".Translate(),
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Overclock", true),
+                    icon = ContentFinder<Texture2D>.Get("UI/Gizmos/ToggleTurret", true),
                     isActive = () => enabled,
                     toggleAction = delegate
                     {
