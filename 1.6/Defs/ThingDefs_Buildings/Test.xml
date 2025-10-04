@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<ThingDef ParentName="BuildingBase">
 		<defName>CrimsonGridProvider</defName>
@@ -48,7 +48,7 @@
 				<compClass>CompHeatPusherPowered</compClass>
 				<heatPerSecond>6</heatPerSecond>
 			</li>
-			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Flickable" />
 			<li Class="CrimsonGridFramework.CompProperties_BandwidthProvider">
 				<bandwidthAmount>10</bandwidthAmount>
 			</li>
@@ -59,7 +59,7 @@
 						<additionalPowerDraw>0</additionalPowerDraw>
 						<AdditionalHeatPerSecond>0</AdditionalHeatPerSecond>
 						<graphicData>
-							<texPath>Things/Building/Power/WoodFiredGenerator</texPath>
+							<texPath>Things/Building/Misc/MoisturePump</texPath>
 							<graphicClass>Graphic_Single</graphicClass>
 							<drawSize>(2,2)</drawSize>
 							<shadowData>
@@ -167,7 +167,7 @@
 				<compClass>CompHeatPusherPowered</compClass>
 				<heatPerSecond>6</heatPerSecond>
 			</li>
-			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Flickable" />
 			<li Class="CrimsonGridFramework.CompProperties_BandwidthRelay">
 				<bandwidthRelayAmount>5</bandwidthRelayAmount>
 				<compClass>CrimsonGridFramework.CompBandwidthRelayBuilding</compClass>
