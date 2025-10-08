@@ -22,6 +22,7 @@ namespace CrimsonGridFramework
 
             return MechWeightClassHelper.ShouldApplyDebuffs(def, weaponExt.targetMechWeightClass);
         }
+
         public override float GetStatOffset(StatDef stat)
         {
             if (parent.ParentHolder is not Pawn_EquipmentTracker tracker || !tracker.pawn.IsCrimsonGridRobot())
@@ -38,13 +39,38 @@ namespace CrimsonGridFramework
 
             foreach (var statModifier in weaponExt.debuffStats)
             {
-                if (statModifier.stat == stat)
+                if (statModifier.stat == stat && statModifier.HasOffset)
                 {
-                    return statModifier.value;
+                    return statModifier.offset;
                 }
             }
 
             return 0f;
+        }
+
+        public override float GetStatFactor(StatDef stat)
+        {
+            if (parent.ParentHolder is not Pawn_EquipmentTracker tracker || !tracker.pawn.IsCrimsonGridRobot())
+            {
+                return 1f;
+            }
+
+            if (!ShouldApplyDebuff(tracker.pawn, tracker.pawn.def.race.mechWeightClass))
+                return 1f;
+
+            WeaponWeightClassExtension weaponExt = GetEquippedWeaponExtension();
+            if (weaponExt?.debuffStats == null)
+                return 1f;
+
+            foreach (var statModifier in weaponExt.debuffStats)
+            {
+                if (statModifier.stat == stat && statModifier.HasFactor)
+                {
+                    return statModifier.factor;
+                }
+            }
+
+            return 1f;
         }
 
         public override void GetStatsExplanation(StatDef stat, StringBuilder sb, string whitespace = "")
@@ -65,7 +91,14 @@ namespace CrimsonGridFramework
             {
                 if (statModifier.stat == stat)
                 {
-                    sb.AppendLine($"{whitespace}{"CGF_HeavyWeaponPenalty".Translate(weaponExt.targetMechWeightClass?.label ?? "unknown")}: {statModifier.value.ToStringByStyle(stat.toStringStyle, ToStringNumberSense.Offset)}");
+                    if (statModifier.HasOffset)
+                    {
+                        sb.AppendLine($"{whitespace}{"CGF_HeavyWeaponPenalty".Translate(weaponExt.targetMechWeightClass?.label ?? "unknown")}: {statModifier.offset.ToStringByStyle(stat.toStringStyle, ToStringNumberSense.Offset)}");
+                    }
+                    if (statModifier.HasFactor)
+                    {
+                        sb.AppendLine($"{whitespace}{"CGF_HeavyWeaponPenalty".Translate(weaponExt.targetMechWeightClass?.label ?? "unknown")}: {statModifier.factor.ToStringByStyle(stat.toStringStyle, ToStringNumberSense.Factor)}");
+                    }
                     break;
                 }
             }

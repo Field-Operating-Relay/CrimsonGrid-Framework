@@ -4,19 +4,20 @@
   <CGF_WeaponTooLight>This {0} weapon is too light for a {1} mech to effectively use</CGF_WeaponTooLight>
   <CGF_WeaponTooHeavy>This {0} weapon is too heavy for a {1} mech to handle</CGF_WeaponTooHeavy>
   <CGF_WeaponIncompatible>Weapon is incompatible with this mech's weight class</CGF_WeaponIncompatible>
+  <CGF_MechOnlyWeapon>Weapon equippable by Crimson Grid mechs only</CGF_MechOnlyWeapon>
   <!-- Heavy Weapon Penalty -->
   <CGF_HeavyWeaponPenalty>Heavy weapon penalty ({0})</CGF_HeavyWeaponPenalty>
   <!-- Caravan Section -->
   <CGF_Title>CrimsonGrid Framework</CGF_Title>
   <CGF_Caravan_MechSection_Title>Ironskins</CGF_Caravan_MechSection_Title>
 
-<!--Overclocking-->
-	<CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
-	<!--Building Upgrades-->
-	<CGF_CurrentLevel>Current upgrade level: {0}</CGF_CurrentLevel>
-	<CGF_Upgrading>Upgrading work amount left: {0}</CGF_Upgrading>
-	<CG_Upgrade>Upgrade</CG_Upgrade>
-	<CG_UpgradeDesc>Upgrading will provide:\nAdditional bandwidth: {0}.\nAdditional power draw: {1}\nAdditional heat: {2}\nCost:{3}</CG_UpgradeDesc>
-	<CG_CancelUpgrade>Cancel Upgrade</CG_CancelUpgrade>
-	<CG_CancelUpgradeDesc>Canceling upgrade will refund the resources used</CG_CancelUpgradeDesc>
+  <!--Overclocking-->
+  <CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
+  <!--Building Upgrades-->
+  <CGF_CurrentLevel>Current upgrade level: {0}</CGF_CurrentLevel>
+  <CGF_Upgrading>Upgrading work amount left: {0}</CGF_Upgrading>
+  <CG_Upgrade>Upgrade</CG_Upgrade>
+  <CG_UpgradeDesc>Upgrading will provide:\nAdditional bandwidth: {0}.\nAdditional power draw: {1}\nAdditional heat: {2}\nCost:{3}</CG_UpgradeDesc>
+  <CG_CancelUpgrade>Cancel Upgrade</CG_CancelUpgrade>
+  <CG_CancelUpgradeDesc>Canceling upgrade will refund the resources used</CG_CancelUpgradeDesc>
 </LanguageData>
