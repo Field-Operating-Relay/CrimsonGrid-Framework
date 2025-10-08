@@ -12,4 +12,11 @@
 
 <!--Overclocking-->
 	<CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
+	<!--Building Upgrades-->
+	<CGF_CurrentLevel>Current upgrade level: {0}</CGF_CurrentLevel>
+	<CGF_Upgrading>Upgrading work amount left: {0}</CGF_Upgrading>
+	<CG_Upgrade>Upgrade</CG_Upgrade>
+	<CG_UpgradeDesc>Upgrading will provide:\nAdditional bandwidth: {0}.\nAdditional power draw: {1}\nAdditional heat: {2}\nCost:{3}</CG_UpgradeDesc>
+	<CG_CancelUpgrade>Cancel Upgrade</CG_CancelUpgrade>
+	<CG_CancelUpgradeDesc>Canceling upgrade will refund the resources used</CG_CancelUpgradeDesc>
 </LanguageData>
