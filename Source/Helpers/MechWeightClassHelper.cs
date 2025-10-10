@@ -74,9 +74,10 @@ namespace CrimsonGridFramework
             WeightClassComparison comparison = CompareWeightClasses(mechWeightClass, weaponWeightClass);
             int difference = GetWeightClassDifference(mechWeightClass, weaponWeightClass);
 
-            // Can equip if weapon is same weight class or exactly 1 heavier
+            // Can equip if weapon is same weight class, exactly 1 heavier, or exactly 1 lighter
             return comparison == WeightClassComparison.Equal ||
-                   (comparison == WeightClassComparison.Lighter && difference == 1);
+                   (comparison == WeightClassComparison.Lighter && difference == 1) ||
+                   (comparison == WeightClassComparison.Heavier && difference == 1);
         }
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace CrimsonGridFramework
             WeightClassComparison comparison = CompareWeightClasses(mechWeightClass, weaponWeightClass);
             int difference = GetWeightClassDifference(mechWeightClass, weaponWeightClass);
 
-            if (comparison == WeightClassComparison.Heavier)
+            if (comparison == WeightClassComparison.Heavier && difference >= 2)
             {
                 return "CGF_WeaponTooLight".Translate(weaponWeightClass.label, mechWeightClass.label);
             }
