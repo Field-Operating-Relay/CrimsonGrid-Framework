@@ -55,12 +55,12 @@ namespace CrimsonGridFramework.HarmonyPatches
                 return;
             }
 
-            if (weaponExtension.applyEmpStunOnFire)
+            if (weaponExtension.applyEmpStunOnShoot)
             {
                 ApplyEmpStun(casterPawn);
             }
 
-            if (weaponExtension.applyFireDamageOnFire)
+            if (weaponExtension.applyFireDamageOnShoot)
             {
                 ApplyFireDamage(casterPawn, weaponExtension.fireDamageAmount);
             }
