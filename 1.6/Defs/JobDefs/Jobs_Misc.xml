@@ -8,4 +8,12 @@
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 		<neverShowWeapon>true</neverShowWeapon>
 	</JobDef>
+
+	<JobDef>
+		<defName>CG_ReloadAPS</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_ReloadAPS</driverClass>
+		<reportString>reloading APS.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 </Defs>

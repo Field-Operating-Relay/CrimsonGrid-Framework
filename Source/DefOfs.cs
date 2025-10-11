@@ -20,5 +20,7 @@ namespace CrimsonGridFramework
         public static DamageDef CG_Burn;
         public static HediffDef CG_GlobalBottleneck;
         public static HediffDef CG_RelayBottleneck;
+        public static HediffDef CG_APSModification;
+        public static JobDef CG_ReloadAPS;
     }
 }
