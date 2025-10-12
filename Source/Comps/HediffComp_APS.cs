@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using RimWorld.Utility;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using Verse;
 
@@ -17,7 +16,6 @@ namespace CrimsonGridFramework
         private bool enabledByPlayer = true;
         private bool blockFriendlyFire = false;
         private bool disabled = false;
-        private const int ONE_SECOND_IN_TICKS = 60;
 
         public HediffCompProperties_APS Props => (HediffCompProperties_APS)props;
         public Thing ReloadableThing => parent.pawn;
@@ -43,11 +41,6 @@ namespace CrimsonGridFramework
 
         public override void CompPostTick(ref float sev)
         {
-            if (Find.TickManager.TicksGame % ONE_SECOND_IN_TICKS == 0)
-            {
-                disabled = !CanBeUsed(out _);
-            }
-
             if (cooldownTicksRemaining > 0)
             {
                 cooldownTicksRemaining--;
@@ -78,6 +71,7 @@ namespace CrimsonGridFramework
             if (toDeleteProjectiles.Count > 0)
             {
                 remainingCharges--;
+                disabled = !CanBeUsed(out _);
                 cooldownTicksRemaining = Props.cooldownTicks;
 
                 foreach (Projectile proj in toDeleteProjectiles)
@@ -159,6 +153,7 @@ namespace CrimsonGridFramework
             int numCharges = Mathf.Clamp(ammo.stackCount / Props.ammoCountPerCharge, 0, MaxCharges - remainingCharges);
             ammo.SplitOff(numCharges * Props.ammoCountPerCharge).Destroy();
             remainingCharges += numCharges;
+            disabled = !CanBeUsed(out _);
         }
 
         public int MinAmmoNeeded(bool allowForcedReload)
