@@ -88,8 +88,12 @@
             <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
                 <targetMechWeightClass>Light</targetMechWeightClass>
                 <debuffStats>
-                    <MoveSpeed>-0.5</MoveSpeed>
-                    <ShootingAccuracyPawn>-0.1</ShootingAccuracyPawn>
+                    <MoveSpeed>
+                        <offset>-0.5</offset>
+                    </MoveSpeed>
+                    <ShootingAccuracyPawn>
+                        <offset>-0.1</offset>
+                    </ShootingAccuracyPawn>
                 </debuffStats>
             </li>
         </modExtensions>
@@ -105,10 +109,17 @@
             <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
                 <targetMechWeightClass>Medium</targetMechWeightClass>
                 <debuffStats>
-                    <MoveSpeed>-0.7</MoveSpeed>
-                    <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
-                    <RangedWeapon_DamageMultiplier>-0.1</RangedWeapon_DamageMultiplier>
+                    <MoveSpeed>
+                        <offset>-0.7</offset>
+                    </MoveSpeed>
+                    <ShootingAccuracyPawn>
+                        <offset>-0.2</offset>
+                    </ShootingAccuracyPawn>
+                    <RangedWeapon_DamageMultiplier>
+                        <offset>-0.1</offset>
+                    </RangedWeapon_DamageMultiplier>
                 </debuffStats>
+                <crimsonRobotsOnly>true</crimsonRobotsOnly>
             </li>
         </modExtensions>
         <comps>
@@ -123,8 +134,12 @@
             <li Class="CrimsonGridFramework.WeaponWeightClassExtension">
                 <targetMechWeightClass>Heavy</targetMechWeightClass>
                 <debuffStats>
-                    <MoveSpeed>-0.9</MoveSpeed>
-                    <ShootingAccuracyPawn>-0.3</ShootingAccuracyPawn>
+                    <MoveSpeed>
+                        <offset>-0.9</offset>
+                    </MoveSpeed>
+                    <ShootingAccuracyPawn>
+                        <offset>-0.3</offset>
+                    </ShootingAccuracyPawn>
                 </debuffStats>
             </li>
         </modExtensions>
@@ -143,7 +158,7 @@
                     <MoveSpeed>-0.7</MoveSpeed>
                     <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
                 </debuffStats>
-                <applyEmpStunOnFire>true</applyEmpStunOnFire>
+                <applyEmpStunOnShoot>true</applyEmpStunOnShoot>
             </li>
         </modExtensions>
         <comps>
@@ -161,7 +176,7 @@
                     <MoveSpeed>-0.7</MoveSpeed>
                     <ShootingAccuracyPawn>-0.2</ShootingAccuracyPawn>
                 </debuffStats>
-                <applyFireDamageOnFire>true</applyFireDamageOnFire>
+                <applyFireDamageOnShoot>true</applyFireDamageOnShoot>
                 <fireDamageAmount>5</fireDamageAmount>
             </li>
         </modExtensions>

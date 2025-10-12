@@ -4,19 +4,53 @@
   <CGF_WeaponTooLight>This {0} weapon is too light for a {1} mech to effectively use</CGF_WeaponTooLight>
   <CGF_WeaponTooHeavy>This {0} weapon is too heavy for a {1} mech to handle</CGF_WeaponTooHeavy>
   <CGF_WeaponIncompatible>Weapon is incompatible with this mech's weight class</CGF_WeaponIncompatible>
+  <CGF_MechOnlyWeapon>Weapon equippable by Crimson Grid mechs only</CGF_MechOnlyWeapon>
   <!-- Heavy Weapon Penalty -->
   <CGF_HeavyWeaponPenalty>Heavy weapon penalty ({0})</CGF_HeavyWeaponPenalty>
   <!-- Caravan Section -->
   <CGF_Title>CrimsonGrid Framework</CGF_Title>
   <CGF_Caravan_MechSection_Title>Ironskins</CGF_Caravan_MechSection_Title>
 
-<!--Overclocking-->
-	<CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
-	<!--Building Upgrades-->
-	<CGF_CurrentLevel>Current upgrade level: {0}</CGF_CurrentLevel>
-	<CGF_Upgrading>Upgrading work amount left: {0}</CGF_Upgrading>
-	<CG_Upgrade>Upgrade</CG_Upgrade>
-	<CG_UpgradeDesc>Upgrading will provide:\nAdditional bandwidth: {0}.\nAdditional power draw: {1}\nAdditional heat: {2}\nCost:{3}</CG_UpgradeDesc>
-	<CG_CancelUpgrade>Cancel Upgrade</CG_CancelUpgrade>
-	<CG_CancelUpgradeDesc>Canceling upgrade will refund the resources used</CG_CancelUpgradeDesc>
+  <!--Overclocking-->
+  <CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
+  <!--Building Upgrades-->
+  <CGF_CurrentLevel>Current upgrade level: {0}</CGF_CurrentLevel>
+  <CGF_Upgrading>Upgrading work amount left: {0}</CGF_Upgrading>
+  <CG_Upgrade>Upgrade</CG_Upgrade>
+  <CG_UpgradeDesc>Upgrading will provide:\nAdditional bandwidth: {0}.\nAdditional power draw: {1}\nAdditional heat: {2}\nCost:{3}</CG_UpgradeDesc>
+  <CG_CancelUpgrade>Cancel Upgrade</CG_CancelUpgrade>
+  <CG_CancelUpgradeDesc>Canceling upgrade will refund the resources used</CG_CancelUpgradeDesc>
+
+  <!-- HediffComp_APS Gizmo -->
+  <CGF_APS_GizmoLabel>APS</CGF_APS_GizmoLabel>
+  <CGF_APS_GizmoDesc>Active Protection System</CGF_APS_GizmoDesc>
+
+  <!-- HediffComp_APS Interception -->
+  <CGF_APS_Activated>APS Activated</CGF_APS_Activated>
+
+  <!-- HediffComp_APS Reload Messages -->
+  <CGF_APS_NeedAmmoSingle>Need {0} {1}</CGF_APS_NeedAmmoSingle>
+  <CGF_APS_NeedAmmoRange>Need {0}-{1} {2}</CGF_APS_NeedAmmoRange>
+
+  <!-- HediffComp_APS Status Labels -->
+  <CGF_APS_ChargesLabel>APS: {0}/{1}</CGF_APS_ChargesLabel>
+  <CGF_APS_Off>APS: OFF</CGF_APS_Off>
+
+  <!-- Command_APSToggle UI -->
+  <CGF_APS_CooldownSeconds>{0} seconds</CGF_APS_CooldownSeconds>
+  <CGF_APS_OffLabel>OFF</CGF_APS_OffLabel>
+
+  <!-- Command_APSToggle Tooltip -->
+  <CGF_APS_TooltipSystemDisabled>System Disabled</CGF_APS_TooltipSystemDisabled>
+  <CGF_APS_TooltipClickEnable>Click to enable</CGF_APS_TooltipClickEnable>
+  <CGF_APS_TooltipSystemActive>System Active</CGF_APS_TooltipSystemActive>
+  <CGF_APS_TooltipClickDisable>Click to disable</CGF_APS_TooltipClickDisable>
+  <CGF_APS_TooltipCharges>Charges:</CGF_APS_TooltipCharges>
+  <CGF_APS_TooltipCooldown>Cooldown:</CGF_APS_TooltipCooldown>
+  <CGF_APS_TooltipOutOfCharges>Out of charges - needs reload</CGF_APS_TooltipOutOfCharges>
+  <CGF_APS_TooltipReady>Ready</CGF_APS_TooltipReady>
+  <CGF_APS_TooltipAmmo>Ammo:</CGF_APS_TooltipAmmo>
+  <CGF_APS_TooltipPerCharge>Per charge:</CGF_APS_TooltipPerCharge>
+  <CGF_APS_TooltipInterceptRadius>Intercept radius:</CGF_APS_TooltipInterceptRadius>
+  <CGF_APS_TooltipTiles>{0} tiles</CGF_APS_TooltipTiles>
 </LanguageData>

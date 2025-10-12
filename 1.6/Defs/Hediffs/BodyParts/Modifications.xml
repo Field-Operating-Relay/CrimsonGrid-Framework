@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
     <HediffDef ParentName="AddedBodyPartBase">
-        <defName>CGF_PsychicWarcallReactor</defName>
+        <defName>CG_PsychicWarcallReactor</defName>
         <label>psychic warcall reactor</label>
         <labelNoun>a psychic warcall reactor</labelNoun>
         <description>An installed psychic warcall reactor modification. This advanced modification integrates psychic amplifiers directly into the mech's power core, allowing it to project powerful mental commands to nearby animals. The modification also reconstructs the mech's outer plating with cleaner, more refined surfaces that better conduct psychic energy.</description>
         <descriptionHyperlinks>
-            <ThingDef>CGF_PsychicWarcallReactor</ThingDef>
+            <ThingDef>CG_PsychicWarcallReactor</ThingDef>
         </descriptionHyperlinks>
-        <spawnThingOnRemoved>CGF_PsychicWarcallReactor</spawnThingOnRemoved>
+        <spawnThingOnRemoved>CG_PsychicWarcallReactor</spawnThingOnRemoved>
         <addedPartProps>
             <solid>true</solid>
             <partEfficiency>1.15</partEfficiency>
@@ -50,11 +50,11 @@
     </HediffDef>
 
     <ThingDef ParentName="BodyPartBionicBase">
-        <defName>CGF_PsychicWarcallReactor</defName>
+        <defName>CG_PsychicWarcallReactor</defName>
         <label>psychic warcall reactor</label>
         <description>An advanced reactor modification that integrates psychic amplification technology into a mech's power core. When installed, it grants the ability to establish mental connections with wild animals and compel them to fight. The modification includes bio-luminescent neural pathways that create distinctive glowing patterns across the mech's frame, marking it as a psychic-enhanced unit.</description>
         <descriptionHyperlinks>
-            <RecipeDef>CGF_InstallPsychicWarcallReactor</RecipeDef>
+            <RecipeDef>CG_InstallPsychicWarcallReactor</RecipeDef>
         </descriptionHyperlinks>
         <graphicData>
             <texPath>Things/Item/Health/HealthItem</texPath>
@@ -89,12 +89,12 @@
     </ThingDef>
 
     <RecipeDef ParentName="SurgeryAndroid">
-        <defName>CGF_InstallPsychicWarcallReactor</defName>
+        <defName>CG_InstallPsychicWarcallReactor</defName>
         <label>install psychic warcall reactor</label>
         <description>Install a psychic warcall reactor modification into a mech's power core.</description>
         <descriptionHyperlinks>
-            <ThingDef>CGF_PsychicWarcallReactor</ThingDef>
-            <HediffDef>CGF_PsychicWarcallReactor</HediffDef>
+            <ThingDef>CG_PsychicWarcallReactor</ThingDef>
+            <HediffDef>CG_PsychicWarcallReactor</HediffDef>
         </descriptionHyperlinks>
         <jobString>Installing psychic warcall reactor.</jobString>
         <workAmount>5000</workAmount>
@@ -106,7 +106,7 @@
             <li>
                 <filter>
                     <thingDefs>
-                        <li>CGF_PsychicWarcallReactor</li>
+                        <li>CG_PsychicWarcallReactor</li>
                     </thingDefs>
                 </filter>
                 <count>1</count>
@@ -114,13 +114,118 @@
         </ingredients>
         <fixedIngredientFilter>
             <thingDefs>
-                <li>CGF_PsychicWarcallReactor</li>
+                <li>CG_PsychicWarcallReactor</li>
             </thingDefs>
         </fixedIngredientFilter>
         <appliedOnFixedBodyParts>
             <li>Reactor</li>
         </appliedOnFixedBodyParts>
-        <addsHediff>CGF_PsychicWarcallReactor</addsHediff>
+        <addsHediff>CG_PsychicWarcallReactor</addsHediff>
+        <recipeUsers>
+            <li>Robot_Test_With_Turret_Light</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <HediffDef ParentName="AddedBodyPartBase">
+        <defName>CG_APSModification</defName>
+        <label>aps modification</label>
+        <labelNoun>an aps modification</labelNoun>
+        <description>Activates an automated defense system that intercepts incoming explosive projectiles within a radius, destroying them before they can reach the robot.</description>
+        <descriptionHyperlinks>
+            <ThingDef>CG_APSModification</ThingDef>
+        </descriptionHyperlinks>
+        <spawnThingOnRemoved>CG_APSModification</spawnThingOnRemoved>
+        <addedPartProps>
+            <solid>true</solid>
+            <partEfficiency>1.15</partEfficiency>
+            <betterThanNatural>true</betterThanNatural>
+        </addedPartProps>
+        <comps>
+            <li Class="CrimsonGridFramework.HediffCompProperties_APS">
+                <interceptRadius>4</interceptRadius>
+                <tickInterval>5</tickInterval>
+                <showInterceptionText>true</showInterceptionText>
+                <cooldownTicks>1200</cooldownTicks>
+                <maxCharges>3</maxCharges>
+                <ammoDef>Steel</ammoDef>
+                <baseReloadTicks>90</baseReloadTicks>
+                <ammoCountPerCharge>5</ammoCountPerCharge>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>CG_APSModification</defName>
+        <label>aps modification</label>
+        <description>Activates an automated defense system that intercepts incoming explosive projectiles within a radius, destroying them before they can reach the robot.</description>
+        <descriptionHyperlinks>
+            <RecipeDef>CG_InstallPsychicWarcallReactor</RecipeDef>
+        </descriptionHyperlinks>
+        <graphicData>
+            <texPath>Things/Item/Health/HealthItem</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>0.80</drawSize>
+            <color>(150, 100, 255)</color>
+        </graphicData>
+        <costList>
+            <Plasteel>25</Plasteel>
+            <ComponentSpacer>6</ComponentSpacer>
+            <Uranium>10</Uranium>
+        </costList>
+        <statBases>
+            <Mass>3</Mass>
+            <WorkToMake>35000</WorkToMake>
+        </statBases>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <unfinishedThingDef>UnfinishedHealthItemBionic</unfinishedThingDef>
+            <skillRequirements>
+                <Crafting>12</Crafting>
+                <Intellectual>8</Intellectual>
+            </skillRequirements>
+            <recipeUsers>
+                <li>FabricationBench</li>
+            </recipeUsers>
+            <displayPriority>350</displayPriority>
+        </recipeMaker>
+    </ThingDef>
+
+    <RecipeDef ParentName="SurgeryAndroid">
+        <defName>CG_InstallAPSModification</defName>
+        <label>install aps modification</label>
+        <description>Install an aps modification into a mech's power core.</description>
+        <descriptionHyperlinks>
+            <ThingDef>CG_APSModification</ThingDef>
+            <HediffDef>CG_APSModification</HediffDef>
+        </descriptionHyperlinks>
+        <jobString>Installing aps modification.</jobString>
+        <workAmount>5000</workAmount>
+        <skillRequirements>
+            <Medicine>8</Medicine>
+            <Intellectual>6</Intellectual>
+        </skillRequirements>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CG_APSModification</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>CG_APSModification</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <appliedOnFixedBodyParts>
+            <li>Reactor</li>
+        </appliedOnFixedBodyParts>
+        <addsHediff>CG_APSModification</addsHediff>
         <recipeUsers>
             <li>Robot_Test_With_Turret_Light</li>
         </recipeUsers>
