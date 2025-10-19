@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<NeedDef>
+		<defName>CG_FuelNeed</defName>
+		<needClass>CrimsonGridFramework.Need_Fuel</needClass>
+		<description>fuel.</description>
+		<label>fuel</label>
+		<showOnNeedList>true</showOnNeedList>
+		<minIntelligence>ToolUser</minIntelligence>
+		<colonistsOnly>true</colonistsOnly>
+		<hediffRequiredAny>
+			<li>CG_Ironhide</li>
+		</hediffRequiredAny>
+		<listPriority>10000</listPriority>
+		<freezeWhileSleeping>true</freezeWhileSleeping>
+		<showForCaravanMembers>true</showForCaravanMembers>
+		<major>true</major>
+	</NeedDef>
+</Defs>

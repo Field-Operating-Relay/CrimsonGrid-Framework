@@ -3,6 +3,7 @@
 
 	<ThingDef ParentName="BasePawn" Name="BaseRobot" Abstract="true">
 		<statBases>
+			<CG_FuelEnergyUsageFactor>0.9</CG_FuelEnergyUsageFactor>
 			<MarketValue>1200</MarketValue>
 			<PsychicSensitivity>0.5</PsychicSensitivity>
 			<ToxicResistance>1</ToxicResistance>

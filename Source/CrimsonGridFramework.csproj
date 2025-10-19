@@ -59,4 +59,7 @@
   <ItemGroup>
     <Publicize Include="Assembly-CSharp:RimWorld.ITab_Pawn_Gear.SelPawnForGear" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Hediff\" />
+  </ItemGroup>
 </Project>

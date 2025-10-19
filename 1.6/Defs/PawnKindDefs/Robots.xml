@@ -8,6 +8,11 @@
 		<canStrip>false</canStrip>
 		<minGenerationAge MayRequire="Ludeon.RimWorld.Biotech">200</minGenerationAge>
 		<forceNormalGearQuality>true</forceNormalGearQuality>
+		<startingHediffs>
+			<li>
+				<def>CG_Ironhide</def>
+			</li>
+		</startingHediffs>
 	</PawnKindDef>
 
 	<PawnKindDef ParentName="BaseRobotKind" Name="RobotTestKind">

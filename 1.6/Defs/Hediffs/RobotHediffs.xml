@@ -127,12 +127,16 @@
 		</stages>
 	</HediffDef>
 	<HediffDef>
-		<defName>CG_Hediff_Draftable</defName>
-		<hediffClass>CrimsonGridFramework.CG_Hediff_Draftable</hediffClass>
-		<label>Draftable</label>
+		<defName>CG_Ironhide</defName>
+		<label>robot</label>
+		<description>This is a robot.</description>
 		<isBad>false</isBad>
-		<description>Draftable.</description>
 		<initialSeverity>1</initialSeverity>
 		<maxSeverity>1</maxSeverity>
+		<stages>
+			<li>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
 	</HediffDef>
 </Defs>

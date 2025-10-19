@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<StatCategoryDef>
+		<defName>CG_Ironhides</defName>
+		<label>ironhides</label>
+		<displayOrder>418</displayOrder>
+	</StatCategoryDef>
+
+	<StatDef>
+		<defName>CG_FuelEnergyUsageFactor</defName>
+		<label>fuel energy usage factor</label>
+		<description>A multiplier on how efficiently this burns its fuel reserves.</description>
+		<defaultBaseValue>1</defaultBaseValue>
+		<minValue>0</minValue>
+		<toStringStyle>PercentZero</toStringStyle>
+		<displayPriorityInCategory>2000</displayPriorityInCategory>
+		<scenarioRandomizable>false</scenarioRandomizable>
+		<showIfUndefined>false</showIfUndefined>
+		<showOnAnimals>false</showOnAnimals>
+		<showOnHumanlikes>false</showOnHumanlikes>
+		<showOnMechanoids>false</showOnMechanoids>
+		<category>CG_Ironhides</category>
+		<showIfHediffsPresent>
+			<li>CG_Ironhide</li>
+		</showIfHediffsPresent>
+	</StatDef>
+</Defs>

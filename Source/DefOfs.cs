@@ -16,11 +16,16 @@ namespace CrimsonGridFramework
         public static JobDef Disconnected;
         public static JobDef CG_UpgradeBuilding;
         public static JobDef CG_DeliverUpgradeMaterials;
-        public static HediffDef CG_Hediff_Draftable;
         public static DamageDef CG_Burn;
         public static HediffDef CG_GlobalBottleneck;
         public static HediffDef CG_RelayBottleneck;
         public static HediffDef CG_APSModification;
         public static JobDef CG_ReloadAPS;
+
+        public static StatCategoryDef CG_Ironhides;
+        public static NeedDef CG_FuelNeed;
+        public static StatDef CG_FuelEnergyUsageFactor;
+
+
     }
 }
