@@ -41,6 +41,8 @@
 					</subNodes>
 				</li>
 
+				<li Class="CrimsonGridFramework.JobGiver_ReloadAPS"/>
+
 				<!-- Lord -->
 				<li Class="ThinkNode_Subtree">
 					<treeDef>LordDuty</treeDef>
