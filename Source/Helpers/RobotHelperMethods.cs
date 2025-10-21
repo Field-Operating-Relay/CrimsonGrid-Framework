@@ -25,6 +25,16 @@ namespace CrimsonGridFramework
 
             return true;
         }
+        public static bool IsFueled(this Pawn pawn)
+        {
+            pawn.needs.TryGetNeed<Need_Fuel>(out var fuelNeed);
+            return fuelNeed != null && fuelNeed.CurLevelPercentage > 0.01f;
+        }
+        public static bool NeedsFuel(this Pawn pawn)
+        {
+            pawn.needs.TryGetNeed<Need_Fuel>(out var fuelNeed);
+            return fuelNeed != null && fuelNeed.CurLevelPercentage < 0.1f;
+        }
         public static bool IsCrimsonGridRobot(this Pawn pawn)
         {
             return pawn.GetBandwidthComp() != null;

@@ -24,7 +24,15 @@
 						<li Class="CrimsonGridFramework.JobGiver_Disconnected" />
 					</subNodes>
 				</li>
-
+				
+				<!-- No Fuel -->
+				<li Class="CrimsonGridFramework.ThinkNode_ConditionalFueled">
+					<invert>true</invert>
+					<subNodes>
+						<li Class="CrimsonGridFramework.JobGiver_PoweredDown" />
+					</subNodes>
+				</li>
+				
 				<!-- Do a queued job -->
 				<li Class="ThinkNode_QueuedJob" />
 
@@ -42,7 +50,13 @@
 				</li>
 
 				<li Class="CrimsonGridFramework.JobGiver_ReloadAPS"/>
-
+				<!--
+				<li Class="CrimsonGridFramework.ThinkNode_ConditionalNeedFuel">
+					<subNodes>
+						<li Class="CrimsonGridFramework.JobGiver_GetFuel" />
+					</subNodes>
+				</li>-->
+				
 				<!-- Lord -->
 				<li Class="ThinkNode_Subtree">
 					<treeDef>LordDuty</treeDef>

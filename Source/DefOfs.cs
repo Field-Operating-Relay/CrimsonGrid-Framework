@@ -14,6 +14,7 @@ namespace CrimsonGridFramework
     public static class CrimsonGridFramework_DefOfs
     {
         public static JobDef Disconnected;
+        public static JobDef CG_PoweredDown;
         public static JobDef CG_UpgradeBuilding;
         public static JobDef CG_DeliverUpgradeMaterials;
         public static DamageDef CG_Burn;

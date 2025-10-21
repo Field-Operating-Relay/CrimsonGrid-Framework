@@ -8,6 +8,15 @@
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 		<neverShowWeapon>true</neverShowWeapon>
 	</JobDef>
+	
+	<JobDef>
+		<defName>CG_PoweredDown</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_PoweredDown</driverClass>
+		<reportString>powered down.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<neverShowWeapon>true</neverShowWeapon>
+	</JobDef>
 
 	<JobDef>
 		<defName>CG_ReloadAPS</defName>
