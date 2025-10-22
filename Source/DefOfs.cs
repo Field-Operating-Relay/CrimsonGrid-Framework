@@ -17,6 +17,9 @@ namespace CrimsonGridFramework
         public static JobDef CG_PoweredDown;
         public static JobDef CG_UpgradeBuilding;
         public static JobDef CG_DeliverUpgradeMaterials;
+        public static JobDef CG_GetFuelJob;
+        public static JobDef CGF_RefuelRobot;
+
         public static DamageDef CG_Burn;
         public static HediffDef CG_GlobalBottleneck;
         public static HediffDef CG_RelayBottleneck;
@@ -26,7 +29,6 @@ namespace CrimsonGridFramework
         public static StatCategoryDef CG_Ironhides;
         public static NeedDef CG_FuelNeed;
         public static StatDef CG_FuelEnergyUsageFactor;
-
-
+        public static StatDef CG_RefuelEfficiencyFactor;
     }
 }

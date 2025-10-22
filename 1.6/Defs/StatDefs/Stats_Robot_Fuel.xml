@@ -24,4 +24,23 @@
 			<li>CG_Ironhide</li>
 		</showIfHediffsPresent>
 	</StatDef>
+	<StatDef>
+		<defName>CG_RefuelEfficiencyFactor</defName>
+		<label>refuel efficiency factor</label>
+		<description>How much fuel tank percentage this robot fills per 1 unit of fuel.</description>
+		<defaultBaseValue>0.01</defaultBaseValue>
+		<minValue>0</minValue>
+		<toStringStyle>PercentZero</toStringStyle>
+		<displayPriorityInCategory>2000</displayPriorityInCategory>
+		<scenarioRandomizable>false</scenarioRandomizable>
+		<showIfUndefined>false</showIfUndefined>
+		<showOnAnimals>false</showOnAnimals>
+		<showOnHumanlikes>false</showOnHumanlikes>
+		<showOnMechanoids>false</showOnMechanoids>
+		<category>CG_Ironhides</category>
+		<showIfHediffsPresent>
+			<li>CG_Ironhide</li>
+		</showIfHediffsPresent>
+	</StatDef>
+	
 </Defs>

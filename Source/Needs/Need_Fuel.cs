@@ -12,15 +12,19 @@ namespace CrimsonGridFramework
 {
     public class Need_Fuel : Need
     {
+        public bool IsDisconnected => pawn.CurJobDef == CrimsonGridFramework_DefOfs.Disconnected;
+        public bool IsRefuelling => pawn.CurJobDef == CrimsonGridFramework_DefOfs.CG_GetFuelJob;
+        public bool IsPoweredDown => pawn.CurJobDef == CrimsonGridFramework_DefOfs.CG_PoweredDown;
+        public bool needToShutdown = false;
         private float BaseFallPerDay
         {
             get
             {
                 if (pawn.mindState != null && !pawn.mindState.IsIdle)
                 {
-                    return 10f;
+                    return 0.2f;
                 }
-                return 3f;
+                return 0.05f;
             }
         }
         public float FallPerDay
@@ -39,25 +43,33 @@ namespace CrimsonGridFramework
                 {
                     return 0f;
                 }
+                if (IsRefuelling)
+                {
+                    return 0f;
+                }
+                if (IsDisconnected)
+                {
+                    return 0f;
+                }
+                if (IsPoweredDown)
+                {
+                    return 0f;
+                }
                 return BaseFallPerDay * pawn.GetStatValue(CrimsonGridFramework_DefOfs.CG_FuelEnergyUsageFactor);
             }
         }
-
-        public bool IsDisconnected => pawn.CurJobDef == CrimsonGridFramework_DefOfs.Disconnected;
-        public bool needToShutdown = false;
         public Need_Fuel(Pawn newPawn) : base(newPawn){}
         public override void NeedInterval()
         {
-            float num = 400f;
             if (!IsDisconnected)
             {
-                CurLevel -= FallPerDay / num;
+                CurLevel -= FallPerDay / 400f;
             }
             if (CurLevel <= 0f)
             {
                 needToShutdown = true;
             }
-            else if (CurLevel >= 15f || pawn.CurJobDef == JobDefOf.MechCharge)
+            else if (CurLevel >= 0.15f || IsRefuelling)
             {
                 needToShutdown = false;
             }

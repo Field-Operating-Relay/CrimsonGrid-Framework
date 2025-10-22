@@ -8,11 +8,11 @@ using Verse.AI;
 
 namespace CrimsonGridFramework
 {
-/*    public class JobGiver_GetFuel : ThinkNode_JobGiver
-    {
+    public class JobGiver_GetFuel : ThinkNode_JobGiver
+    { 
         protected override Job TryGiveJob(Pawn pawn)
         {
             return pawn.GetFuelJob();
         }
-    }*/
+    }
 }

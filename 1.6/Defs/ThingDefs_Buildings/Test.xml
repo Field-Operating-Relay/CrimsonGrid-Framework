@@ -226,6 +226,8 @@
 		<pathCost>50</pathCost>
 		<rotatable>false</rotatable>
 		<blockWind>true</blockWind>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
 		<castEdgeShadows>false</castEdgeShadows>
 		<statBases>
 			<MaxHitPoints>300</MaxHitPoints>
@@ -264,6 +266,7 @@
 				<drawFuelGaugeInMap>true</drawFuelGaugeInMap>
 			</li>
 			<li Class="CrimsonGridFramework.CompProperties_FuelStation">
+				<fuelTransferRate>5</fuelTransferRate>
 			</li>
 		</comps>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
