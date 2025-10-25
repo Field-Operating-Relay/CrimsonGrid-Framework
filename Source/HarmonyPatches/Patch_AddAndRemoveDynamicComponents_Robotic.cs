@@ -14,13 +14,15 @@ namespace CrimsonGridFramework.HarmonyPatches
     {
         public static void Postfix(Pawn pawn)
         {
-            if (pawn.IsCrimsonGridRobot() && pawn.Faction == Faction.OfPlayer && pawn.drafter == null)
+            if (pawn.IsCrimsonGridRobot())
             {
-                pawn.drafter = new Pawn_DraftController(pawn);
-
-                pawn.abilities = new Pawn_AbilityTracker(pawn);
+                pawn.training = null;
+                if (pawn.Faction == Faction.OfPlayer && pawn.drafter == null)
+                {
+                    pawn.drafter = new Pawn_DraftController(pawn);
+                    pawn.abilities = new Pawn_AbilityTracker(pawn);
+                }
             }
-
         }
     }
 }
