@@ -266,12 +266,15 @@ namespace CrimsonGridFramework
                 Rect widgetsRect = new Rect(rowRect.xMax, rowRect.y, rect.width * 0.5f, rect.height);
                 using (new TextBlock(GameFont.Tiny))
                 {
+                    Text.Anchor = TextAnchor.UpperCenter;
                     Widgets.BeginGroup(widgetsRect);
-                    WidgetRow row = new WidgetRow(0, widgetsRect.height / 2f, UIDirection.RightThenUp, rect.width * 0.5f);
+                    WidgetRow row = new WidgetRow(0, (widgetsRect.height / 2f) - 10, UIDirection.RightThenUp, rect.width * 0.5f);
                     InspectPaneFiller.DrawHealth(row, consumer.parent);
                     DrawFuel(row, (Pawn)consumer.parent);
                     InspectPaneFiller.DrawAreaAllowed(row, (Pawn)consumer.parent);
                     Widgets.EndGroup();
+                    Text.Anchor = TextAnchor.MiddleLeft;
+
                 }
                 if (Mouse.IsOver(rect))
                 {
