@@ -19,6 +19,7 @@
 	<CGF_NetworkManager_Consumers>Consumers</CGF_NetworkManager_Consumers>
 	<CGF_NetworkManager_NoConsumers>No available consumers</CGF_NetworkManager_NoConsumers>
 	<CGF_NetworkManager_LocalBandwidth>Local Bandwidth: {0}/{1}</CGF_NetworkManager_LocalBandwidth>
+	<CGF_NetworkManager_GlobalBandwidth>Global Bandwidth: {0}/{1}</CGF_NetworkManager_GlobalBandwidth>
 	<!--Overclocking-->
 	<CGF_OverclockingDisabled>Overclock disabled</CGF_OverclockingDisabled>
 	<!--Building Upgrades-->

@@ -1,10 +1,12 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Profiling;
 using Verse;
 
 namespace CrimsonGridFramework
@@ -12,6 +14,9 @@ namespace CrimsonGridFramework
     [StaticConstructorOnStartup]
     public class Dialog_NetworkManager : Window
     {
+        private static readonly Texture2D ZoomInIcon = ContentFinder<Texture2D>.Get("UI/Icons/ZoomIn", true);
+        private static readonly Texture2D FuelTex = SolidColorMaterials.NewSolidColorTexture(new ColorInt(184, 156, 90).ToColor);
+        private static readonly Texture2D BarBGTex = SolidColorMaterials.NewSolidColorTexture(new ColorInt(10, 10, 10).ToColor);
         private Vector2 scrollPositionLeft;
         private Vector2 scrollPositionMiddle;
         private Vector2 scrollPositionRight;
@@ -54,17 +59,18 @@ namespace CrimsonGridFramework
             float width = (inRect.width / 3) - (ColumnMargins * 0.75f);
             Rect providerLabelRect = inRect;
             providerLabelRect.height = OffsetHeaderY;
-            providerLabelRect.width = width * 0.8f;
+            providerLabelRect.width = width * 0.7f;
             // Left window (providers)
             Widgets.Label(providerLabelRect, "CGF_NetworkManager_Providers".Translate());
-            Rect providerSearchRect = new Rect(ColumnMargins, providerLabelRect.yMax, width * 0.78f, EntryRowHeight / 2);
+            Rect providerSearchRect = new Rect(ColumnMargins, providerLabelRect.yMax, width * 0.68f, EntryRowHeight / 2);
             ProviderFilter = Widgets.TextArea(providerSearchRect, ProviderFilter);
             Regex rgx = new Regex(ProviderFilter, RegexOptions.IgnoreCase);
             List<CompBandwidthProvider> providersFiltered = providers.Where(c => rgx.IsMatch(c.parent.Label)).ToList();
             Rect rect3 = inRect;
             rect3.yMin = providerSearchRect.yMax;
-            rect3.width = width * 0.8f;
+            rect3.width = width * 0.7f;
             rect3.xMin = ColumnMargins;
+            rect3.yMax = inRect.yMax * 0.95f;
             Widgets.DrawMenuSection(rect3);
             rect3 = rect3.ContractedBy(1f);
             float height = providersFiltered.Count * EntryRowHeight;
@@ -90,17 +96,33 @@ namespace CrimsonGridFramework
                 }
                 Widgets.EndScrollView();
             }
+            //Bottom Left window (Global Bandwidth)
+            Rect globalBandwidthRect = inRect;
+            globalBandwidthRect.xMin = rect3.xMin;
+            globalBandwidthRect.yMin = rect3.yMax + ColumnMargins;
+            globalBandwidthRect.width = rect3.width;
+            Widgets.DrawMenuSection(globalBandwidthRect);
+            globalBandwidthRect = globalBandwidthRect.ContractedBy(1f);
+            using (new TextBlock(GameFont.Small))
+            {
+                Text.Anchor = TextAnchor.MiddleLeft;
+                Rect globalBandwidthTextRect = globalBandwidthRect;
+                globalBandwidthTextRect.xMin += 15f;
+                globalBandwidthTextRect.width -= 15f;
+                Widgets.Label(globalBandwidthTextRect, TranslatorFormattedStringExtensions.Translate("CGF_NetworkManager_GlobalBandwidth", [WorldComponent_GridBandwidth.Instance.TotalBandwidthInUse, WorldComponent_GridBandwidth.Instance.TotalBandwidth]));
+            }
+
             // Middle window (Relays)
             Rect relayLabelRect = inRect;
             relayLabelRect.xMin = providerLabelRect.xMax + ColumnMargins;
             relayLabelRect.height = OffsetHeaderY;
-            relayLabelRect.width = width * 0.8f;
+            relayLabelRect.width = width * 0.7f;
             Widgets.Label(relayLabelRect, "CGF_NetworkManager_Relays".Translate());
-            Rect relaySearchRect = new Rect(rect3.xMax + ColumnMargins, relayLabelRect.yMax, width * 0.8f, EntryRowHeight / 2);
+            Rect relaySearchRect = new Rect(rect3.xMax + ColumnMargins, relayLabelRect.yMax, width * 0.7f, EntryRowHeight / 2);
             Rect rect5 = inRect;
             rect5.yMin = relaySearchRect.yMax;
             rect5.xMin = rect3.xMax + ColumnMargins;
-            rect5.width = width * 0.8f;
+            rect5.width = width * 0.7f;
             Widgets.DrawMenuSection(rect5);
             rect5 = rect5.ContractedBy(1f);
             RelayFilter = Widgets.TextArea(relaySearchRect, RelayFilter);
@@ -142,7 +164,7 @@ namespace CrimsonGridFramework
             Rect consumerRectangle = inRect;
             consumerRectangle.yMin = consumerSearchRect.yMax;
             consumerRectangle.xMin = rect5.xMax + ColumnMargins;
-            consumerRectangle.width = width * 1.4f;
+            consumerRectangle.width = width * 1.6f;
             consumerRectangle.yMax = rect5.yMax * 0.95f;
             Widgets.DrawMenuSection(consumerRectangle);
             consumerRectangle = consumerRectangle.ContractedBy(1f);
@@ -174,7 +196,7 @@ namespace CrimsonGridFramework
             Rect rect9 = inRect;
             rect9.yMin = consumerRectangle.yMax + ColumnMargins;
             rect9.xMin = rect5.xMax + ColumnMargins;
-            rect9.width = width * 1.4f;
+            rect9.width = width * 1.6f;
             Widgets.DrawMenuSection(rect9);
             rect9 = rect9.ContractedBy(1f);
             using (new TextBlock(GameFont.Small))
@@ -183,7 +205,7 @@ namespace CrimsonGridFramework
                 Rect rect10 = rect9;
                 rect10.xMin += 15f;
                 rect10.width -= 15f;
-                Widgets.Label(rect10, TranslatorFormattedStringExtensions.Translate("CGF_NetworkManager_LocalBandwidth", selectedRelay == null ? [0,0] :[selectedRelay.RelayBandwidthInUse, selectedRelay.RelayBandwidthAmount]));
+                Widgets.Label(rect10, TranslatorFormattedStringExtensions.Translate("CGF_NetworkManager_LocalBandwidth", selectedRelay == null ? [0, 0] : [selectedRelay.RelayBandwidthInUse, selectedRelay.RelayBandwidthAmount]));
             }
         }
         private void DoEntryRelayRow(Rect rect, CompBandwidthRelay relay, int index)
@@ -193,23 +215,23 @@ namespace CrimsonGridFramework
             float num = (rect.height - 64) / 2f;
             using (new TextBlock(GameFont.Small))
             {
-                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width, 64);
+                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.85f, rect.height);
                 DrawIconWithLabel(rowRect, relay.parent.LabelCap, Widgets.GetIconFor(relay.parent.def));
-                if(relay == selectedRelay)
+                if (relay == selectedRelay)
                 {
-                    Widgets.DrawHighlightSelected(rect);
+                    Widgets.DrawHighlightSelected(rowRect);
                 }
                 else if (index % 2 == 1)
                 {
-                    Widgets.DrawLightHighlight(rect);
+                    Widgets.DrawLightHighlight(rowRect);
                 }
-                if (Mouse.IsOver(rect))
+                if (Mouse.IsOver(rowRect))
                 {
-                    Widgets.DrawHighlight(rect);
+                    Widgets.DrawHighlight(rowRect);
                 }
-                if (Widgets.ButtonInvisible(rect))
+                if (Widgets.ButtonInvisible(rowRect))
                 {
-                    if(selectedRelay == relay)
+                    if (selectedRelay == relay)
                     {
                         selectedRelay = null;
                     }
@@ -218,6 +240,16 @@ namespace CrimsonGridFramework
                         selectedRelay = relay;
                     }
                     FillConsumers();
+                }
+                Rect zoomButton = rowRect;
+                zoomButton.xMin = rowRect.xMax;
+                zoomButton.width = rect.width * 0.15f;
+                if (Widgets.ButtonImage(zoomButton, ZoomInIcon))
+                {
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(relay.parent);
+                    Find.CameraDriver.JumpToCurrentMapLoc(relay.parent.Position);
+                    Close();
                 }
             }
             Text.Anchor = TextAnchor.UpperLeft;
@@ -229,8 +261,18 @@ namespace CrimsonGridFramework
             float num = (rect.height - 64) / 2f;
             using (new TextBlock(GameFont.Small))
             {
-                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width, 64);
+                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.4f, rect.height);
                 DrawIconWithLabel(rowRect, consumer.parent.LabelCap, Widgets.GetIconFor(consumer.parent.def));
+                Rect widgetsRect = new Rect(rowRect.xMax, rowRect.y, rect.width * 0.5f, rect.height);
+                using (new TextBlock(GameFont.Tiny))
+                {
+                    Widgets.BeginGroup(widgetsRect);
+                    WidgetRow row = new WidgetRow(0, widgetsRect.height / 2f, UIDirection.RightThenUp, rect.width * 0.5f);
+                    InspectPaneFiller.DrawHealth(row, consumer.parent);
+                    DrawFuel(row, (Pawn)consumer.parent);
+                    InspectPaneFiller.DrawAreaAllowed(row, (Pawn)consumer.parent);
+                    Widgets.EndGroup();
+                }
                 if (Mouse.IsOver(rect))
                 {
                     Widgets.DrawHighlight(rect);
@@ -239,9 +281,27 @@ namespace CrimsonGridFramework
                 {
                     Widgets.DrawLightHighlight(rect);
                 }
+                Rect zoomButton = widgetsRect;
+                zoomButton.xMin = widgetsRect.xMax;
+                zoomButton.width = rect.width * 0.1f;
+                if (Widgets.ButtonImage(zoomButton, ZoomInIcon))
+                {
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(consumer.parent);
+                    Find.CameraDriver.JumpToCurrentMapLoc(consumer.parent.Position);
+                    Close();
+                }
             }
             Text.Anchor = TextAnchor.UpperLeft;
         }
+
+        private void DrawFuel(WidgetRow row, Pawn pawn)
+        {
+            Need_Fuel fuelNeed = pawn.needs.TryGetNeed<Need_Fuel>();
+            row.Gap(6f);
+            row.FillableBar(93f, 16f, fuelNeed.CurLevelPercentage, $"{Mathf.Round(fuelNeed.CurLevelPercentage * 100)}%", FuelTex, BarBGTex);
+        }
+
         private void DoEntryProviderRow(Rect rect, CompBandwidthProvider provider, int index)
         {
 
@@ -250,15 +310,25 @@ namespace CrimsonGridFramework
             float num = (rect.height - 64) / 2f;
             using (new TextBlock(GameFont.Small))
             {
-                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width, 64);
+                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.85f, rect.height);
                 DrawIconWithLabel(rowRect, provider.parent.LabelCap, Widgets.GetIconFor(provider.parent.def));
-                if (Mouse.IsOver(rect))
+                if (Mouse.IsOver(rowRect))
                 {
-                    Widgets.DrawHighlight(rect);
+                    Widgets.DrawHighlight(rowRect);
                 }
                 else if (index % 2 == 1)
                 {
-                    Widgets.DrawLightHighlight(rect);
+                    Widgets.DrawLightHighlight(rowRect);
+                }
+                Rect zoomButton = rowRect;
+                zoomButton.xMin = rowRect.xMax;
+                zoomButton.width = rect.width * 0.15f;
+                if (Widgets.ButtonImage(zoomButton, ZoomInIcon))
+                {
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(provider.parent);
+                    Find.CameraDriver.JumpToCurrentMapLoc(provider.parent.Position);
+                    Close();
                 }
 
             }
