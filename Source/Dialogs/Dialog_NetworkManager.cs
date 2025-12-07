@@ -215,7 +215,7 @@ namespace CrimsonGridFramework
             float num = (rect.height - 64) / 2f;
             using (new TextBlock(GameFont.Small))
             {
-                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.85f, rect.height);
+                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.8f, rect.height);
                 DrawIconWithLabel(rowRect, relay.parent.LabelCap, Widgets.GetIconFor(relay.parent.def));
                 if (relay == selectedRelay)
                 {
@@ -244,6 +244,10 @@ namespace CrimsonGridFramework
                 Rect zoomButton = rowRect;
                 zoomButton.xMin = rowRect.xMax;
                 zoomButton.width = rect.width * 0.15f;
+                zoomButton.yMin = rowRect.yMin + (rect.height - zoomButton.width) / 2f;
+                zoomButton.height = zoomButton.width;
+
+
                 if (Widgets.ButtonImage(zoomButton, ZoomInIcon))
                 {
                     Find.Selector.ClearSelection();
@@ -263,7 +267,7 @@ namespace CrimsonGridFramework
             {
                 Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.4f, rect.height);
                 DrawIconWithLabel(rowRect, consumer.parent.LabelCap, Widgets.GetIconFor(consumer.parent.def));
-                Rect widgetsRect = new Rect(rowRect.xMax, rowRect.y, rect.width * 0.5f, rect.height);
+                Rect widgetsRect = new Rect(rowRect.xMax, rowRect.y, rect.width * 0.45f, rect.height);
                 using (new TextBlock(GameFont.Tiny))
                 {
                     Text.Anchor = TextAnchor.UpperCenter;
@@ -287,6 +291,8 @@ namespace CrimsonGridFramework
                 Rect zoomButton = widgetsRect;
                 zoomButton.xMin = widgetsRect.xMax;
                 zoomButton.width = rect.width * 0.1f;
+                zoomButton.yMin = rowRect.yMin + (rect.height - zoomButton.width) / 2f;
+                zoomButton.height = zoomButton.width;
                 if (Widgets.ButtonImage(zoomButton, ZoomInIcon))
                 {
                     Find.Selector.ClearSelection();
@@ -313,7 +319,7 @@ namespace CrimsonGridFramework
             float num = (rect.height - 64) / 2f;
             using (new TextBlock(GameFont.Small))
             {
-                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.85f, rect.height);
+                Rect rowRect = new Rect(x + 5f, rect.y + num, rect.width * 0.8f, rect.height);
                 DrawIconWithLabel(rowRect, provider.parent.LabelCap, Widgets.GetIconFor(provider.parent.def));
                 if (Mouse.IsOver(rowRect))
                 {
@@ -326,6 +332,8 @@ namespace CrimsonGridFramework
                 Rect zoomButton = rowRect;
                 zoomButton.xMin = rowRect.xMax;
                 zoomButton.width = rect.width * 0.15f;
+                zoomButton.yMin = rowRect.yMin + (rect.height - zoomButton.width) / 2f;
+                zoomButton.height = zoomButton.width;
                 if (Widgets.ButtonImage(zoomButton, ZoomInIcon))
                 {
                     Find.Selector.ClearSelection();
