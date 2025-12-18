@@ -24,4 +24,10 @@
 		<reportString>Refueling TargetA.</reportString>
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
+	<JobDef>
+		<defName>CG_ResupplyLauncher</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_ResupplyLauncher</driverClass>
+		<reportString>Resupplying TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 </Defs>

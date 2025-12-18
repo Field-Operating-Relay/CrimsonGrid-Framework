@@ -7,7 +7,7 @@ using Verse;
 
 namespace CrimsonGridFramework
 {
-    public class Verb_SpawnRocket : Verb
+    public class Verb_SpawnRocket : Verb_LaunchProjectile
     {
         protected override bool TryCastShot()
         {

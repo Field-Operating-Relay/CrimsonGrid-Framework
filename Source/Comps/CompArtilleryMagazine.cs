@@ -26,7 +26,7 @@ namespace CrimsonGridFramework
         public CompProperties_ArtilleryMagazine Props => (CompProperties_ArtilleryMagazine)props;
         public int MaxAmmo => Props.maxAmmo;
         public int CurrentAmmo => currentAmmo.Sum(ac => ac.count);
-        public class AmmoCount: IExposable
+        public class AmmoCount : IExposable
         {
             public ThingDef ammoDef;
             public int count;
@@ -41,7 +41,7 @@ namespace CrimsonGridFramework
         public void ChamberShell()
         {
             ProjectileComp.LoadShell(currentAmmo.Peek().ammoDef, 1);
-            currentAmmo.Peek().count--;
+            currentAmmo.Peek().count = currentAmmo.Peek().count - 1;
             if (currentAmmo.Peek().count <= 0)
             {
                 currentAmmo.Dequeue();
@@ -49,6 +49,13 @@ namespace CrimsonGridFramework
         }
         public void LoadShells(ThingDef ammoDef, int count)
         {
+            if (CurrentAmmo + count > MaxAmmo)
+            {
+                Thing shells = ThingMaker.MakeThing(ammoDef);
+                shells.stackCount = count - MaxAmmo - CurrentAmmo;
+                GenPlace.TryPlaceThing(shells, parent.Position, parent.Map, ThingPlaceMode.Near);
+                count = MaxAmmo - CurrentAmmo;
+            }
             var existingAmmo = currentAmmo.LastOrDefault();
             if (existingAmmo != null && existingAmmo.ammoDef == ammoDef)
             {
@@ -57,6 +64,10 @@ namespace CrimsonGridFramework
             else
             {
                 currentAmmo.Enqueue(new AmmoCount { ammoDef = ammoDef, count = count });
+            }
+            if (!ProjectileComp.Loaded)
+            {
+                ChamberShell();
             }
         }
         public void UnloadAllShells()
@@ -78,8 +89,7 @@ namespace CrimsonGridFramework
 
         public bool SpawnMissile(GlobalTargetInfo globalTargetInfo)
         {
-            Log.Message("1");
-            if(ProjectileComp.Loaded)
+            if (ProjectileComp.Loaded)
             {
                 ActiveTransporter activeDropPod = (ActiveTransporter)ThingMaker.MakeThing(ThingDefOf.ActiveDropPod);
                 activeDropPod.Contents = new ActiveTransporterInfo();
@@ -102,6 +112,27 @@ namespace CrimsonGridFramework
         }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
+            var unloadShells = new Command_Action
+            {
+                action = delegate
+                {
+                    UnloadAllShells();
+                },
+                defaultLabel = "Unload Shells",
+                defaultDesc = null,
+                icon = null
+            };
+            if (CurrentAmmo <= 0)
+            {
+                unloadShells.Disabled = true;
+                unloadShells.disabledReason = "CG_NoShellsToUnload".Translate();
+            }
+            else
+            {
+                unloadShells.Disabled = false;
+                unloadShells.disabledReason = null;
+            }
+            yield return unloadShells;
             if (!DebugSettings.ShowDevGizmos)
             {
                 yield break;
@@ -119,6 +150,13 @@ namespace CrimsonGridFramework
                 defaultDesc = null,
                 icon = null
             };
+        }
+        public override string CompInspectStringExtra()
+        {
+            StringBuilder sb = new(base.CompInspectStringExtra());
+            sb.AppendLine("CG_NextShell".Translate() + ": " + (CurrentAmmo > 0 ? currentAmmo.Peek().ammoDef.LabelCap : "CG_None".Translate()));
+            sb.Append($"Ammo: {CurrentAmmo}/{MaxAmmo}");
+            return sb.ToString();
         }
     }
 }

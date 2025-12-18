@@ -16,4 +16,16 @@
             <li>Robot_Test_With_Turret_Light</li>
         </fixedBillGiverDefs>
     </WorkGiverDef>
+	<WorkGiverDef>
+		<defName>CG_ResupplyLauncher</defName>
+		<label>resupply launcher</label>
+		<giverClass>CrimsonGridFramework.WorkGiver_ResupplyLauncher</giverClass>
+		<workType>Hauling</workType>
+		<priorityInType>74</priorityInType>
+		<verb>resupply</verb>
+		<gerund>resupplying</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
 </Defs>

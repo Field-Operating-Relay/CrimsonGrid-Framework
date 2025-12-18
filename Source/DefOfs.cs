@@ -34,5 +34,6 @@ namespace CrimsonGridFramework
         // Top Down Rockets
         public static ThingDef CG_RocketLeaving;
         public static WorldObjectDef CG_TravellingRocket;
+        public static JobDef CG_ResupplyLauncher;
     }
 }
