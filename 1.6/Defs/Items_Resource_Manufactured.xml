@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="MakeableShellBase">
+    <defName>Shell_Rocket</defName>
+    <label>rocket</label>
+    <description>Explodes when damaged.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Shell/Shell_Rocket</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <tradeTags Inherit="False" />
+    <genericMarketSellable>false</genericMarketSellable>
+    <costList>
+      <Bioferrite>25</Bioferrite>
+    </costList>
+    <recipeMaker>
+      <displayPriority>0</displayPriority>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <explosiveRadius>4</explosiveRadius>
+        <wickTicks>30~60</wickTicks>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_Rocket</defName>
+    <label>rocket</label>
+    <graphicData>
+      <texPath>Things/Projectile/Rocket</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>41</speed>
+      <explosionRadius>0.1</explosionRadius>
+      <flyOverhead>true</flyOverhead>
+      <soundExplode>ShellLanded</soundExplode>
+    </projectile>
+  </ThingDef>
+  
+</Defs>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="SkyfallerBase">
+		<defName>CG_RocketLeaving</defName>
+		<label>rocket leaving</label>
+		<size>(1, 1)</size>
+		<thingClass>CrimsonGridFramework.RocketLeaving</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/Projectile_TopDownRocket</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutFlying</shaderType>
+			<drawOffset>(0.5,0,0.5)</drawOffset>
+		</graphicData>
+		<skyfaller>
+			<movementType>Decelerate</movementType>
+			<reversed>true</reversed>
+			<shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+			<shadowSize>(2, 2)</shadowSize>
+			<anticipationSound>DropPod_Leaving</anticipationSound>
+			<anticipationSoundTicks>-10</anticipationSoundTicks>
+			<ticksToImpactRange>
+				<min>-15</min>
+				<max>-8</max>
+			</ticksToImpactRange>
+			<angleCurve>
+				<points>
+					<li>(0, 0)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0, 0)</li>
+				</points>
+			</rotationCurve>
+		</skyfaller>
+	</ThingDef>
+
+
+</Defs>

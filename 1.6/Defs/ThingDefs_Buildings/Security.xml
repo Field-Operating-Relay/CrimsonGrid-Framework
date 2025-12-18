@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--=============== missile silo turret ===============-->
+	<ThingDef ParentName="BuildingBase">
+		<defName>Turret_MissileSilo</defName>
+		<label>missile silo turret</label>
+		<description>Boom</description>
+		<thingClass>CrimsonGridFramework.Building_TurretGunTopless</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<drawHighlight>true</drawHighlight>
+		<drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Security/MRLS</texPath>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.38,0.2,0.56375,0.8)</rect>
+				<cornerTL>Damage/Corner</cornerTL>
+			</damageData>
+			<shadowData>
+				<offset>(-0.13,-0.87,-0.1)</offset>
+				<volume>(0.5,0.4,1.05)</volume>
+			</shadowData>
+		</graphicData>
+		<uiIconPath>Things/Building/Security/TurretSniper_MenuIcon</uiIconPath>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<altitudeLayer>Building</altitudeLayer>
+		<stealable>false</stealable>
+		<size>(2,2)</size>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<fillPercent>0.4</fillPercent>
+		<thingCategories>
+			<li>BuildingsSecurity</li>
+		</thingCategories>
+		<tickerType>Normal</tickerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>Security</designationCategory>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Flammability>0.7</Flammability>
+			<WorkToBuild>2000</WorkToBuild>
+			<Mass>30</Mass>
+			<Beauty>-20</Beauty>
+		</statBases>
+		<building>
+			<turretGunDef>Gun_MissileSilo</turretGunDef>
+			<buildingTags>
+				<li>Artillery_BaseDestroyer</li>
+			</buildingTags>
+			<turretBurstWarmupTime>4.0</turretBurstWarmupTime>
+			<turretBurstCooldownTime>28.0</turretBurstCooldownTime>
+			<buildingTags>
+				<li>Artillery</li>
+			</buildingTags>
+		</building>
+		<placeWorkers>
+			<li>PlaceWorker_NotUnderRoof</li>
+			<li>PlaceWorker_TurretTop</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>Mortars</li>
+		</researchPrerequisites>
+		<uiIconScale>1.1</uiIconScale>
+		<costList>
+			<Steel>300</Steel>
+			<Plasteel>30</Plasteel>
+			<Uranium>60</Uranium>
+			<ComponentIndustrial>6</ComponentIndustrial>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<wickTicks>240</wickTicks>
+				<explosiveRadius>5.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+			</li>
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>150</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_Stunnable">
+				<affectedDamageDefs>
+					<li>Stun</li>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+			<li Class="CrimsonGridFramework.CompProperties_ArtilleryMagazine">
+				<maxAmmo>5</maxAmmo>
+			</li>
+		</comps>
+		<inspectorTabs>
+			<li>ITab_Shells</li>
+		</inspectorTabs>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseArtilleryWeapon">
+		<defName>Gun_MissileSilo</defName>
+		<label>automated missile silo</label>
+		<description>Blah</description>
+		<drawerType>None</drawerType>
+		<graphicData>
+			<texPath>Things/Null</texPath>
+		</graphicData>
+		<verbs>
+			<li>
+				<verbClass>CrimsonGridFramework.Verb_SpawnRocket</verbClass>
+				<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+				<warmupTime>4.0</warmupTime>
+				<forcedMissRadius>5</forcedMissRadius>
+				<forcedMissRadiusClassicMortars>13</forcedMissRadiusClassicMortars>
+				<requireLineOfSight>false</requireLineOfSight>
+				<minRange>29.9</minRange>
+				<range>500</range>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>Mortar_LaunchA</soundCast>
+				<muzzleFlashScale>16</muzzleFlashScale>
+				<consumeFuelPerShot>1</consumeFuelPerShot>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_ChangeableProjectile" />
+
+		</comps>
+		<building>
+			<fixedStorageSettings>
+				<filter>
+					<categories>
+						<li>MortarShells</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<filter>
+					<categories>
+						<li>MortarShells</li>
+					</categories>
+					<disallowedThingDefs>
+						<li>Shell_Firefoam</li>
+						<li>Shell_AntigrainWarhead</li>
+					</disallowedThingDefs>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+	</ThingDef>
+
+</Defs>

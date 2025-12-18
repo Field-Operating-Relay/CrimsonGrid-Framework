@@ -30,5 +30,9 @@ namespace CrimsonGridFramework
         public static NeedDef CG_FuelNeed;
         public static StatDef CG_FuelEnergyUsageFactor;
         public static StatDef CG_RefuelEfficiencyFactor;
+
+        // Top Down Rockets
+        public static ThingDef CG_RocketLeaving;
+        public static WorldObjectDef CG_TravellingRocket;
     }
 }
