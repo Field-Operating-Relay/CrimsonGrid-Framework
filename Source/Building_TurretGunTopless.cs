@@ -15,7 +15,7 @@ namespace CrimsonGridFramework
         {
             return base.TryFindNewTarget();
         }
-        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
+        public override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             return; // Intentionally left blank to prevent drawing the turret top
         }

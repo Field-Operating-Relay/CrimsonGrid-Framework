@@ -59,6 +59,7 @@
   <ItemGroup>
     <Publicize Include="Assembly-CSharp:RimWorld.ITab_Pawn_Gear.SelPawnForGear" />
     <Publicize Include="Assembly-CSharp:RimWorld.InspectPaneFiller.DrawAreaAllowed" />
+    <Publicize Include="Assembly-CSharp" MemberPattern="^RimWorld\.Building_TurretGun\..*" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Hediff\" />

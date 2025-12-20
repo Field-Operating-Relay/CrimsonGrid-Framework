@@ -19,7 +19,7 @@ namespace CrimsonGridFramework
         {
             return pawn.Map.listerBuildings.AllColonistBuildingsOfType<Building_TurretGunTopless>().Where(b =>
             {
-                var comp = b.TryGetComp<CompArtilleryMagazine>();
+                var comp = b.TryGetComp<CompTopDownArtillery>();
                 return comp != null && comp.CurrentAmmo < comp.MaxAmmo;
             });
         }
@@ -41,7 +41,7 @@ namespace CrimsonGridFramework
             {
                 return false;
             }
-            CompArtilleryMagazine comp = launcher.TryGetComp<CompArtilleryMagazine>();
+            CompTopDownArtillery comp = launcher.TryGetComp<CompTopDownArtillery>();
             if(comp == null)
             {
                 return false;

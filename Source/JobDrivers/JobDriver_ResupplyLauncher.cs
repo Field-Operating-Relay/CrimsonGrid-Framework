@@ -13,7 +13,7 @@ namespace CrimsonGridFramework
     public class JobDriver_ResupplyLauncher : JobDriver
     {
         private Building_TurretGunTopless Turret => (Building_TurretGunTopless)job.GetTarget(TargetIndex.A).Thing;
-        private CompArtilleryMagazine MagazineComp => Turret.TryGetComp<CompArtilleryMagazine>();
+        private CompTopDownArtillery MagazineComp => Turret.TryGetComp<CompTopDownArtillery>();
         private Thing Hauling => job.GetTarget(TargetIndex.B).Thing;
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {

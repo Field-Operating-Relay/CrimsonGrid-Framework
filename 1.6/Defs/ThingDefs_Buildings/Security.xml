@@ -89,8 +89,9 @@
 					<li>EMP</li>
 				</affectedDamageDefs>
 			</li>
-			<li Class="CrimsonGridFramework.CompProperties_ArtilleryMagazine">
+			<li Class="CrimsonGridFramework.CompProperties_TopDownArtillery">
 				<maxAmmo>5</maxAmmo>
+				<fireMissionRange>10</fireMissionRange>
 			</li>
 		</comps>
 		<inspectorTabs>

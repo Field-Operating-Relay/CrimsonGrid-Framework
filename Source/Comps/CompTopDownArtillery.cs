@@ -3,28 +3,34 @@ using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Verse;
+using Verse.Sound;
+using static UnityEngine.GraphicsBuffer;
 
 namespace CrimsonGridFramework
 {
-    public class CompProperties_ArtilleryMagazine : CompProperties
+    public class CompProperties_TopDownArtillery : CompProperties
     {
         public int maxAmmo = 1;
-        public CompProperties_ArtilleryMagazine()
+        public int fireMissionRange = 10;
+        public CompProperties_TopDownArtillery()
         {
-            this.compClass = typeof(CompArtilleryMagazine);
+            this.compClass = typeof(CompTopDownArtillery);
         }
     }
-    public class CompArtilleryMagazine : ThingComp
+    public class CompTopDownArtillery : ThingComp
     {
         public Building_TurretGun Parent => parent as Building_TurretGun;
         public CompChangeableProjectile ProjectileComp => Parent.gun.TryGetComp<CompChangeableProjectile>();
-        public CompProperties_ArtilleryMagazine Props => (CompProperties_ArtilleryMagazine)props;
+        public CompProperties_TopDownArtillery Props => (CompProperties_TopDownArtillery)props;
+        public GlobalTargetInfo target;
         public int MaxAmmo => Props.maxAmmo;
+        public int FireMissionRange => Props.fireMissionRange;
         public int CurrentAmmo => currentAmmo.Sum(ac => ac.count);
         public class AmmoCount : IExposable
         {
@@ -87,10 +93,20 @@ namespace CrimsonGridFramework
             Scribe_Collections.Look(ref currentAmmo, "currentAmmo", LookMode.Deep);
         }
 
-        public bool SpawnMissile(GlobalTargetInfo globalTargetInfo)
+        public bool SpawnMissile()
         {
             if (ProjectileComp.Loaded)
             {
+                GlobalTargetInfo globalTargetInfo;
+                if (target.IsValid)
+                {
+                    globalTargetInfo = target;
+                    target = GlobalTargetInfo.Invalid;
+                }
+                else
+                {
+                    globalTargetInfo = Parent.CurrentTarget.ToGlobalTargetInfo(Parent.Map);
+                }
                 ActiveTransporter activeDropPod = (ActiveTransporter)ThingMaker.MakeThing(ThingDefOf.ActiveDropPod);
                 activeDropPod.Contents = new ActiveTransporterInfo();
                 FlyShipLeaving flyShipLeaving = (FlyShipLeaving)SkyfallerMaker.MakeSkyfaller(CrimsonGridFramework_DefOfs.CG_RocketLeaving, activeDropPod);
@@ -110,15 +126,88 @@ namespace CrimsonGridFramework
             }
             return false;
         }
+        public void StartFireMission()
+        {
+            CameraJumper.TryJump(CameraJumper.GetWorldTarget(parent));
+            Find.WorldSelector.ClearSelection();
+            PlanetTile tile = parent.Map.Tile;
+            Find.WorldTargeter.BeginTargeting(TargetChosen, canTargetTiles: false, null, closeWorldTabWhenFinished: true, delegate
+            {
+                GenDraw.DrawWorldRadiusRing(tile, FireMissionRange);
+            });
+
+        }
+
+        private bool TargetChosen(GlobalTargetInfo target)
+        {
+            if (!target.IsValid)
+            {
+                Messages.Message("CG_FireMissionTargetInvalid".Translate(), MessageTypeDefOf.RejectInput);
+                return false;
+            }
+            int distance = Find.WorldGrid.TraversalDistanceBetween(parent.Map.Tile, target.Tile);
+            if (distance > FireMissionRange)
+            {
+                Messages.Message("CG_FireMissionTargetBeyondMaximumRange".Translate(), parent, MessageTypeDefOf.RejectInput);
+                return false;
+            }
+            Map artilleryMap;
+            if (target.WorldObject is MapParent { HasMap: not false } mapParent)
+            {
+                artilleryMap = parent.Map;
+                Map map = mapParent.Map;
+                Current.Game.CurrentMap = map;
+                Targeter targeter = Find.Targeter;
+                targeter.BeginTargeting(new TargetingParameters
+                {
+                    canTargetPawns = true,
+                    canTargetBuildings = true,
+                    canTargetLocations = true
+                }, (LocalTargetInfo x) => { FireMission(map.Tile, x, map.uniqueID); });
+                return true;
+            }
+            Messages.Message("CG_FireMissionNeedMap".Translate(), MessageTypeDefOf.RejectInput);
+            return false;
+        }
+        public void FireMission(int tile, LocalTargetInfo targ, int map)
+        {
+            if (!targ.IsValid)
+            {
+                return;
+            }
+            GlobalTargetInfo newtarget = targ.ToGlobalTargetInfo(Find.Maps.FirstOrDefault((Map x) => x.uniqueID == map));
+            int num = Find.WorldGrid.TraversalDistanceBetween(parent.Map.Tile, tile);
+            if (num > FireMissionRange)
+            {
+                Messages.Message("CG_FireMissionTargetBeyondMaximumRange".Translate(), parent, MessageTypeDefOf.RejectInput);
+                return;
+            }
+            if (Parent.burstCooldownTicksLeft <= 0)
+            {
+                target = newtarget;
+                Parent.currentTargetInt = Parent;
+                Parent.burstWarmupTicksLeft = Parent.gun.def.Verbs[0].warmupTime.SecondsToTicks();
+            }
+            SoundDefOf.TurretAcquireTarget.PlayOneShot(new TargetInfo(parent.Position, parent.Map));
+        }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
+            var crossFireMission = new Command_Action
+            {
+                action = StartFireMission,
+                defaultLabel = "CG_CrossFireMission".Translate(),
+                defaultDesc = "CG_CrossFireMissionDesc".Translate(),
+                icon = null,
+                Disabled = ProjectileComp.Loaded == false || Parent.burstCooldownTicksLeft > 0,
+            };
+            yield return crossFireMission;
             var unloadShells = new Command_Action
             {
                 action = delegate
                 {
                     UnloadAllShells();
                 },
-                defaultLabel = "Unload Shells",
+                defaultLabel = "CG_UnloadShells".Translate(),
                 defaultDesc = null,
                 icon = null
             };

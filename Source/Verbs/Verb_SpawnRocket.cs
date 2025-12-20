@@ -11,11 +11,12 @@ namespace CrimsonGridFramework
     {
         protected override bool TryCastShot()
         {
-            if (base.Caster.TryGetComp<CompArtilleryMagazine>(out var s))
+            if (base.Caster.TryGetComp<CompTopDownArtillery>(out var s))
             {
-                return s.SpawnMissile(CurrentTarget.ToGlobalTargetInfo(caster.Map));
+                return s.SpawnMissile();
             }
             return false;
+            
         }
     }
 }
