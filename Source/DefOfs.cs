@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -35,5 +35,7 @@ namespace CrimsonGridFramework
         public static ThingDef CG_RocketLeaving;
         public static WorldObjectDef CG_TravellingRocket;
         public static JobDef CG_ResupplyLauncher;
+        public static JobDef CG_DeployItem;
+        public static StatDef CG_DeployableCapacity;
     }
 }

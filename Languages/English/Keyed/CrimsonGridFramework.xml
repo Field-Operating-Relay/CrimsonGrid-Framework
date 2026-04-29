@@ -1,5 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+	<!-- Deployable Building -->
+	<CGF_DeployableTimeLeft>Time left: {0}</CGF_DeployableTimeLeft>
 	<!-- Weapon Weight Class Restrictions -->
 	<CGF_WeaponTooLight>This {0} weapon is too light for a {1} mech to effectively use</CGF_WeaponTooLight>
 	<CGF_WeaponTooHeavy>This {0} weapon is too heavy for a {1} mech to handle</CGF_WeaponTooHeavy>
@@ -62,4 +64,10 @@
 	<CGF_APS_TooltipPerCharge>Per charge:</CGF_APS_TooltipPerCharge>
 	<CGF_APS_TooltipInterceptRadius>Intercept radius:</CGF_APS_TooltipInterceptRadius>
 	<CGF_APS_TooltipTiles>{0} tiles</CGF_APS_TooltipTiles>
+
+	<!-- Deployable Items -->
+	<CG_DeployItem>Deploy {0}</CG_DeployItem>
+	<CG_DeployItemDesc>Order this pawn to deploy this item at a target location.</CG_DeployItemDesc>
+	<CG_CannotDeployCapacityFull>Cannot deploy: inventory capacity full</CG_CannotDeployCapacityFull>
+	<CG_CannotPlaceBuildingHere>Cannot place building here</CG_CannotPlaceBuildingHere>
 </LanguageData>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef ParentName="ResourceBase">
+        <defName>CG_TestDeployableItem</defName>
+        <label>test deployable turret</label>
+        <description>A portable turret that can be deployed in the field.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/Shell_Rocket/Shell_Rocket_a</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Metal_Drop</soundInteract>
+        <soundDrop>Metal_Drop</soundDrop>
+        <stackLimit>5</stackLimit>
+        <statBases>
+            <MaxHitPoints>50</MaxHitPoints>
+            <MarketValue>150</MarketValue>
+            <Mass>5</Mass>
+            <Flammability>0.5</Flammability>
+            <CG_DeployableCapacity>5</CG_DeployableCapacity>
+        </statBases>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_DeployableItem">
+                <buildingDef>CG_TestDeployableTurret</buildingDef>
+                <capacityCost>1</capacityCost>
+                <installDuration>300</installDuration>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <ThingDef ParentName="BuildingBase">
+        <defName>CG_TestDeployableTurret</defName>
+        <label>deployed turret</label>
+        <description>A deployed portable turret. Automatically engages hostiles.</description>
+        <thingClass>Building_TurretGun</thingClass>
+        <drawerType>MapMeshAndRealTime</drawerType>
+        <graphicData>
+            <texPath>Things/Building/Security/MRLS</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(2,2)</drawSize>
+            <damageData>
+                <rect>(0.2,0.2,0.6,0.6)</rect>
+            </damageData>
+        </graphicData>
+        <uiIconPath>Things/Building/Security/TurretMini_MenuIcon</uiIconPath>
+        <altitudeLayer>Building</altitudeLayer>
+        <stealable>false</stealable>
+        <rotatable>false</rotatable>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.5</Flammability>
+            <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+        </statBases>
+        <tickerType>Normal</tickerType>
+        <comps>
+            <li Class="CrimsonGridFramework.CompProperties_DeployableBuilding">
+                <inactiveDef>CG_TestDeployableTurret_Inactive</inactiveDef>
+                <lifespanTicks>60000</lifespanTicks>
+            </li>
+            <li Class="CompProperties_Forbiddable" />
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <basePowerConsumption>80</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Flickable" />
+        </comps>
+        <passability>PassThroughOnly</passability>
+        <pathCost>50</pathCost>
+        <fillPercent>0.4</fillPercent>
+        <hasTooltip>true</hasTooltip>
+        <building>
+            <combatPower>45</combatPower>
+            <ai_combatDangerous>true</ai_combatDangerous>
+            <turretGunDef>CG_Gun_TestDeployableTurret</turretGunDef>
+            <turretBurstCooldownTime>4.8</turretBurstCooldownTime>
+        </building>
+        <placeWorkers>
+            <li>PlaceWorker_TurretTop</li>
+            <li>PlaceWorker_ShowTurretRadius</li>
+        </placeWorkers>
+    </ThingDef>
+
+    <ThingDef ParentName="BuildingBase">
+        <defName>CG_TestDeployableTurret_Inactive</defName>
+        <label>inactive turret</label>
+        <description>An inactive portable turret.</description>
+        <graphicData>
+            <texPath>Things/Building/Security/MRLS</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(2,2)</drawSize>
+            <color>(0.5,0.5,0.5)</color>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.5</Flammability>
+        </statBases>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseWeaponTurret">
+        <defName>CG_Gun_TestDeployableTurret</defName>
+        <label>test deployable turret gun</label>
+        <graphicData>
+            <texPath>Things/Building/Security/MRLS</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <statBases>
+            <AccuracyTouch>0.77</AccuracyTouch>
+            <AccuracyShort>0.7</AccuracyShort>
+            <AccuracyMedium>0.45</AccuracyMedium>
+            <AccuracyLong>0.24</AccuracyLong>
+            <RangedWeapon_Cooldown>4.8</RangedWeapon_Cooldown>
+            <DeteriorationRate>0</DeteriorationRate>
+            <Mass>5</Mass>
+            <Flammability>0</Flammability>
+        </statBases>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>
+                <defaultProjectile>CG_Bullet_TestDeployableTurret</defaultProjectile>
+                <warmupTime>0</warmupTime>
+                <range>28.9</range>
+                <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+                <burstShotCount>2</burstShotCount>
+                <soundCast>GunShotA</soundCast>
+                <soundCastTail>GunTail_Light</soundCastTail>
+                <muzzleFlashScale>9</muzzleFlashScale>
+            </li>
+        </verbs>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseBullet">
+        <defName>CG_Bullet_TestDeployableTurret</defName>
+        <label>test turret bullet</label>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_Small</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>12</damageAmountBase>
+            <speed>70</speed>
+        </projectile>
+    </ThingDef>
+
+</Defs>
