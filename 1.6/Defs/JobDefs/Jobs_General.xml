@@ -30,4 +30,10 @@
 		<reportString>Resupplying TargetA.</reportString>
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
+    <JobDef>
+        <defName>CG_DeployItem</defName>
+        <driverClass>CrimsonGridFramework.JobDriver_DeployItem</driverClass>
+        <reportString>deploying TargetB.</reportString>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
 </Defs>
