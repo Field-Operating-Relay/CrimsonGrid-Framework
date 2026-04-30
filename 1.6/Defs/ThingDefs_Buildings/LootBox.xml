@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>CG_LootBox_FixedSet</defName>
+    <label>loot box (armor set)</label>
+    <description>A mysterious crate containing unknown supplies.</description>
+    <thingClass>CrimsonGridFramework.Building_LootBox</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Ancient/OpenableContainers/AirdropPallet_Medicine</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <fillPercent>0.4</fillPercent>
+    <comps>
+      <li Class="CrimsonGridFramework.CompProperties_LootBox">
+        <lootType>FixedSet</lootType>
+        <fixedItemSets>
+          <li>
+            <Apparel_PlateArmor>1~1</Apparel_PlateArmor>
+            <Apparel_FlakPants>1~1</Apparel_FlakPants>
+          </li>
+          <li>
+            <Apparel_PowerArmor>1~1</Apparel_PowerArmor>
+            <Apparel_Pants>1~1</Apparel_Pants>
+          </li>
+          <li>
+            <Apparel_ArmorRecon>1~1</Apparel_ArmorRecon>
+            <Apparel_Pants>1~1</Apparel_Pants>
+          </li>
+        </fixedItemSets>
+        <openGraphicData>
+          <texPath>Things/Building/Ancient/OpenableContainers/AirdropPallet_Open</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(1,1)</drawSize>
+        </openGraphicData>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>CG_LootBox_RandomResources</defName>
+    <label>loot box (random resources)</label>
+    <description>A mysterious crate containing unknown supplies.</description>
+    <thingClass>CrimsonGridFramework.Building_LootBox</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Ancient/OpenableContainers/AirdropPallet_Medicine</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <fillPercent>0.4</fillPercent>
+    <comps>
+      <li Class="CrimsonGridFramework.CompProperties_LootBox">
+        <lootType>RandomResources</lootType>
+        <resourcePool>
+          <Steel>200~300</Steel>
+          <Gold>50~300</Gold>
+          <Silver>100~200</Silver>
+        </resourcePool>
+        <variance>1~2</variance>
+        <openGraphicData>
+          <texPath>Things/Building/Ancient/OpenableContainers/AirdropPallet_Open</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(1,1)</drawSize>
+        </openGraphicData>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>
