@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingDef ParentName="BaseHumanMakeableGun">
+        <defName>CG_TOWLauncher</defName>
+        <label>TOW launcher</label>
+        <description>A tube-launched, optically tracked, wire-guided missile system. Fires a missile that actively steers toward its target, trailing a thin guidance wire.</description>
+        <graphicData>
+            <texPath>Things/Item/Equipment/WeaponRanged/RocketLauncher</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <recipeMaker>
+            <researchPrerequisite>GunTurrets</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>6</Crafting>
+            </skillRequirements>
+            <displayPriority>430</displayPriority>
+        </recipeMaker>
+        <statBases>
+            <WorkToMake>50000</WorkToMake>
+            <Mass>8</Mass>
+            <AccuracyTouch>0.55</AccuracyTouch>
+            <AccuracyShort>0.7</AccuracyShort>
+            <AccuracyMedium>0.8</AccuracyMedium>
+            <AccuracyLong>0.85</AccuracyLong>
+            <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+        </statBases>
+        <costList>
+            <Steel>80</Steel>
+            <ComponentIndustrial>10</ComponentIndustrial>
+        </costList>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>CG_Bullet_TOW</defaultProjectile>
+                <forcedMissRadius>1.9</forcedMissRadius>
+                <warmupTime>1.5</warmupTime>
+                <range>35.9</range>
+                <burstShotCount>1</burstShotCount>
+                <soundCast>Mortar_LaunchA</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>16</muzzleFlashScale>
+            </li>
+        </verbs>
+        <weaponTags>
+            <li>IndustrialGunHeavy</li>
+        </weaponTags>
+        <tools>
+            <li>
+                <label>tube</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseBullet">
+        <defName>CG_Bullet_TOW</defName>
+        <label>TOW missile</label>
+        <drawOffscreen>true</drawOffscreen>
+        <drawerType>RealtimeOnly</drawerType>
+        <graphicData>
+            <texPath>Things/Projectile/Rocket_Big</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <thingClass>CrimsonGridFramework.Projectile_TOW</thingClass>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <damageAmountBase>80</damageAmountBase>
+            <speed>10</speed>
+            <explosionRadius>2.9</explosionRadius>
+            <arcHeightFactor>50</arcHeightFactor>
+            <flyOverhead>false</flyOverhead>
+            <soundExplode>MortarBomb_Explode</soundExplode>
+            <soundAmbient>MortarRound_Ambient</soundAmbient>
+        </projectile>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.TOWMissileExtension">
+                <maxTurnRateDegreesPerTick>3</maxTurnRateDegreesPerTick>
+                <wireAmplitude>0.12</wireAmplitude>
+                <wireSegments>24</wireSegments>
+                <wireWidth>0.03</wireWidth>
+                <wireSCount>3</wireSCount>
+                <waveAnimSpeed>0.15</waveAnimSpeed>
+                <useArcTrajectory>true</useArcTrajectory>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+</Defs>
