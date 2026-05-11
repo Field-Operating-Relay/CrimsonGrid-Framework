@@ -70,4 +70,9 @@
 	<CG_DeployItemDesc>Order this pawn to deploy this item at a target location.</CG_DeployItemDesc>
 	<CG_CannotDeployCapacityFull>Cannot deploy: inventory capacity full</CG_CannotDeployCapacityFull>
 	<CG_CannotPlaceBuildingHere>Cannot place building here</CG_CannotPlaceBuildingHere>
+
+	<!-- Flamethrower -->
+	<CG_FlamethrowerHeat_Pressurized>{0} is overheating from sustained flamethrower fire!</CG_FlamethrowerHeat_Pressurized>
+	<CG_FlamethrowerMeltdown>Flamethrower meltdown!</CG_FlamethrowerMeltdown>
+	<CG_FlamethrowerMeltdownDesc>{0} is at critical temperature! The flamethrower tank will catastrophically rupture imminently!</CG_FlamethrowerMeltdownDesc>
 </LanguageData>
