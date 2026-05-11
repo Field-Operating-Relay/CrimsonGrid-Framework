@@ -6,6 +6,7 @@ namespace CrimsonGridFramework
     {
         public ThingDef inactiveDef;
         public int lifespanTicks;
+        public bool turnToInactiveWhenDestroyed;
 
         public CompProperties_DeployableBuilding()
         {
