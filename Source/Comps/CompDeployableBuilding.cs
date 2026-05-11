@@ -8,6 +8,7 @@ namespace CrimsonGridFramework
     {
         public CompProperties_DeployableBuilding Props => (CompProperties_DeployableBuilding)props;
         private int age;
+        private bool expiring;
 
         public override void CompTick()
         {
@@ -23,16 +24,29 @@ namespace CrimsonGridFramework
 
         private void Expire()
         {
+            expiring = true;
             var hp = parent.HitPoints;
             var map = parent.Map;
             var pos = parent.Position;
             var faction = parent.Faction;
             parent.Destroy();
-            if (Props.inactiveDef != null)
+            if (Props.inactiveDef != null && map != null && pos.InBounds(map))
             {
                 var newBuilding = GenSpawn.Spawn(Props.inactiveDef, pos, map);
                 newBuilding.SetFaction(faction);
                 newBuilding.HitPoints = hp;
+            }
+        }
+
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            var pos = parent.PositionHeld;
+            var faction = parent.Faction;
+            base.PostDestroy(mode, previousMap);
+            if (expiring is false && Props.inactiveDef != null && Props.turnToInactiveWhenDestroyed && previousMap != null && pos.InBounds(previousMap))
+            {
+                var newBuilding = GenSpawn.Spawn(Props.inactiveDef, pos, previousMap);
+                newBuilding.SetFaction(faction);
             }
         }
 
