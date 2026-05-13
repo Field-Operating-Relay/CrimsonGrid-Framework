@@ -38,8 +38,8 @@ namespace CrimsonGridFramework
                 new(-halfWidth, 0f, 1f),
                 new( halfWidth, 0f, 1f)
             };
-            mesh.uv = new Vector2[] { new(0,0), new(1,0), new(0,1), new(1,1) };
-            mesh.triangles = new int[] { 0,2,1, 2,3,1 };
+            mesh.uv = new Vector2[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) };
+            mesh.triangles = new int[] { 0, 2, 1, 2, 3, 1 };
             mesh.RecalculateNormals();
             mesh.RecalculateBounds();
             return mesh;
@@ -57,18 +57,6 @@ namespace CrimsonGridFramework
         private bool launched;
 
         private TOWMissileExtension Extension => def.GetModExtension<TOWMissileExtension>() ?? new TOWMissileExtension();
-
-        private float ArcHeight
-        {
-            get
-            {
-                float num = def.projectile.arcHeightFactor;
-                var num2 = (DestinationRef(this) - OriginRef(this)).MagnitudeHorizontalSquared();
-                if (num * num > num2 * 0.2f * 0.2f)
-                    num = Mathf.Sqrt(num2) * 0.2f;
-                return num;
-            }
-        }
 
         private float GetArcFraction()
         {
@@ -174,6 +162,11 @@ namespace CrimsonGridFramework
                     float maxRad = Extension.maxTurnRateDegreesPerTick * Mathf.Deg2Rad;
                     currentVelocity = Vector3.RotateTowards(currentVelocity, toTarget / dist, maxRad, 0f);
                     currentVelocity.Normalize();
+                }
+                else if (dot <= guidanceLossThreshold)
+                {
+                    Explode();
+                    return;
                 }
 
                 float speed = def.projectile.SpeedTilesPerTick;

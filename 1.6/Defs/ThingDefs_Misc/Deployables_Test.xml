@@ -56,6 +56,9 @@
             <li Class="CrimsonGridFramework.CompProperties_DeployableBuilding">
                 <inactiveDef>CG_TestDeployableTurret_Inactive</inactiveDef>
                 <lifespanTicks>60000</lifespanTicks>
+                <maxShots>10</maxShots>
+                <soundDeploy>DropPod_Open</soundDeploy>
+                <soundExpire>DropPod_Impact</soundExpire>
             </li>
             <li Class="CompProperties_Forbiddable" />
             <li Class="CompProperties_Power">
