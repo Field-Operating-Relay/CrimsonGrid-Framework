@@ -11,7 +11,7 @@
     <tradeTags Inherit="False" />
     <genericMarketSellable>false</genericMarketSellable>
     <costList>
-      <Bioferrite>25</Bioferrite>
+      <Steel>25</Steel>
     </costList>
     <recipeMaker>
       <displayPriority>0</displayPriority>
@@ -27,7 +27,7 @@
       </li>
     </comps>
   </ThingDef>
-  
+
   <ThingDef ParentName="BaseBullet">
     <defName>Bullet_Shell_Rocket</defName>
     <label>rocket</label>
@@ -45,5 +45,5 @@
       <soundExplode>ShellLanded</soundExplode>
     </projectile>
   </ThingDef>
-  
+
 </Defs>
