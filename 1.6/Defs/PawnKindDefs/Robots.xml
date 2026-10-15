@@ -41,6 +41,11 @@
 		</weaponTags>
 		<techHediffsChance>1</techHediffsChance>
 		<techHediffsMoney>9999~9999</techHediffsMoney>
+    <abilities>
+      <li>Robot_Overclock</li>
+      <li>Robot_MineLaying</li>
+      <li>Robot_Grenade</li>
+    </abilities>
 	</PawnKindDef>
 	<PawnKindDef ParentName="BaseRobotKind">
 		<defName>Robot_Consoom</defName>
