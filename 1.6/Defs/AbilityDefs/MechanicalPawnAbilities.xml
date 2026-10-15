@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AbilityDef>
+    <defName>Robot_Overclock</defName>
+    <label>overclock</label>
+    <description>.</description>
+    <cooldownTicksRange>90000</cooldownTicksRange> <!-- 150 seconds -->
+    <hostile>false</hostile>
+    <groupAbility>true</groupAbility>
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <aiCanUse>true</aiCanUse>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <targetRequired>false</targetRequired>
+    <statBases>
+      <Ability_Duration>30</Ability_Duration>
+    </statBases>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <targetable>false</targetable>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Robot_Overclock</hediffDef>
+        <onlyApplyToSelf>True</onlyApplyToSelf>
+        <replaceExisting>true</replaceExisting>
+      </li>
+    </comps>
+  </AbilityDef>
+  <HediffDef>
+    <defName>Robot_Overclock</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>overclock</label>
+    <description>.</description>
+    <everCurableByItem>false</everCurableByItem>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <postFactor>0.20</postFactor>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.15</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <AbilityDef>
+    <defName>Robot_MineLaying</defName>
+    <label>mine laying</label>
+    <description>.</description>
+    <cooldownTicksRange>180000</cooldownTicksRange> <!-- 300 seconds -->
+    <charges>5</charges>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>CrimsonGridFramework.Verb_SpawnBuilding</verbClass>
+      <range>1.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <warmupTime>0.1</warmupTime>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CrimsonGridFramework.CompProperties_SpawnBuilding">
+        <placedBuilding>TrapIED_HighExplosive</placedBuilding>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  <AbilityDef>
+    <defName>Robot_Grenade</defName>
+    <label>grenade</label>
+    <description>.</description>
+    <cooldownTicksRange>180000</cooldownTicksRange> <!-- 300 seconds -->
+    <charges>5</charges>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <label>launch frag grenade</label>
+      <verbClass>CrimsonGridFramework.Verb_CastLaunchProjectileStatic</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <onlyManualCast>True</onlyManualCast>
+      <range>5</range>
+      <warmupTime>2</warmupTime>
+      <noiseRadius>4</noiseRadius>
+      <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+      <soundCast>Shot_IncendiaryLauncher</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>14</muzzleFlashScale>
+      <drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+      <defaultProjectile>Proj_GrenadeFrag</defaultProjectile>
+      <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+        <compClass>CompAbilityEffect_OnlyTargetHostiles</compClass>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+</Defs>
