@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<WorldObjectDef>
+		<defName>CG_TravellingRocket</defName>
+		<label>rocket</label>
+		<description>travelling rocket in flight.</description>
+		<worldObjectClass>TravellingTransporters</worldObjectClass>
+		<texture>World/WorldObjects/TravelingTransportPods</texture>
+		<useDynamicDrawer>true</useDynamicDrawer>
+		<expandingIcon>true</expandingIcon>
+		<expandingIconTexture>World/WorldObjects/Expanding/TravelingTransportPods</expandingIconTexture>
+		<expandingIconPriority>60</expandingIconPriority>
+		<expandMore>true</expandMore>
+		<allowCaravanIncidentsWhichGenerateMap>true</allowCaravanIncidentsWhichGenerateMap>
+		<fullyExpandedInSpace>true</fullyExpandedInSpace>
+		<validLaunchTarget>false</validLaunchTarget>
+	</WorldObjectDef>
+</Defs>

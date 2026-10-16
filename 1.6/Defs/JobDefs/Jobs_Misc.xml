@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<JobDef>
+		<defName>Disconnected</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_Disconnected</driverClass>
+		<reportString>disconnected.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<neverShowWeapon>true</neverShowWeapon>
+	</JobDef>
+	
+	<JobDef>
+		<defName>CG_PoweredDown</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_PoweredDown</driverClass>
+		<reportString>powered down.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<neverShowWeapon>true</neverShowWeapon>
+	</JobDef>
+
+	<JobDef>
+		<defName>CG_ReloadAPS</defName>
+		<driverClass>CrimsonGridFramework.JobDriver_ReloadAPS</driverClass>
+		<reportString>reloading APS.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+</Defs>

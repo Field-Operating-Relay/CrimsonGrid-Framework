@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+    <CGF_Settings_Title>Weapon Weight Class Thresholds</CGF_Settings_Title>
+    <CGF_Settings_Description>Set the mass thresholds (in kg) for categorizing weapons into weight classes.</CGF_Settings_Description>
+    <CGF_Settings_LightThreshold>Light Weapons Mass Threshold: {0} kg</CGF_Settings_LightThreshold>
+    <CGF_Settings_MediumThreshold>Medium Weapons Mass Threshold: {0} kg</CGF_Settings_MediumThreshold>
+    <CGF_Settings_HeavyThreshold>Heavy Weapons Mass Threshold: {0} kg</CGF_Settings_HeavyThreshold>
+    <CGF_Settings_ValidationWarning>Warning: Each threshold must be less than the next weight class!</CGF_Settings_ValidationWarning>
+    <CGF_Settings_ValidationRequired>Required: Light &lt; Medium &lt; Heavy</CGF_Settings_ValidationRequired>
+    <CGF_Settings_ResetButton>Reset to Defaults</CGF_Settings_ResetButton>
+    <CGF_Settings_Note>Note: Changes will apply to weapons on next game load.</CGF_Settings_Note>
+</LanguageData>
