@@ -10,6 +10,7 @@ namespace CrimsonGridFramework
     {
         private static readonly Material WireMat;
         private static readonly Mesh WireSegMesh;
+        private static readonly Mesh WireSegMesh2;
 
         private static readonly AccessTools.FieldRef<Projectile, Vector3> OriginRef =
             AccessTools.FieldRefAccess<Projectile, Vector3>("origin");
@@ -25,6 +26,7 @@ namespace CrimsonGridFramework
             WireMat.mainTexture = tex;
 
             WireSegMesh = BuildWireSegMesh();
+            WireSegMesh2 = BuildWireSegMesh();
         }
 
         private static Mesh BuildWireSegMesh()
@@ -51,6 +53,7 @@ namespace CrimsonGridFramework
         private int originalTotalTicks;
         private float baseArcHeight;
         private List<Vector3> wireHistory = new List<Vector3>();
+        private List<Vector3> wireHistory2 = new List<Vector3>();
         private Vector3 currentVelocity;
         private int ticksAlive;
         private LocalTargetInfo myIntendedTarget;
@@ -96,6 +99,7 @@ namespace CrimsonGridFramework
             launchPos = origin;
             launchPos.y = launcher.DrawPos.y - 0.01f;
             wireHistory.Add(launchPos);
+            wireHistory2.Add(launchPos);
 
             currentVelocity = (targetPos.Yto0() - origin.Yto0()).normalized;
             launched = true;
@@ -187,16 +191,18 @@ namespace CrimsonGridFramework
                 wirePoint.z += offset;
             }
             wireHistory.Add(wirePoint);
+            wireHistory2.Add(wirePoint);
             base.Tick();
         }
 
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
-            if (wireHistory.Count < 2)
+            if (wireHistory.Count < 2 && wireHistory2.Count < 2)
                 return;
 
             var ext = Extension;
-            float phase = ticksAlive * ext.waveAnimSpeed;
+
+            float phase = ticksAlive * ext.waveAnimSpeed.min;
             int count = wireHistory.Count;
             var points = new Vector3[count];
 
@@ -222,6 +228,33 @@ namespace CrimsonGridFramework
 
             for (int i = 0; i < count - 1; i++)
                 DrawWireSegment(points[i], points[i + 1], ext.wireWidth);
+
+            float phase2 = ticksAlive * ext.waveAnimSpeed.max;
+            int count2 = wireHistory2.Count;
+            var points2 = new Vector3[count2];
+
+            for (int i = 0; i < count2; i++)
+            {
+                Vector3 segDir;
+                if (i == 0)
+                    segDir = wireHistory2[1] - wireHistory2[0];
+                else if (i == count2 - 1)
+                    segDir = wireHistory2[count2 - 1] - wireHistory2[count2 - 2];
+                else
+                    segDir = wireHistory2[i + 1] - wireHistory2[i - 1];
+
+                segDir.y = 0f;
+                if (segDir.sqrMagnitude > 0.001f) segDir.Normalize();
+                var perp = new Vector3(-segDir.z, 0f, segDir.x);
+
+                float t = i / (float)(count2 - 1);
+                var wave = Mathf.Sin(t * ext.wireSCount * Mathf.PI * 2f - phase2);
+                points2[i] = wireHistory2[i] + perp * (ext.wireAmplitude * wave);
+                points2[i].y = wireHistory2[i].y;
+            }
+
+            for (int i = 0; i < count2 - 1; i++)
+                DrawWireSegment2(points2[i], points2[i + 1], ext.wireWidth);
 
             if (Extension.useArcTrajectory)
             {
@@ -250,6 +283,21 @@ namespace CrimsonGridFramework
                 new Vector3(width, 1f, len)
             );
             Graphics.DrawMesh(WireSegMesh, mat, WireMat, 0);
+        }
+
+        private void DrawWireSegment2(Vector3 from, Vector3 to, float width)
+        {
+            Vector3 dir = to - from;
+            float len = dir.magnitude;
+            if (len < 0.001f)
+                return;
+
+            var mat = Matrix4x4.TRS(
+                from,
+                Quaternion.FromToRotation(Vector3.forward, dir / len),
+                new Vector3(width, 1f, len)
+            );
+            Graphics.DrawMesh(WireSegMesh2, mat, WireMat, 0);
         }
 
         public override void ExposeData()
