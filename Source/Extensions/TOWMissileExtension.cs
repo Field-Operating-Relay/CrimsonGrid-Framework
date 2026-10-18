@@ -8,7 +8,7 @@ namespace CrimsonGridFramework
         public int wireSegments;
         public float wireWidth;
         public int wireSCount = 2;
-        public float waveAnimSpeed = 8f;
+        public FloatRange waveAnimSpeed = new FloatRange(8f);
         public float wireAmplitude;
         public bool useArcTrajectory;
     }

@@ -86,7 +86,7 @@
                 <wireSegments>24</wireSegments>
                 <wireWidth>0.03</wireWidth>
                 <wireSCount>3</wireSCount>
-                <waveAnimSpeed>0.15</waveAnimSpeed>
+                <waveAnimSpeed>0.1~0.2</waveAnimSpeed>
                 <useArcTrajectory>true</useArcTrajectory>
             </li>
         </modExtensions>
