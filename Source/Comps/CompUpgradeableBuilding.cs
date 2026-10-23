@@ -39,6 +39,10 @@ namespace CrimsonGridFramework
 
         private static readonly Texture2D TileTex = ContentFinder<Texture2D>.Get("Things/Building/BuildingFrame/Tile");
 
+        private static readonly Texture2D UpgradeGizmoIcon = ContentFinder<Texture2D>.Get("UI/Commands/UpgradeGizmoIcon");
+
+        private static readonly Texture2D CancelUpgradeGizmoIcon = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
+
         private static readonly Color FrameColor = new Color(0.6f, 0.6f, 0.6f);
         private Material cachedCornerMat;
         private Material cachedTileMat;
@@ -221,7 +225,7 @@ namespace CrimsonGridFramework
                 {
                     defaultLabel = "CG_Upgrade".Translate(),
                     defaultDesc = "CG_UpgradeDesc".Translate(Props.upgrades[CurrentUpgradeLevel + 1].additionalBandwidth, Props.upgrades[CurrentUpgradeLevel + 1].additionalPowerDraw, Props.upgrades[CurrentUpgradeLevel + 1].AdditionalHeatPerSecond, Props.upgrades[CurrentUpgradeLevel + 1].ingredients.ToStringSafeEnumerable()),
-                    icon = null,
+                    icon = UpgradeGizmoIcon,
                     activateSound = SoundDefOf.Designate_DragBuilding,
                     action = () =>
                     {
@@ -238,7 +242,7 @@ namespace CrimsonGridFramework
                 {
                     defaultLabel = "CG_CancelUpgrade".Translate(),
                     defaultDesc = "CG_CancelUpgradeDesc".Translate(),
-                    icon = null,
+                    icon = CancelUpgradeGizmoIcon,
                     activateSound = SoundDefOf.Designate_Cancel,
                     action = () =>
                     {
