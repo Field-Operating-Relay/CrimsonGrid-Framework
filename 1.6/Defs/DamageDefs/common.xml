@@ -1,0 +1,8 @@
+<Defs>
+    <DamageDef ParentName="Flame">
+        <defName>CG_Burn</defName>
+        <label>burn</label>
+        <workerClass>DamageWorker_AddInjury</workerClass>
+        <armorCategory>Sharp</armorCategory>
+    </DamageDef>
+</Defs>

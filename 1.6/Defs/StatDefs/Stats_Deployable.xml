@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <StatDef>
+        <defName>CG_DeployableCapacity</defName>
+        <label>deployable capacity provided</label>
+        <description>How much deployable capacity this item provides when carried.</description>
+        <category>Basics</category>
+        <defaultBaseValue>5</defaultBaseValue>
+        <minValue>1</minValue>
+        <toStringStyle>Integer</toStringStyle>
+        <displayPriorityInCategory>10</displayPriorityInCategory>
+    </StatDef>
+</Defs>

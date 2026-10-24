@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<MainButtonDef>
+		<defName>NetworkManager</defName>
+		<label>network manager</label>
+		<description>Open the network manager.</description>
+		<workerClass>CrimsonGridFramework.MainButtonWorker_NetworkManager</workerClass>
+		<order>101</order>
+		<validWithoutMap>false</validWithoutMap>
+		<minimized>False</minimized>
+		<iconPath>UI/Buttons/MainButtons/NetworkManager</iconPath>
+	</MainButtonDef>
+</Defs>

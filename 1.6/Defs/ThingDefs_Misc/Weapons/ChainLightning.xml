@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef ParentName="BaseHumanMakeableGun">
+        <defName>Gun_ChainLightning</defName>
+        <label>chain lightning gun</label>
+        <description>A weapon that fires a lightning bolt that chains to nearby targets, burning and stunning them.</description>
+        <graphicData>
+            <texPath>Things/Item/Equipment/WeaponRanged/ChargeRifle</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Interact_ChargeRifle</soundInteract>
+        <recipeMaker>
+            <researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+            <displayPriority>420</displayPriority>
+        </recipeMaker>
+        <thingSetMakerTags>
+            <li>RewardStandardQualitySuper</li>
+        </thingSetMakerTags>
+        <statBases>
+            <WorkToMake>25000</WorkToMake>
+            <Mass>3</Mass>
+            <AccuracyTouch>0.8</AccuracyTouch>
+            <AccuracyShort>0.85</AccuracyShort>
+            <AccuracyMedium>0.75</AccuracyMedium>
+            <AccuracyLong>0.65</AccuracyLong>
+            <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+        </statBases>
+        <costList>
+            <Steel>50</Steel>
+            <ComponentIndustrial>5</ComponentIndustrial>
+        </costList>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_ChainLightning</defaultProjectile>
+                <warmupTime>1.5</warmupTime>
+                <range>25.9</range>
+                <soundCast>Shot_ChargeRifle</soundCast>
+                <soundCastTail>GunTail_Light</soundCastTail>
+                <muzzleFlashScale>9</muzzleFlashScale>
+            </li>
+        </verbs>
+        <weaponTags>
+            <li>IndustrialGunAdvanced</li>
+        </weaponTags>
+        <tools>
+            <li>
+                <label>barrel</label>
+                <capacities>
+                    <li>Blunt</li>
+                    <li>Poke</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_ChainLightning</defName>
+        <label>chain lightning bolt</label>
+        <graphicData>
+            <texPath>Things/Mote/Transparent</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <thingClass>CrimsonGridFramework.Projectile_ChainLightning</thingClass>
+        <projectile>
+            <damageDef>CG_Burn</damageDef>
+            <damageAmountBase>5</damageAmountBase>
+            <speed>999999999</speed>
+        </projectile>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.ChainLightningExtension">
+                <maxChains>5</maxChains>
+                <chainRange>3</chainRange>
+                <stunTicks>120</stunTicks>
+                <chanceToHitLauncher>0.3</chanceToHitLauncher>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseHumanMakeableGun">
+        <defName>Gun_ChainLightning_Long</defName>
+        <label>long chain lightning gun</label>
+        <description>An advanced weapon that fires a lightning bolt with extended range, chaining to more distant targets.</description>
+        <graphicData>
+            <texPath>Things/Item/Equipment/WeaponRanged/ChargeRifle</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Interact_ChargeRifle</soundInteract>
+        <recipeMaker>
+            <researchPrerequisite>ChargedShot</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>7</Crafting>
+            </skillRequirements>
+            <displayPriority>420</displayPriority>
+        </recipeMaker>
+        <thingSetMakerTags>
+            <li>RewardStandardQualitySuper</li>
+        </thingSetMakerTags>
+        <statBases>
+            <WorkToMake>35000</WorkToMake>
+            <Mass>3.5</Mass>
+            <AccuracyTouch>0.85</AccuracyTouch>
+            <AccuracyShort>0.9</AccuracyShort>
+            <AccuracyMedium>0.8</AccuracyMedium>
+            <AccuracyLong>0.7</AccuracyLong>
+            <RangedWeapon_Cooldown>2.7</RangedWeapon_Cooldown>
+        </statBases>
+        <costList>
+            <Steel>70</Steel>
+            <ComponentIndustrial>8</ComponentIndustrial>
+        </costList>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_ChainLightning_Long</defaultProjectile>
+                <warmupTime>1.7</warmupTime>
+                <range>30.9</range>
+                <soundCast>Shot_ChargeRifle</soundCast>
+                <soundCastTail>GunTail_Medium</soundCastTail>
+                <muzzleFlashScale>9</muzzleFlashScale>
+            </li>
+        </verbs>
+        <weaponTags>
+            <li>IndustrialGunAdvanced</li>
+        </weaponTags>
+        <tools>
+            <li>
+                <label>barrel</label>
+                <capacities>
+                    <li>Blunt</li>
+                    <li>Poke</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_ChainLightning_Long</defName>
+        <label>long chain lightning bolt</label>
+        <graphicData>
+            <texPath>Things/Mote/Transparent</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <thingClass>CrimsonGridFramework.Projectile_ChainLightning</thingClass>
+        <projectile>
+            <damageDef>CG_Burn</damageDef>
+            <damageAmountBase>5</damageAmountBase>
+            <speed>999999999</speed>
+        </projectile>
+        <modExtensions>
+            <li Class="CrimsonGridFramework.ChainLightningExtension">
+                <maxChains>8</maxChains>
+                <chainRange>5</chainRange>
+                <stunTicks>120</stunTicks>
+                <chanceToHitLauncher>0.3</chanceToHitLauncher>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+</Defs>

@@ -1,0 +1,41 @@
+using RimWorld;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Verse;
+
+namespace CrimsonGridFramework
+{
+    [DefOf]
+    [SuppressMessage("ReSharper", "UnassignedField.Global")]
+    public static class CrimsonGridFramework_DefOfs
+    {
+        public static JobDef Disconnected;
+        public static JobDef CG_PoweredDown;
+        public static JobDef CG_UpgradeBuilding;
+        public static JobDef CG_DeliverUpgradeMaterials;
+        public static JobDef CG_GetFuelJob;
+        public static JobDef CGF_RefuelRobot;
+
+        public static DamageDef CG_Burn;
+        public static HediffDef CG_GlobalBottleneck;
+        public static HediffDef CG_RelayBottleneck;
+        public static HediffDef CG_APSModification;
+        public static JobDef CG_ReloadAPS;
+
+        public static StatCategoryDef CG_Ironhides;
+        public static NeedDef CG_FuelNeed;
+        public static StatDef CG_FuelEnergyUsageFactor;
+        public static StatDef CG_RefuelEfficiencyFactor;
+
+        // Top Down Rockets
+        public static ThingDef CG_RocketLeaving;
+        public static WorldObjectDef CG_TravellingRocket;
+        public static JobDef CG_ResupplyLauncher;
+        public static JobDef CG_DeployItem;
+        public static StatDef CG_DeployableCapacity;
+    }
+}
